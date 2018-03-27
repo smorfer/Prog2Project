@@ -35,4 +35,13 @@ public abstract class Entity {
     {
         position = new XY(position, direction);
     }
+
+    @Override
+    public String toString() {
+        return "Entity{" +
+                "ID=" + ID +
+                ", energy=" + energy +
+                ", position=" + position.toString() +
+                '}';
+    }
 }
