@@ -42,25 +42,24 @@ public final class XY {
                 '}';
     }
 
-    public static XY getRandomDirection() {
-        int selector = new Random().nextInt(8);
+    public static XY inputToDirection(int selector) {
         switch (selector)
         {
-            case 0:
+            case 8:
                 return UP;
-            case 1:
-                return DOWN;
             case 2:
-                return RIGHT;
-            case 3:
-                return LEFT;
-            case 4:
-                return UP_RIGHT;
-            case 5:
-                return UP_LEFT;
+                return DOWN;
             case 6:
-                return DOWN_RIGHT;
+                return RIGHT;
+            case 4:
+                return LEFT;
+            case 9:
+                return UP_RIGHT;
             case 7:
+                return UP_LEFT;
+            case 3:
+                return DOWN_RIGHT;
+            case 1:
                 return DOWN_LEFT;
             default:
                 return ORIGIN;
