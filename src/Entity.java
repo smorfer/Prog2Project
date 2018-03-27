@@ -1,8 +1,8 @@
 public abstract class Entity {
-    private final int ID;
-    private int energy;
-    private int posX;
-    private int posY;
+    protected final int ID;
+    protected int energy;
+    protected int posX;
+    protected int posY;
 
     public Entity(int ID, int energy, int posX, int posY) {
         this.ID = ID;
@@ -35,5 +35,15 @@ public abstract class Entity {
     {
         posX += deltaX;
         posY += deltaY;
+    }
+
+    @Override
+    public String toString() {
+        return "Entity{" +
+                "ID=" + ID +
+                ", energy=" + energy +
+                ", posX=" + posX +
+                ", posY=" + posY +
+                '}';
     }
 }
