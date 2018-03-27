@@ -1,16 +1,16 @@
 import Entities.Entity;
 
 public class EntitySet {
-    private static Entity entities[] = new Entity[100];
+    private Entity entities[] = new Entity[100];
 
-    public static void addEntity(Entity entity)
+    public void addEntity(Entity entity)
     {
         int index;
         for (index = 0; entities[index] != null; index++);
         entities[index] = entity;
     }
 
-    public static void removeEntity(int id)
+    public void removeEntity(int id)
     {
         for (int i = 0; i < entities.length; i++)
         {
