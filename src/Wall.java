@@ -1,7 +1,7 @@
 public class Wall extends Entity {
-
+    private static final int INIT_ENERGY = -10;
     public Wall(int ID, int posX, int posY) {
-        super(ID, -10, posX, posY);
+        super(ID, INIT_ENERGY, posX, posY);
     }
 
     @Override
@@ -10,8 +10,4 @@ public class Wall extends Entity {
 
     @Override
     public void updateEnergy(int deltaEnergy){}
-
-
-
-
 }

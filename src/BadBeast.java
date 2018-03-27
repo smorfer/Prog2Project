@@ -1,7 +1,7 @@
 public class BadBeast extends Entity{
-
+    private static final int INIT_ENERGY = -150;
     public BadBeast(int ID, int posX, int posY) {
-        super(ID, -150, posX, posY);
+        super(ID, INIT_ENERGY, posX, posY);
         // Change energy here!
     }
 
@@ -10,8 +10,4 @@ public class BadBeast extends Entity{
 
     }
 
-    @Override
-    public void updateEnergy(int deltaEnergy) {
-        energy += deltaEnergy;
-    }
 }

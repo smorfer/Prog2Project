@@ -13,7 +13,9 @@ public abstract class Entity {
 
     public abstract void nextStep();
 
-    public abstract void updateEnergy(int deltaEnergy);
+    public void updateEnergy(int deltaEnergy){
+        energy += deltaEnergy;
+    }
 
     public int getID() {
         return ID;
