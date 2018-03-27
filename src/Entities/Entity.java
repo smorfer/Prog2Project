@@ -1,3 +1,5 @@
+package Entities;
+
 public abstract class Entity {
     protected final int ID;
     protected int energy;

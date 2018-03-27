@@ -1,3 +1,5 @@
+package Entities;
+
 public class Wall extends Entity {
     private static final int INIT_ENERGY = -10;
     public Wall(int ID, int posX, int posY) {

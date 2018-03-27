@@ -1,3 +1,5 @@
+package Entities.squirrels;
+
 public class MiniSquirrel extends Squirrel{
 
     private int masterID;

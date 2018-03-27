@@ -1,3 +1,5 @@
+package Entities.squirrels;
+
 public class MasterSquirrel extends Squirrel{
     private static final int INIT_ENERGY = 1000;
     public MasterSquirrel(int ID, int energy, int posX, int posY) {

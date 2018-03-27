@@ -1,4 +1,8 @@
-public class BadPlant extends Entity{
+package Entities.plants;
+
+import Entities.Entity;
+
+public class BadPlant extends Entity {
     private static final int INIT_ENERGY = -100;
     public BadPlant(int ID, int posX, int posY) {
         super(ID, INIT_ENERGY, posX, posY);
