@@ -1,8 +1,9 @@
-package Entities.squirrels;
+package Entities.squirrels.MiniSquirrel;
 
+import Entities.squirrels.Squirrel;
 import geom.XY;
 
-public class MiniSquirrel extends Squirrel{
+public class MiniSquirrel extends Squirrel {
 
     private int masterID;
 

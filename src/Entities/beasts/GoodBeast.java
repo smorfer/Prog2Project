@@ -10,10 +10,5 @@ public class GoodBeast extends Beast {
         // Change energy here!
     }
 
-    @Override
-    public void nextStep() {
-
-    }
-
 
 }

@@ -9,5 +9,8 @@ public abstract class Beast extends Entity{
         super(ID, energy, position);
     }
 
-
+    @Override
+    public void nextStep() {
+        move(position, XY.getRandomDirection());
+    }
 }
