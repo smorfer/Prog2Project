@@ -4,6 +4,8 @@ import geom.XY;
 
 import java.util.Scanner;
 
+import static geom.XY.inputToDirection;
+
 public class HandOperatedMasterSquirrel extends MasterSquirrel {
 
     Scanner sc = new Scanner(System.in);

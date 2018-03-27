@@ -42,6 +42,11 @@ public final class XY {
                 '}';
     }
 
+    public static int getRandomNumber(){
+        Random rnd = new Random();
+        return rnd.nextInt(10);
+    }
+
     public static XY inputToDirection(int selector) {
         switch (selector)
         {

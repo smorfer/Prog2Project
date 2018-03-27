@@ -3,6 +3,8 @@ package Entities.beasts;
 import Entities.Entity;
 import geom.XY;
 
+import java.util.Random;
+
 
 public abstract class Beast extends Entity{
     public Beast(int ID, int energy, XY position) {
@@ -11,6 +13,6 @@ public abstract class Beast extends Entity{
 
     @Override
     public void nextStep() {
-        move(position, XY.getRandomDirection());
+        move(XY.inputToDirection(XY.getRandomNumber()));
     }
 }
