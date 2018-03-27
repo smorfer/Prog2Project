@@ -1,0 +1,42 @@
+import Entities.Entity;
+
+public class EntitySet {
+    private static Entity entities[] = new Entity[100];
+
+    public static void addEntity(Entity entity)
+    {
+        int index;
+        for (index = 0; entities[index] != null; index++);
+        entities[index] = entity;
+    }
+
+    public static void removeEntity(int id)
+    {
+        for (int i = 0; i < entities.length; i++)
+        {
+            if (entities[i].getID() == id)
+            {
+                entities[i] = null;
+                break;
+            }
+        }
+    }
+
+    @Override
+    public String toString() {
+        String rets = "";
+        for (Entity e : entities)
+        {
+            rets += e.toString() + "\n";
+        }
+        return rets;
+    }
+
+    public void nextStep()
+    {
+        for (Entity e : entities)
+        {
+            e.nextStep();
+        }
+    }
+}
