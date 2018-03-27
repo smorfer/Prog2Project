@@ -1,16 +1,16 @@
 package Entities;
 
+import geom.XY;
+
 public abstract class Entity {
     protected final int ID;
     protected int energy;
-    protected int posX;
-    protected int posY;
+    protected XY position;
 
-    public Entity(int ID, int energy, int posX, int posY) {
+    public Entity(int ID, int energy, XY position) {
         this.ID = ID;
         this.energy = energy;
-        this.posX = posX;
-        this.posY = posY;
+        this.position = position;
     }
 
     public abstract void nextStep();
@@ -27,27 +27,12 @@ public abstract class Entity {
         return energy;
     }
 
-    public int getPosX() {
-        return posX;
+    public XY getPosition(){
+        return position;
     }
 
-    public int getPosY() {
-        return posY;
-    }
-
-    public void move(int deltaX, int deltaY)
+    public void move(XY direction)
     {
-        posX += deltaX;
-        posY += deltaY;
-    }
-
-    @Override
-    public String toString() {
-        return this.getClass().getName() +"{" +
-                "ID=" + ID +
-                ", energy=" + energy +
-                ", posX=" + posX +
-                ", posY=" + posY +
-                '}';
+        position = new XY(position, direction);
     }
 }

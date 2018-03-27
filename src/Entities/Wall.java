@@ -1,9 +1,11 @@
 package Entities;
 
+import geom.XY;
+
 public class Wall extends Entity {
     private static final int INIT_ENERGY = -10;
-    public Wall(int ID, int posX, int posY) {
-        super(ID, INIT_ENERGY, posX, posY);
+    public Wall(int ID, XY position) {
+        super(ID, INIT_ENERGY, position);
     }
 
     @Override

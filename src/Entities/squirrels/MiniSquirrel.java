@@ -1,11 +1,13 @@
 package Entities.squirrels;
 
+import geom.XY;
+
 public class MiniSquirrel extends Squirrel{
 
     private int masterID;
 
-    public MiniSquirrel(int ID, int energy, int posX, int posY, int masterID) {
-        super(ID, energy, posX, posY);
+    public MiniSquirrel(int ID, int energy, XY position, int masterID) {
+        super(ID, energy, position);
         this.masterID = masterID;
         //Change energy here!
     }
