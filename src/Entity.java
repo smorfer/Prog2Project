@@ -39,7 +39,7 @@ public abstract class Entity {
 
     @Override
     public String toString() {
-        return "Entity{" +
+        return this.getClass().getName() +"{" +
                 "ID=" + ID +
                 ", energy=" + energy +
                 ", posX=" + posX +
