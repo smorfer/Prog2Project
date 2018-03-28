@@ -38,11 +38,10 @@ public abstract class Entity {
         Entity target = EntitySet.getEntity(loc);
 
         if(target instanceof GoodPlant){
-            this.updateEnergy(30);
+            this.updateEnergy(30);  //Never called
         }
 
-        this.position = loc;
-
+        this.position = new XY(position, direction);
     }
 
 

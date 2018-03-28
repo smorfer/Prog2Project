@@ -28,8 +28,10 @@ public class EntitySet {
 
     public static Entity getEntity(XY location) {
         for (Entity e : entities) {
-            if (e != null && e.getPosition().equals(location)) {
-                return e;
+            if (e != null) {        // This statement works!
+                if (e.getPosition().equals(location)) {     //This statement is never called
+                    return e;
+                }
             }
         }
 
