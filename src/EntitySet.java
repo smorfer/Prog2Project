@@ -1,4 +1,5 @@
 import Entities.Entity;
+import geom.XY;
 
 public class EntitySet {
     private Entity entities[] = new Entity[100];
@@ -10,6 +11,7 @@ public class EntitySet {
         entities[index] = entity;
     }
 
+
     public void removeEntity(int id)
     {
         for (int i = 0; i < entities.length; i++)
@@ -20,6 +22,15 @@ public class EntitySet {
                 break;
             }
         }
+    }
+
+    public Entity getEntity(XY location){
+        for(Entity e : entities){
+            if(e.getPosition() == location){
+                return e;
+            }
+        }
+        return null;
     }
 
     @Override

@@ -36,6 +36,8 @@ public abstract class Entity {
         position = new XY(position, direction);
     }
 
+    //TODO: In XY: getEntityOnLoc
+
     @Override
     public String toString() {
         return this.getClass().getName() + "\n{" +

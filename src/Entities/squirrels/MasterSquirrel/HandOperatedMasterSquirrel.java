@@ -14,13 +14,13 @@ public class HandOperatedMasterSquirrel extends MasterSquirrel {
         super(ID, energy, position);
     }
 
-    public XY getHandOperatedDirection() {
+    public XY getDirection() {
         return inputToDirection(sc.nextInt());
     }
 
     @Override
     public void nextStep() {
-        move(getHandOperatedDirection());
+        move(getDirection());
     }
 
 }

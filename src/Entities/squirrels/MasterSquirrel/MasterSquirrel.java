@@ -10,6 +10,12 @@ public abstract class MasterSquirrel extends Squirrel {
         //Change energy here!
     }
 
+    @Override
+    public void nextStep() {
+        move(getDirection());
+    }
 
+
+    public abstract XY getDirection();
 
 }
