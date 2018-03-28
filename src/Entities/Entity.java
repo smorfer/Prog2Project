@@ -38,13 +38,15 @@ public abstract class Entity {
         Entity target = EntitySet.getEntity(loc);
 
 
-        if(!(target instanceof Wall) && target != null){
-            this.updateEnergy(target.getEnergy());
-            target.die();
-        } else if(target != null) {     //This is called when an entity is a Wall
-            return;
+        if (target != null) {
+            if(!(target instanceof Wall)){
+                this.updateEnergy(target.getEnergy());
+                target.die();
+            }else{     //This is called when an entity is a Wall
+                this.updateEnergy(target.getEnergy());
+                return;
+            }
         }
-
 
 
         this.position = new XY(position, direction);

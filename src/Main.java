@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) {
 
         ES.addEntity(new HandOperatedMasterSquirrel(4444, 200, XY.ORIGIN));
-        ES.addEntity(new GoodPlant(69, 200, new XY(4,4)));
+        ES.addEntity(new GoodPlant(69, new XY(4,4)));
         ES.addEntity(new BadPlant(70, new XY(8,4)));
         ES.addEntity(new Wall(999, new XY(3,0)));
         ES.addEntity(new Wall(998, new XY(3,1)));
