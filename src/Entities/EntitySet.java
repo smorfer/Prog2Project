@@ -28,7 +28,7 @@ public class EntitySet {
 
     public static Entity getEntity(XY location) {
         for (Entity e : entities) {
-            if (e.getPosition() == location) {
+            if (e != null && e.getPosition() == location) {
                 return e;
             }
         }
