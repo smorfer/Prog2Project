@@ -37,9 +37,15 @@ public abstract class Entity {
         XY loc = new XY(position, direction);
         Entity target = EntitySet.getEntity(loc);
 
-        if(target instanceof GoodPlant){
-            this.updateEnergy(30);  //Never called
+
+        if(!(target instanceof Wall) && target != null){
+            this.updateEnergy(target.getEnergy());
+            target.die();
+        } else if(target != null) {     //This is called when an entity is a Wall
+            return;
         }
+
+
 
         this.position = new XY(position, direction);
     }
@@ -53,5 +59,9 @@ public abstract class Entity {
                 ", energy=" + energy +
                 ", position=" + position.toString() +
                 '}';
+    }
+
+    public void die(){
+        EntitySet.removeEntity(this.getID());
     }
 }

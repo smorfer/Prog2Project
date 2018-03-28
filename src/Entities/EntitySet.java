@@ -14,7 +14,7 @@ public class EntitySet {
     }
 
 
-    public void removeEntity(int id)
+    public static void removeEntity(int id)
     {
         for (int i = 0; i < entities.length; i++)
         {
