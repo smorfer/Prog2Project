@@ -1,5 +1,6 @@
 package Entities;
 
+import Entities.plants.GoodPlant;
 import geom.XY;
 
 public abstract class Entity {
@@ -33,10 +34,18 @@ public abstract class Entity {
 
     public void move(XY direction)
     {
-        position = new XY(position, direction);
+        XY loc = new XY(position, direction);
+        Entity target = EntitySet.getEntity(loc);
+
+        if(target instanceof GoodPlant){
+            this.updateEnergy(30);
+        }
+
+        this.position = loc;
+
     }
 
-    //TODO: In XY: getEntityOnLoc
+
 
     @Override
     public String toString() {

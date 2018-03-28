@@ -1,8 +1,10 @@
+package Entities;
+
 import Entities.Entity;
 import geom.XY;
 
 public class EntitySet {
-    private Entity entities[] = new Entity[100];
+    private static Entity entities[] = new Entity[100];
 
     public void addEntity(Entity entity)
     {
@@ -24,14 +26,16 @@ public class EntitySet {
         }
     }
 
-    public Entity getEntity(XY location){
-        for(Entity e : entities){
-            if(e.getPosition() == location){
+    public static Entity getEntity(XY location) {
+        for (Entity e : entities) {
+            if (e.getPosition() == location) {
                 return e;
             }
         }
+
         return null;
     }
+
 
     @Override
     public String toString() {
