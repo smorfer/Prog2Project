@@ -34,7 +34,7 @@ public final class XY {
         return Y;
     }
 
-    public boolean eqauals(XY location){
+    public boolean equals(XY location){
         return(this.getX() == location.getX() && this.getY() == location.getY());
     }
 
