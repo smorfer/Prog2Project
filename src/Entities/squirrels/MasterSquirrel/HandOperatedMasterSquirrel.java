@@ -11,7 +11,7 @@ public class HandOperatedMasterSquirrel extends MasterSquirrel {
     Scanner sc = new Scanner(System.in);
 
     public HandOperatedMasterSquirrel(int ID, int energy, XY position) {
-        super(ID, energy, position);
+        super(ID, position);
     }
 
     public XY getDirection() {

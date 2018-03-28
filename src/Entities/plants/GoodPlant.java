@@ -7,7 +7,6 @@ public class GoodPlant extends Entity {
     private static final int INIT_ENERGY = 100;
     public GoodPlant(int ID, XY position)
     {
-
         super(ID, INIT_ENERGY, position);
     }
 
