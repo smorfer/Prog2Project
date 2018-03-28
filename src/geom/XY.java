@@ -34,6 +34,10 @@ public final class XY {
         return Y;
     }
 
+    public boolean eqauals(XY location){
+        return(this.getX() == location.getX() && this.getY() == location.getY());
+    }
+
     @Override
     public String toString() {
         return "XY{" +
