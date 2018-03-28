@@ -14,7 +14,7 @@ public class EntitySet {
     {
         for (int i = 0; i < entities.length; i++)
         {
-            if (entities[i].getID() == id)
+            if (entities[i] != null && entities[i].getID() == id)
             {
                 entities[i] = null;
                 break;
@@ -27,7 +27,11 @@ public class EntitySet {
         String rets = "";
         for (Entity e : entities)
         {
-            rets += e.toString() + "\n";
+            if (e != null)
+            {
+                rets += e.toString() + "\n";
+
+            }
         }
         return rets;
     }
@@ -36,7 +40,10 @@ public class EntitySet {
     {
         for (Entity e : entities)
         {
-            e.nextStep();
+            if (e != null)
+            {
+                e.nextStep();
+            }
         }
     }
 }
