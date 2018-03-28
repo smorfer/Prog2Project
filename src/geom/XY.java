@@ -22,8 +22,12 @@ public final class XY {
     }
 
     public XY(XY origin, XY direction) {
-        X = origin.getX() + direction.getX();
-        Y = origin.getY() + direction.getY();
+
+        int newX = origin.getX() + direction.getX();
+        int newY = origin.getY() + direction.getY();
+        X = (newX<0) ? 0 : newX;
+        Y = (newY<0) ? 0 : newY;
+
     }
 
     public int getX() {

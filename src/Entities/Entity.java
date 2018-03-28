@@ -38,7 +38,7 @@ public abstract class Entity {
         Entity target = EntitySet.getEntity(loc);
 
 
-        if (target != null) {
+        if (target != null && this.getID() != target.getID()) {
             if(!(target instanceof Wall)){
                 this.updateEnergy(target.getEnergy());
                 target.die();
