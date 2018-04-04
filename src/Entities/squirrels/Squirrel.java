@@ -1,6 +1,7 @@
 package Entities.squirrels;
 
 import Entities.Entity;
+import Entities.EntitySet;
 import geom.XY;
 
 public abstract class Squirrel extends Entity {

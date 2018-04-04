@@ -52,7 +52,7 @@ public final class XY {
 
     public static int getRandomNumber(){
         Random rnd = new Random();
-        return rnd.nextInt(10);
+        return rnd.nextInt(9);
     }
 
     public static XY inputToDirection(int selector) {

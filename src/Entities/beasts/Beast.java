@@ -15,4 +15,8 @@ public abstract class Beast extends Entity{
     public void nextStep() {
         move(XY.inputToDirection(XY.getRandomNumber()));
     }
+
+    public void move(XY direction){
+        this.position = new XY(position, direction);
+    }
 }
