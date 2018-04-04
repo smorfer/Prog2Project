@@ -32,13 +32,13 @@ public abstract class Entity {
         return position;
     }
 
-    public void move(XY direction){};
+    public void move(XY direction){}
 
 
 
     @Override
     public String toString() {
-        return this.getClass().getName() + "\n{" +
+        return this.getClass().getName() + " {" +
                 "ID=" + ID +
                 ", energy=" + energy +
                 ", position=" + position.toString() +

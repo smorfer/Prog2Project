@@ -1,10 +1,6 @@
 import Entities.EntitySet;
-import Entities.Wall;
-import Entities.beasts.BadBeast;
-import Entities.beasts.Beast;
-import Entities.beasts.GoodBeast;
+import Entities.beasts.BadBeast.BadBeast;
 import Entities.plants.BadPlant;
-import Entities.plants.GoodPlant;
 import Entities.squirrels.MasterSquirrel.HandOperatedMasterSquirrel;
 import geom.XY;
 

@@ -41,6 +41,10 @@ public class EntitySet {
         return null;
     }
 
+    public static Entity[] getEntities(){
+        return entities;
+    }
+
     public static Entity[] getEntitiesAtPosition(XY location) {
         int ArrayLength = 0;
         for (Entity e : entities)
@@ -54,19 +58,19 @@ public class EntitySet {
             }
         }
         Entity EntitiesAtPosition[] = new Entity[ArrayLength];
-        int ArraryPosition = 0;
+        int ArrayPosition = 0;
         for (Entity e : entities)
         {
             if (e!=null)
             {
                 if (e.getPosition().equals(location))
                 {
-                    EntitiesAtPosition[ArraryPosition] = e;
-                    ArraryPosition++;
+                    EntitiesAtPosition[ArrayPosition] = e;
+                    ArrayPosition++;
                 }
             }
         }
-        return null;
+        return EntitiesAtPosition;
     }
 
 

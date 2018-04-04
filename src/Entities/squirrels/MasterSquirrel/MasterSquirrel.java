@@ -26,6 +26,12 @@ public abstract class MasterSquirrel extends Squirrel {
         if (targets != null)
         {
             for (Entity target : targets) {
+
+                if(this.getEnergy() <= 0){      // Master Squirrel killed!
+                    this.die();
+                    return;
+                }
+
                 if (target != null && this.getID() != target.getID()) {
                     if(!(target instanceof Wall)){
                         this.updateEnergy(target.getEnergy());

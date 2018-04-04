@@ -3,6 +3,9 @@ package geom;
 import java.util.Random;
 
 public final class XY {
+
+    //TODO: Method that creates Vector from an Entity to its target (MasterSquirrel)
+
     private final int X;
     private final int Y;
 
