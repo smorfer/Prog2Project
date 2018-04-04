@@ -26,15 +26,46 @@ public class EntitySet {
         }
     }
 
-    public static Entity getEntity(XY location) {
-        for (Entity e : entities) {
-            if (e != null) {        // This statement works!
-                if (e.getPosition().equals(location)) {     //This statement is never called
+    public static Entity getEntity(int ID)
+    {
+        for (Entity e : entities)
+        {
+            if (e != null)
+            {
+                if (e.getID() == ID)
+                {
                     return e;
                 }
             }
         }
+        return null;
+    }
 
+    public static Entity[] getEntitiesAtPosition(XY location) {
+        int ArrayLength = 0;
+        for (Entity e : entities)
+        {
+            if (e!=null)
+            {
+                if (e.getPosition().equals(location))
+                {
+                    ArrayLength++;
+                }
+            }
+        }
+        Entity EntitiesAtPosition[] = new Entity[ArrayLength];
+        int ArraryPosition = 0;
+        for (Entity e : entities)
+        {
+            if (e!=null)
+            {
+                if (e.getPosition().equals(location))
+                {
+                    EntitiesAtPosition[ArraryPosition] = e;
+                    ArraryPosition++;
+                }
+            }
+        }
         return null;
     }
 

@@ -20,16 +20,21 @@ public abstract class MasterSquirrel extends Squirrel {
 
     public void move(XY direction){
         XY loc = new XY(position, direction);
-        Entity target = EntitySet.getEntity(loc);
+        Entity targets[] = EntitySet.getEntitiesAtPosition(loc);
 
 
-        if (target != null && this.getID() != target.getID()) {
-            if(!(target instanceof Wall)){
-                this.updateEnergy(target.getEnergy());
-                target.die();
-            }else{     //This is called when an entity is a Wall
-                this.updateEnergy(target.getEnergy());
-                return;
+        if (targets != null)
+        {
+            for (Entity target : targets) {
+                if (target != null && this.getID() != target.getID()) {
+                    if(!(target instanceof Wall)){
+                        this.updateEnergy(target.getEnergy());
+                        target.die();
+                    }else{     //This is called when an entity is a Wall
+                        this.updateEnergy(target.getEnergy());
+                        return;
+                    }
+                }
             }
         }
 
