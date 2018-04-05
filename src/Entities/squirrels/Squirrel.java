@@ -44,4 +44,27 @@ public abstract class Squirrel extends Entity {
         XY loc = new XY(position, direction);
         this.position = new XY(position, direction);
     }
+
+    public boolean canMove(XY targetLocation){
+        Entity targets[] = EntitySet.getEntitiesAtPosition(targetLocation);
+
+        if (targets != null)
+        {
+            for (Entity target : targets) {
+                if (target != null && this.getID() != target.getID()) {
+                    if(!(target instanceof Wall)){
+                        return true;
+                    }else{     //This is called when an entity is a Wall
+                        return false;
+                    }
+
+                    this.hit(target);
+                }
+            }
+        }
+
+        return true;
+    }
+
+
 }

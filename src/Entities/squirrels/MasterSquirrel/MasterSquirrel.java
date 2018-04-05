@@ -19,28 +19,4 @@ public abstract class MasterSquirrel extends Squirrel {
     }
 
 
-    /*Entity targets[] = EntitySet.getEntitiesAtPosition(loc);
-
-
-        if (targets != null)
-        {
-            for (Entity target : targets) {
-
-                if(this.getEnergy() <= 0){      // Master Squirrel killed!
-                    this.die();
-                    return;
-                }
-
-                if (target != null && this.getID() != target.getID()) {
-                    if(!(target instanceof Wall)){
-                        this.updateEnergy(target.getEnergy());
-                        target.die();
-                    }else{     //This is called when an entity is a Wall
-                        this.updateEnergy(target.getEnergy());
-                        return;
-                    }
-                }
-            }
-        }*/
-
 }
