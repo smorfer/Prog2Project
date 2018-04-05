@@ -22,4 +22,8 @@ public class MiniSquirrel extends Squirrel {
     public XY getDirection() {
         return null;
     }
+
+    public int getMasterID() {
+        return masterID;
+    }
 }

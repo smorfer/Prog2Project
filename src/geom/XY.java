@@ -4,8 +4,6 @@ import java.util.Random;
 
 public final class XY {
 
-    //TODO: Method that creates Vector from an Entity to its target (MasterSquirrel)
-
     private final int X;
     private final int Y;
 
@@ -22,6 +20,11 @@ public final class XY {
     public XY(int x, int y) {
         X = x;
         Y = y;
+    }
+
+    public XY(XY xy){
+        X = xy.getX();
+        Y = xy.getY();
     }
 
     public XY(XY origin, XY direction) {

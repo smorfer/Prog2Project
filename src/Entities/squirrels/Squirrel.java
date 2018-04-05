@@ -7,6 +7,7 @@ import Entities.beasts.BadBeast.BadBeast;
 import Entities.beasts.GoodBeast;
 import Entities.plants.GoodPlant;
 import Entities.plants.Plant;
+import Entities.squirrels.MiniSquirrel.MiniSquirrel;
 import geom.XY;
 
 public abstract class Squirrel extends Entity {
@@ -34,6 +35,16 @@ public abstract class Squirrel extends Entity {
         } else if (entity instanceof Wall){
 
             this.updateEnergy(entity.getEnergy());
+
+        } else if(entity instanceof MiniSquirrel){
+
+            if (((MiniSquirrel) entity).getMasterID() == this.getID()) {
+                this.updateEnergy(entity.getEnergy());
+                entity.die();
+            } else{
+                this.updateEnergy(+150);
+                entity.die();
+            }
 
         }
     }

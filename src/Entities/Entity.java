@@ -42,7 +42,7 @@ public abstract class Entity {
                 "ID=" + ID +
                 ", energy=" + energy +
                 ", position=" + position.toString() +
-                " Distance to Origin: " + XY.distanceToTarget(XY.vectorToTarget(XY.ORIGIN, position)) + "}";
+                " Distance to Origin: " + XY.distanceToTarget(XY.vectorToTarget(XY.ORIGIN, position)) +"}";
     }
 
     public void die(){
