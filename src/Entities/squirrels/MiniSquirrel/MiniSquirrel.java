@@ -15,7 +15,7 @@ public class MiniSquirrel extends Squirrel {
 
     @Override
     public void nextStep() {
-
+        energy--;
     }
 
     @Override

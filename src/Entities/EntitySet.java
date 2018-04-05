@@ -1,12 +1,13 @@
 package Entities;
 
 import Entities.Entity;
+import Entities.squirrels.MasterSquirrel.MasterSquirrel;
 import geom.XY;
 
 public class EntitySet {
     private static Entity entities[] = new Entity[100];
 
-    public void addEntity(Entity entity)
+    public static void addEntity(Entity entity)
     {
         int index;
         for (index = 0; entities[index] != null; index++);
@@ -90,12 +91,24 @@ public class EntitySet {
 
     public void nextStep()
     {
+        Entity master = null;
         for (Entity e : entities)
         {
+            if(e instanceof MasterSquirrel){
+                master = e;
+                continue;
+            }
+
             if (e != null)
             {
                 e.nextStep();
             }
         }
+
+        if(master == null)
+            return;
+
+        master.nextStep();
+
     }
 }

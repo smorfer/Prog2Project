@@ -24,7 +24,7 @@ public abstract class Squirrel extends Entity {
 
         } else if(entity instanceof BadBeast){
 
-            //TODO: Hier müsste das BadBeast angreifen (attack() oder bite() Methode Implementieren!)
+            ((BadBeast) entity).bite(this);
 
         } else if(entity instanceof GoodBeast){
 

@@ -55,7 +55,7 @@ public final class XY {
 
     public static int getRandomNumber(){
         Random rnd = new Random();
-        return rnd.nextInt(9);
+        return rnd.nextInt(8)+1;
     }
 
     public static XY inputToDirection(int selector) {
@@ -80,5 +80,16 @@ public final class XY {
             default:
                 return ORIGIN;
         }
+    }
+
+    public static XY vectorToTarget(XY loc, XY target){
+        return new XY((target.getX()-loc.getX()), (target.getY() - loc.getY()));
+    }
+
+    public static double distanceToTarget(XY vector){
+        double x = vector.getX();
+        double y = vector.getY();
+
+        return Math.sqrt(Math.pow(x,2f) + Math.pow(y,2f));
     }
 }

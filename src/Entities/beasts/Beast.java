@@ -17,6 +17,6 @@ public abstract class Beast extends Entity{
     }
 
     public void move(XY direction){
-        this.position = new XY(position, direction);
+        //this.position = new XY(position, direction);
     }
 }

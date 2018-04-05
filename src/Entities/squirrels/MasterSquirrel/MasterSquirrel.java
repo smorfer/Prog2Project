@@ -3,6 +3,7 @@ package Entities.squirrels.MasterSquirrel;
 import Entities.Entity;
 import Entities.EntitySet;
 import Entities.Wall;
+import Entities.squirrels.MiniSquirrel.MiniSquirrel;
 import Entities.squirrels.Squirrel;
 import geom.XY;
 
@@ -16,6 +17,11 @@ public abstract class MasterSquirrel extends Squirrel {
     @Override
     public void nextStep() {
         move(getDirection());
+    }
+
+    public void spawnMiniSquirrel(int ID, int energy){
+        this.energy -= energy;
+        EntitySet.addEntity(new MiniSquirrel(ID, energy, new XY(this.getPosition(), XY.UP), this.getID()));
     }
 
 
