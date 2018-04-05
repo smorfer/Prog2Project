@@ -5,6 +5,7 @@ import Entities.EntitySet;
 import Entities.Wall;
 import Entities.beasts.BadBeast.BadBeast;
 import Entities.beasts.GoodBeast;
+import Entities.plants.GoodPlant;
 import Entities.plants.Plant;
 import geom.XY;
 
@@ -14,23 +15,27 @@ public abstract class Squirrel extends Entity {
     }
 
 
-    //GoodBeast, BadBeast, Plant, Wall
-    public void hit(GoodBeast goodBeast){
-        this.updateEnergy(goodBeast.getEnergy());
-        goodBeast.die();
-    }
 
-    public void hit(BadBeast badBeast){
-        //TODO: Hier müsste das BadBeast angreifen (attack() oder bite() Methode Implementieren!)
-    }
+    public void hit(Entity entity){
+        if(entity instanceof Plant){
 
-    public void hit(Plant plant){
-        this.updateEnergy(plant.getEnergy());
-        plant.die();
-    }
+            this.updateEnergy(entity.getEnergy());
+            entity.die();
 
-    public void hit(Wall wall){
-        this.updateEnergy(wall.getEnergy());
+        } else if(entity instanceof BadBeast){
+
+            //TODO: Hier müsste das BadBeast angreifen (attack() oder bite() Methode Implementieren!)
+
+        } else if(entity instanceof GoodBeast){
+
+            this.updateEnergy(entity.getEnergy());
+            entity.die();
+
+        } else if (entity instanceof Wall){
+
+            this.updateEnergy(entity.getEnergy());
+
+        }
     }
 
     @Override
@@ -42,28 +47,29 @@ public abstract class Squirrel extends Entity {
 
     public void move(XY direction){
         XY loc = new XY(position, direction);
+
+        if(!canMove(loc)){
+            return;
+        }
+
         this.position = new XY(position, direction);
     }
 
     public boolean canMove(XY targetLocation){
         Entity targets[] = EntitySet.getEntitiesAtPosition(targetLocation);
-
+        boolean canMove = true;
         if (targets != null)
         {
             for (Entity target : targets) {
                 if (target != null && this.getID() != target.getID()) {
-                    if(!(target instanceof Wall)){
-                        return true;
-                    }else{     //This is called when an entity is a Wall
-                        return false;
-                    }
 
+                    canMove = (!(target instanceof Wall));
                     this.hit(target);
                 }
             }
         }
 
-        return true;
+        return canMove;
     }
 
 
