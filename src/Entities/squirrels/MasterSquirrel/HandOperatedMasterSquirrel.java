@@ -18,9 +18,6 @@ public class HandOperatedMasterSquirrel extends MasterSquirrel {
         return inputToDirection(sc.nextInt());
     }
 
-    @Override
-    public void nextStep() {
-        move(getDirection());
-    }
+
 
 }

@@ -18,9 +18,8 @@ public abstract class MasterSquirrel extends Squirrel {
         move(getDirection());
     }
 
-    public void move(XY direction){
-        XY loc = new XY(position, direction);
-        Entity targets[] = EntitySet.getEntitiesAtPosition(loc);
+
+    /*Entity targets[] = EntitySet.getEntitiesAtPosition(loc);
 
 
         if (targets != null)
@@ -42,13 +41,6 @@ public abstract class MasterSquirrel extends Squirrel {
                     }
                 }
             }
-        }
-
-
-        this.position = new XY(position, direction);
-    }
-
-
-    public abstract XY getDirection();
+        }*/
 
 }

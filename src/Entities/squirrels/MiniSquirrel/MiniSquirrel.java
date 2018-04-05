@@ -18,4 +18,8 @@ public class MiniSquirrel extends Squirrel {
 
     }
 
+    @Override
+    public XY getDirection() {
+        return null;
+    }
 }
