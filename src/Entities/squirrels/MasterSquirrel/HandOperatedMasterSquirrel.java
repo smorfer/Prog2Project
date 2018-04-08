@@ -24,6 +24,17 @@ public class HandOperatedMasterSquirrel extends MasterSquirrel {
         return inputToDirection(direction);
     }
 
-
-
+    @Override
+    public void nextStep() {
+        int op = sc.nextInt();
+        if (op > 9)
+        {
+            spawnMiniSquirrel(200);
+        }
+        else
+        {
+            previousLocation = new XY(this.getPosition());
+            move(inputToDirection(op));
+        }
+    }
 }
