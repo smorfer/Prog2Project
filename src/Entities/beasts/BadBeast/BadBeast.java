@@ -7,8 +7,8 @@ import geom.XY;
 public class BadBeast extends Beast {
     private static final int INIT_ENERGY = -150;
     private int biteCounter;
-    public BadBeast(int ID, XY position) {
-        super(ID, INIT_ENERGY, position);
+    public BadBeast(XY position) {
+        super(INIT_ENERGY, position);
         // Change energy here!
 
         biteCounter = 0;
@@ -29,7 +29,7 @@ public class BadBeast extends Beast {
                 "ID=" + ID +
                 ", energy=" + energy +
                 ", position=" + position.toString() +
-                " Bite Counter: " + biteCounter + " }";
+                ", Bite Counter: " + biteCounter + " }";
     }
 
 }

@@ -7,8 +7,8 @@ public class MiniSquirrel extends Squirrel {
 
     private int masterID;
 
-    public MiniSquirrel(int ID, int energy, XY position, int masterID) {
-        super(ID, energy, position);
+    public MiniSquirrel(int energy, XY position, int masterID) {
+        super(energy, position);
         this.masterID = masterID;
         //Change energy here!
     }

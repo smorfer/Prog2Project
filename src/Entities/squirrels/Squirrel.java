@@ -11,8 +11,8 @@ import Entities.squirrels.MiniSquirrel.MiniSquirrel;
 import geom.XY;
 
 public abstract class Squirrel extends Entity {
-    public Squirrel(int ID, int energy, XY position) {
-        super(ID, energy, position);
+    public Squirrel(int energy, XY position) {
+        super(energy, position);
     }
 
 

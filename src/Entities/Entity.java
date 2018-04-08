@@ -1,15 +1,15 @@
 package Entities;
 
-import Entities.plants.GoodPlant;
 import geom.XY;
+import ID.IDManager;
 
 public abstract class Entity {
     protected final int ID;
     protected int energy;
     protected XY position;
 
-    public Entity(int ID, int energy, XY position) {
-        this.ID = ID;
+    public Entity(int energy, XY position) {
+        this.ID = IDManager.getNextID();
         this.energy = energy;
         this.position = position;
     }

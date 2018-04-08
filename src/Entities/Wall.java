@@ -4,8 +4,8 @@ import geom.XY;
 
 public class Wall extends Entity {
     private static final int INIT_ENERGY = -10;
-    public Wall(int ID, XY position) {
-        super(ID, INIT_ENERGY, position);
+    public Wall(XY position) {
+        super(INIT_ENERGY, position);
     }
 
     @Override

@@ -7,8 +7,8 @@ import java.util.Random;
 
 
 public abstract class Beast extends Entity{
-    public Beast(int ID, int energy, XY position) {
-        super(ID, energy, position);
+    public Beast(int energy, XY position) {
+        super(energy, position);
     }
 
     @Override
