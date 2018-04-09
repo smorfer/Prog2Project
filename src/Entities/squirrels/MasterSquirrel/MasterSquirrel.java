@@ -25,10 +25,7 @@ public abstract class MasterSquirrel extends Squirrel {
 
     public void spawnMiniSquirrel(int energy){
         this.energy -= energy;
-        EntitySet.addEntity(new MiniSquirrel(energy, new XY(previousLocation), this.getID()));  // This doesnt spawn the entity
-                                                            // KOMISCHER BUG: AN DER PREVIOUS LOC KANN WIRD NICHTS GESPAWNT
-                                                            // Man muss von der prev. Location mit einer Konstanten (XY.DOWN beispielsweise)
-                                                            // weggehen. XY.ORIGIN funktioniert aber auch nicht ...
+        EntitySet.addEntity(new MiniSquirrel(energy, new XY(previousLocation), this.getID())); 
     }
 
     public XY getPreviousLocation() {

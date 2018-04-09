@@ -18,7 +18,6 @@ public class BadBeastSimpleBot {
     }
 
     public XY getDirection(){
-        //TODO: Vector from Beast to Target
-        return null;
+        return XY.inputToDirection(XY.getRandomNumber());
     }
 }
