@@ -6,6 +6,7 @@ import geom.XY;
 
 public class BadBeast extends Beast {
     private static final int INIT_ENERGY = -150;
+    private static BadBeastSimpleBot bot = new BadBeastSimpleBot();
     private int biteCounter;
     public BadBeast(XY position) {
         super(INIT_ENERGY, position);
@@ -32,4 +33,8 @@ public class BadBeast extends Beast {
                 ", Bite Counter: " + biteCounter + " }";
     }
 
+    @Override
+    public void nextStep() {
+        move(bot.getDirection());
+    }
 }

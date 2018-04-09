@@ -7,6 +7,8 @@ import java.util.Random;
 
 
 public abstract class Beast extends Entity{
+    private int moveCounter = 0;
+
     public Beast(int energy, XY position) {
         super(energy, position);
     }
@@ -17,6 +19,11 @@ public abstract class Beast extends Entity{
     }
 
     public void move(XY direction){
-        //this.position = new XY(position, direction);
+        if(moveCounter % 4 == 0){
+            this.position = new XY(position, direction);
+        }
+        moveCounter++;
+
+
     }
 }
