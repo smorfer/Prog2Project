@@ -51,7 +51,7 @@ public class FlattenedBoard implements EntityContext{
         if(squirrelCollision(miniSquirrel, direction, targetEntity)) return;
 
         if(targetEntity instanceof MasterSquirrel){
-            // miniSquirrel.collide(masterSquirrel)
+            ((MasterSquirrel) targetEntity).hit(this, miniSquirrel);
         }
 
     }
@@ -63,11 +63,13 @@ public class FlattenedBoard implements EntityContext{
 
 
         if(targetEntity instanceof Squirrel) {
-            ((Squirrel) targetEntity).hit(FlattenedBoard.this, goodBeast);
+            ((Squirrel) targetEntity).hit(this, goodBeast);
+            return;
         }
 
         if(targetEntity == null) {
             moveEntity(goodBeast, direction);
+            return;
         }
 
 
@@ -81,9 +83,13 @@ public class FlattenedBoard implements EntityContext{
 
         if(targetEntity == null){
             moveEntity(badBeast, direction);
+            return;
             //badBeast.move(direction);
-        } else if(targetEntity instanceof Squirrel){
+        }
+
+        if(targetEntity instanceof Squirrel){
             badBeast.bite(this, targetEntity);
+            return;
         }
 
     }
