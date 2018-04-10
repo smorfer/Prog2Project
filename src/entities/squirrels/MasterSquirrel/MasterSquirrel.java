@@ -1,5 +1,6 @@
 package entities.squirrels.MasterSquirrel;
 
+import core.EntityContext;
 import entities.squirrels.Squirrel;
 import geom.XY;
 
@@ -13,9 +14,10 @@ public abstract class MasterSquirrel extends Squirrel {
     }
 
     @Override
-    public void nextStep() {
+    public void nextStep(EntityContext entityContext) {
         previousLocation = new XY(this.getPosition());
-        move(getDirection());
+
+        entityContext.tryMove(this, getDirection());
 
     }
 

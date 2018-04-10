@@ -1,5 +1,6 @@
 package entities;
 
+import core.EntityContext;
 import geom.XY;
 import ID.IDManager;
 
@@ -14,7 +15,7 @@ public abstract class Entity {
         this.position = position;
     }
 
-    public abstract void nextStep();
+    public abstract void nextStep(EntityContext entityContext);
 
     public void updateEnergy(int deltaEnergy){
         energy += deltaEnergy;

@@ -2,7 +2,7 @@ package core;
 
 import entities.Entity;
 import entities.Wall;
-import entities.beasts.BadBeast.BadBeast;
+import entities.beasts.BadBeast;
 import entities.beasts.GoodBeast;
 import entities.plants.BadPlant;
 import entities.plants.GoodPlant;

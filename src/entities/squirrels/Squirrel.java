@@ -1,5 +1,6 @@
 package entities.squirrels;
 
+import core.EntityContext;
 import entities.Entity;
 import geom.XY;
 
@@ -42,10 +43,6 @@ public abstract class Squirrel extends Entity {
 //        }
 //    }
 
-    @Override
-    public void nextStep() {
-        move(getDirection());
-    }
 
     public abstract XY getDirection();
 

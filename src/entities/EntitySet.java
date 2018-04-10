@@ -92,26 +92,5 @@ public class EntitySet {
         return rets;
     }
 
-    public void nextStep()
-    {
-        Entity master = null;
-        for (Entity e : entities)
-        {
-            if(e instanceof MasterSquirrel){
-                master = e;
-                continue;
-            }
 
-            if (e != null)
-            {
-                e.nextStep();
-            }
-        }
-
-        if(master == null)
-            return;
-
-        master.nextStep();
-
-    }
 }

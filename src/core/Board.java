@@ -3,7 +3,7 @@ package core;
 import entities.Entity;
 import entities.EntitySet;
 import entities.Wall;
-import entities.beasts.BadBeast.BadBeast;
+import entities.beasts.BadBeast;
 import entities.beasts.GoodBeast;
 import entities.plants.BadPlant;
 import entities.plants.GoodPlant;
@@ -179,7 +179,31 @@ public class Board {
     }
 
     public void callNextStep(){
-        entitySet.nextStep();
+        nextStep();
         printBoard();
+    }
+
+    public void nextStep()
+    {
+        EntityContext data = getData();
+        Entity master = null;
+        for (Entity e : entitySet.getEntities())
+        {
+            if(e instanceof MasterSquirrel){
+                master = e;
+                continue;
+            }
+
+            if (e != null)
+            {
+                e.nextStep(data);
+            }
+        }
+
+        if(master == null)
+            return;
+
+        master.nextStep(data);
+
     }
 }

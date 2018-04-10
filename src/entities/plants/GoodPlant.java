@@ -1,5 +1,6 @@
 package entities.plants;
 
+import core.EntityContext;
 import geom.XY;
 
 public class GoodPlant extends Plant {
@@ -10,7 +11,7 @@ public class GoodPlant extends Plant {
     }
 
     @Override
-    public void nextStep() {
+    public void nextStep(EntityContext entityContext) {
 
     }
 }

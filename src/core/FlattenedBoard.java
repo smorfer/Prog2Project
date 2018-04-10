@@ -2,7 +2,7 @@ package core;
 
 import entities.Entity;
 import entities.Wall;
-import entities.beasts.BadBeast.BadBeast;
+import entities.beasts.BadBeast;
 import entities.beasts.GoodBeast;
 import entities.plants.Plant;
 import entities.squirrels.MasterSquirrel.MasterSquirrel;
@@ -34,7 +34,7 @@ public class FlattenedBoard implements EntityContext{
         if(squirrelCollision(masterSquirrel, direction, targetEntity)) return;
 
         if(targetEntity instanceof MiniSquirrel){
-            //MiniSquirrel collision missing here!
+            // MasterSquirrel.collide(miniSquirrel)
         }
     }
 
@@ -43,15 +43,12 @@ public class FlattenedBoard implements EntityContext{
         XY newLocation = new XY(miniSquirrel.getPosition(), direction);
         Entity targetEntity = entities[newLocation.getX()][newLocation.getY()];
 
-        if(targetEntity instanceof MasterSquirrel){
-            MasterSquirrel target = (MasterSquirrel)targetEntity;
+        if(squirrelCollision(miniSquirrel, direction, targetEntity)) return;
 
-        } else if(targetEntity instanceof MiniSquirrel){
-            MiniSquirrel target = (MiniSquirrel)targetEntity;
-        } else if(targetEntity != null){
-            // Get Target Type (we have an ENUM, may that work)
-            // Alternative: Generics Method
+        if(targetEntity instanceof MasterSquirrel){
+            // MiniSquirrel.collide(masterSquirrel)
         }
+
     }
 
     @Override
@@ -59,7 +56,7 @@ public class FlattenedBoard implements EntityContext{
         XY newLocation = new XY(goodBeast.getPosition(), direction);
         Entity targetEntity = entities[newLocation.getX()][newLocation.getY()];
 
-        //move!
+        //move! if target null
 
         if(targetEntity instanceof Squirrel){
             // collide method in Squirrel
@@ -72,7 +69,7 @@ public class FlattenedBoard implements EntityContext{
         Entity targetEntity = entities[newLocation.getX()][newLocation.getY()];
 
         if(targetEntity == null){
-            badBeast.move(direction);
+            //badBeast.move(direction);
         } else if(targetEntity instanceof Squirrel){
             // collide method in Squirrel
         }
@@ -82,23 +79,42 @@ public class FlattenedBoard implements EntityContext{
     public boolean squirrelCollision(Squirrel squirrel, XY direction, Entity targetEntity) {
 
         if (targetEntity == null) {
-            squirrel.move(direction);
+            moveEntity(squirrel, direction);
+            return true;
         } else if (targetEntity instanceof Plant) {
-            // do plant collision
+            //squirrel.collide(targetEntity)
+            System.out.println("Hit Plant");
+            moveEntity(squirrel, direction);
             return true;
         } else if (targetEntity instanceof GoodBeast){
             // do good beast collision
+            System.out.println("Hit Good Beast");
+            moveEntity(squirrel, direction);
             return true;
         } else if(targetEntity instanceof BadBeast){
+            // dont move
+            System.out.println("Hit Bad Beast");
             // do bad beast collision
             return true;
         } else if(targetEntity instanceof Wall){
+            // dont move
+            System.out.println("Hit Wall");
             // do wall collision
             return true;
         }
 
 
         return false;
+    }
+
+    public void moveEntity(Entity entity, XY direction){
+        entities[entity.getPosition().getX()][entity.getPosition().getY()] = null;
+
+        XY targetLocation = new XY(entity.getPosition(), direction);
+        entities[targetLocation.getX()][targetLocation.getY()] = entity;
+
+        entity.move(direction);
+
     }
 
     @Override

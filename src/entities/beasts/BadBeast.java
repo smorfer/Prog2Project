@@ -1,12 +1,14 @@
-package entities.beasts.BadBeast;
+package entities.beasts;
 
+import core.EntityContext;
 import entities.Entity;
 import entities.beasts.Beast;
+import entities.beasts.BeastSimpleBot;
 import geom.XY;
 
 public class BadBeast extends Beast {
     private static final int INIT_ENERGY = -150;
-    private static BadBeastSimpleBot bot = new BadBeastSimpleBot();
+    private static BeastSimpleBot bot = new BeastSimpleBot();
     private int biteCounter;
     public BadBeast(XY position) {
         super(INIT_ENERGY, position);
@@ -35,7 +37,7 @@ public class BadBeast extends Beast {
     }
 
     @Override
-    public void nextStep() {
-        move(bot.getDirection());
+    public void nextStep(EntityContext entityContext) {
+        entityContext.tryMove(this, bot.getDirection());
     }
 }

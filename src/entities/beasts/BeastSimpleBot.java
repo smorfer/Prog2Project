@@ -1,9 +1,9 @@
-package entities.beasts.BadBeast;
+package entities.beasts;
 
 import entities.Entity;
 import geom.XY;
 
-public class BadBeastSimpleBot {
+public class BeastSimpleBot {
     Entity target;
 
 

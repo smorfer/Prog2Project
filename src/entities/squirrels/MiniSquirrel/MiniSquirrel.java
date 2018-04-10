@@ -1,5 +1,6 @@
 package entities.squirrels.MiniSquirrel;
 
+import core.EntityContext;
 import entities.squirrels.Squirrel;
 import geom.XY;
 
@@ -14,7 +15,8 @@ public class MiniSquirrel extends Squirrel {
     }
 
     @Override
-    public void nextStep() {
+    public void nextStep(EntityContext entityContext) {
+        entityContext.tryMove(this, getDirection());
         this.updateEnergy(-1);
     }
 

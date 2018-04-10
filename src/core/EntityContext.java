@@ -1,7 +1,7 @@
 package core;
 
 import entities.Entity;
-import entities.beasts.BadBeast.BadBeast;
+import entities.beasts.BadBeast;
 import entities.beasts.GoodBeast;
 import entities.squirrels.MasterSquirrel.MasterSquirrel;
 import entities.squirrels.MiniSquirrel.MiniSquirrel;

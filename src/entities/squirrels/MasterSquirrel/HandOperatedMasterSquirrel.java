@@ -1,5 +1,6 @@
 package entities.squirrels.MasterSquirrel;
 
+import core.EntityContext;
 import geom.XY;
 
 import java.util.Scanner;
@@ -25,7 +26,7 @@ public class HandOperatedMasterSquirrel extends MasterSquirrel {
     }
 
     @Override
-    public void nextStep() {
+    public void nextStep(EntityContext entityContext) {
         int op = sc.nextInt();
         if (op > 9)
         {
@@ -34,7 +35,8 @@ public class HandOperatedMasterSquirrel extends MasterSquirrel {
         else
         {
             previousLocation = new XY(this.getPosition());
-            move(inputToDirection(op));
+
+            entityContext.tryMove(this, inputToDirection(op));
         }
     }
 }

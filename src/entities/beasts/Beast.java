@@ -1,5 +1,6 @@
 package entities.beasts;
 
+import core.EntityContext;
 import entities.Entity;
 import geom.XY;
 
@@ -11,10 +12,6 @@ public abstract class Beast extends Entity{
         super(energy, position);
     }
 
-    @Override
-    public void nextStep() {
-        move(XY.inputToDirection(XY.getRandomNumber()));
-    }
 
     public void move(XY direction){
         if(moveCounter % 4 == 0){

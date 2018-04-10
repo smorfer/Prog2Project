@@ -1,5 +1,6 @@
 package entities;
 
+import core.EntityContext;
 import geom.XY;
 
 public class Wall extends Entity {
@@ -9,7 +10,7 @@ public class Wall extends Entity {
     }
 
     @Override
-    public void nextStep() {
+    public void nextStep(EntityContext entityContext) {
     }
 
     @Override
