@@ -1,9 +1,7 @@
-package Entities.beasts;
+package entities.beasts;
 
-import Entities.Entity;
+import entities.Entity;
 import geom.XY;
-
-import java.util.Random;
 
 
 public abstract class Beast extends Entity{
@@ -20,7 +18,7 @@ public abstract class Beast extends Entity{
 
     public void move(XY direction){
         if(moveCounter % 4 == 0){
-            this.position = new XY(position, direction);
+            this.setPosition(new XY(getPosition(), direction));
         }
         moveCounter++;
 

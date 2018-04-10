@@ -1,6 +1,6 @@
-package Entities.squirrels.MiniSquirrel;
+package entities.squirrels.MiniSquirrel;
 
-import Entities.squirrels.Squirrel;
+import entities.squirrels.Squirrel;
 import geom.XY;
 
 public class MiniSquirrel extends Squirrel {
@@ -15,7 +15,7 @@ public class MiniSquirrel extends Squirrel {
 
     @Override
     public void nextStep() {
-        energy--;
+        this.updateEnergy(-1);
     }
 
     @Override

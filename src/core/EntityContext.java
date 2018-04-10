@@ -1,11 +1,11 @@
 package core;
 
-import Entities.Entity;
-import Entities.beasts.BadBeast.BadBeast;
-import Entities.beasts.GoodBeast;
-import Entities.squirrels.MasterSquirrel.MasterSquirrel;
-import Entities.squirrels.MiniSquirrel.MiniSquirrel;
-import Entities.squirrels.Squirrel;
+import entities.Entity;
+import entities.beasts.BadBeast.BadBeast;
+import entities.beasts.GoodBeast;
+import entities.squirrels.MasterSquirrel.MasterSquirrel;
+import entities.squirrels.MiniSquirrel.MiniSquirrel;
+import entities.squirrels.Squirrel;
 import geom.XY;
 
 public interface EntityContext {

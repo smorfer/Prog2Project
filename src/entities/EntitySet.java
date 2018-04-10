@@ -1,7 +1,6 @@
-package Entities;
+package entities;
 
-import Entities.Entity;
-import Entities.squirrels.MasterSquirrel.MasterSquirrel;
+import entities.squirrels.MasterSquirrel.MasterSquirrel;
 import geom.XY;
 
 public class EntitySet {

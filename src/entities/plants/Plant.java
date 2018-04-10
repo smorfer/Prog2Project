@@ -1,6 +1,6 @@
-package Entities.plants;
+package entities.plants;
 
-import Entities.Entity;
+import entities.Entity;
 import geom.XY;
 
 public abstract class Plant extends Entity {

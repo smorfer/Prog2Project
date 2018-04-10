@@ -1,12 +1,12 @@
-package Entities;
+package entities;
 
 import geom.XY;
 import ID.IDManager;
 
 public abstract class Entity {
-    protected final int ID;
-    protected int energy;
-    protected XY position;
+    private final int ID;
+    private int energy;
+    private XY position;
 
     public Entity(int energy, XY position) {
         this.ID = IDManager.getNextID();
@@ -30,6 +30,10 @@ public abstract class Entity {
 
     public XY getPosition(){
         return position;
+    }
+
+    public void setPosition(XY position) {
+        this.position = position;
     }
 
     public void move(XY direction){}

@@ -1,6 +1,5 @@
-package Entities.beasts;
+package entities.beasts;
 
-import Entities.Entity;
 import geom.XY;
 
 public class GoodBeast extends Beast {
