@@ -15,13 +15,15 @@ public class Main {
     public static void main(String[] args) {
 
         board = new Board();
+        board.printBoard();
         run();
+
 
     }
 
     public static void run(){
         while(true) {
-            board.printBoard();
+        board.callNextStep();
 
         }
     }

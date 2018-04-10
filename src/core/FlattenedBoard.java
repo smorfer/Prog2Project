@@ -9,6 +9,13 @@ import Entities.squirrels.Squirrel;
 import geom.XY;
 
 public class FlattenedBoard implements EntityContext{
+    //    x  y
+    Entity[][] entities;
+
+    FlattenedBoard(Entity[][] data){
+        entities = data;
+    }
+
     @Override
     public XY getSize() {
         return null;
@@ -16,7 +23,17 @@ public class FlattenedBoard implements EntityContext{
 
     @Override
     public void tryMove(MasterSquirrel masterSquirrel, XY direction) {
+        XY newLocation = new XY(masterSquirrel.getPosition(), direction);
+        Entity targetEntity = entities[newLocation.getX()][newLocation.getY()];
 
+        if(targetEntity instanceof MiniSquirrel){
+            // Mini Squirrel Collision, probably in MasterSquirrel
+        } else if(targetEntity != null){
+            // Collide with target entity, probably in Squirrel
+            // TODO: Where to put wall collision?
+        } else{
+            masterSquirrel.move(direction);
+        }
     }
 
     @Override

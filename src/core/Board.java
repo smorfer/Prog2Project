@@ -161,4 +161,23 @@ public class Board {
         } while (isEntityAtPosition(spawn));
         return spawn;
     }
+
+    public FlattenedBoard getData(){
+
+            Entity[][] data = new Entity[BoardConfig.SIZE][BoardConfig.SIZE];
+
+            for (Entity e : entitySet.getEntities()) {
+                if (e == null) continue;
+
+                XY location = e.getPosition();
+                data[location.getX()][location.getY()] = e;
+            }
+
+            return new FlattenedBoard(data);
+    }
+
+    public void callNextStep(){
+        entitySet.nextStep();
+        printBoard();
+    }
 }
