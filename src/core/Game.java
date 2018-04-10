@@ -1,15 +1,13 @@
 package core;
 
-import geom.XY;
-
-import java.util.Scanner;
-
-import static geom.XY.inputToDirection;
-
 public class Game {
 
+    private State state;
 
-    Scanner sc = new Scanner(System.in);
+    public Game(State state)
+    {
+        this.state = state;
+    }
 
     public void run() {
         while (true) {
@@ -21,10 +19,7 @@ public class Game {
 
     public void render(){}
 
-    public XY processInput(){
-        int direction = sc.nextInt();
-        return inputToDirection(direction);
-    }
+    public void processInput(){}
 
     public void update(){
 
