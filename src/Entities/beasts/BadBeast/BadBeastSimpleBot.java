@@ -8,14 +8,6 @@ import geom.XY;
 public class BadBeastSimpleBot {
     Entity target;
 
-    BadBeastSimpleBot(){
-        for(Entity e : EntitySet.getEntities()){
-            if(e instanceof MasterSquirrel){
-                target = e;
-                break;
-            }
-        }
-    }
 
     public XY getDirection(){
         return XY.inputToDirection(XY.getRandomNumber());

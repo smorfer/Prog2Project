@@ -5,9 +5,13 @@ import Entities.squirrels.MasterSquirrel.MasterSquirrel;
 import geom.XY;
 
 public class EntitySet {
-    private static Entity entities[] = new Entity[100];
+    private Entity entities[];
 
-    public static void addEntity(Entity entity)
+    public EntitySet(int length){
+         entities = new Entity[length];
+    }
+
+    public void addEntity(Entity entity)
     {
         int index;
         for (index = 0; entities[index] != null; index++);
@@ -15,7 +19,7 @@ public class EntitySet {
     }
 
 
-    public static void removeEntity(int id)
+    public void removeEntity(int id)
     {
         for (int i = 0; i < entities.length; i++)
         {
@@ -27,7 +31,7 @@ public class EntitySet {
         }
     }
 
-    public static Entity getEntity(int ID)
+    public Entity getEntity(int ID)
     {
         for (Entity e : entities)
         {
@@ -42,11 +46,11 @@ public class EntitySet {
         return null;
     }
 
-    public static Entity[] getEntities(){
+    public Entity[] getEntities(){
         return entities;
     }
 
-    public static Entity[] getEntitiesAtPosition(XY location) {
+    public Entity[] getEntitiesAtPosition(XY location) {
         int ArrayLength = 0;
         for (Entity e : entities)
         {

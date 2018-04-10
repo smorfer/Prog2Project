@@ -25,7 +25,7 @@ public abstract class MasterSquirrel extends Squirrel {
 
     public void spawnMiniSquirrel(int energy){
         this.energy -= energy;
-        EntitySet.addEntity(new MiniSquirrel(energy, new XY(previousLocation), this.getID())); 
+        //TODO: This has to be somewhere else
     }
 
     public XY getPreviousLocation() {

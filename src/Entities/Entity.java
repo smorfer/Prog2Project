@@ -38,14 +38,12 @@ public abstract class Entity {
 
     @Override
     public String toString() {
-        return this.getClass().getName() + " {" +
+        return this.getClass().getSimpleName() + " {" +
                 "ID=" + ID +
                 ", energy=" + energy +
                 ", position=" + position.toString() +
                 " Distance to Origin: " + XY.distanceToTarget(XY.vectorToTarget(XY.ORIGIN, position)) +"}";
     }
 
-    public void die(){
-        EntitySet.removeEntity(this.getID());
-    }
+
 }

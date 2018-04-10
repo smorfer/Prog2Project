@@ -1,12 +1,14 @@
 package core;
 
 import Entities.Entity;
+import Entities.EntitySet;
 import Entities.Wall;
 import Entities.beasts.BadBeast.BadBeast;
 import Entities.beasts.GoodBeast;
 import Entities.plants.BadPlant;
 import Entities.plants.GoodPlant;
 import Entities.plants.Plant;
+import Entities.squirrels.MasterSquirrel.HandOperatedMasterSquirrel;
 import Entities.squirrels.MasterSquirrel.MasterSquirrel;
 import Entities.squirrels.MiniSquirrel.MiniSquirrel;
 import geom.XY;
@@ -15,11 +17,11 @@ import java.util.Random;
 
 public class Board {
 
-    Entity entities[];
+    EntitySet entitySet;
 
     public Board()
     {
-        entities = new Entity[BoardConfig.ENTITY_QUANTITY];
+        entitySet = new EntitySet(BoardConfig.ENTITY_QUANTITY);
         int entitiesIndex = 0;
         for (int height = 1; height <= BoardConfig.SIZE; height++)
         {
@@ -27,7 +29,7 @@ public class Board {
             {
                 if (height == 1 || width == 1 || height == BoardConfig.SIZE || width == BoardConfig.SIZE)
                 {
-                    entities[entitiesIndex++] = new Wall(new XY(width-1,height-1));
+                    entitySet.addEntity(new Wall(new XY(width-1,height-1)));
                 }
             }
         }
@@ -35,29 +37,31 @@ public class Board {
 
         for(int BadBeastCounter = 0; BadBeastCounter < BoardConfig.BADBEAST_QUANTITY; BadBeastCounter++)
         {
-            entities[entitiesIndex++] = new BadBeast(getFreePosition());
+            entitySet.addEntity(new BadBeast(getFreePosition()));
         }
         for(int GoodBeastCounter = 0; GoodBeastCounter < BoardConfig.GOODBEAST_QUANTITY; GoodBeastCounter++)
         {
-            entities[entitiesIndex++] = new GoodBeast(getFreePosition());
+            entitySet.addEntity(new GoodBeast(getFreePosition()));
         }
         for(int BadPlantCounter = 0; BadPlantCounter < BoardConfig.BADPLANT_QUANTITY; BadPlantCounter++)
         {
-            entities[entitiesIndex++] = new BadPlant(getFreePosition());
+            entitySet.addEntity(new BadPlant(getFreePosition()));
         }
         for(int GoodPlantCounter = 0; GoodPlantCounter < BoardConfig.GOODPLANT_QUANTITY; GoodPlantCounter++)
         {
-            entities[entitiesIndex++] = new GoodPlant(getFreePosition());
+            entitySet.addEntity(new GoodPlant(getFreePosition()));
         }
         for(int WallCounter = 0; WallCounter < BoardConfig.WALL_QUANTITY; WallCounter++)
         {
-            entities[entitiesIndex++] = new Wall(getFreePosition());
+            entitySet.addEntity(new Wall(getFreePosition()));
         }
+
+        entitySet.addEntity(new HandOperatedMasterSquirrel(200, getFreePosition()));
     }
 
     public String toString() {
         String rets = "";
-        for (Entity e : entities)
+        for (Entity e : entitySet.getEntities())
         {
             if (e != null)
             {
@@ -112,11 +116,19 @@ public class Board {
             rets += "\n";
         }
         System.out.print(rets);
+
+        /*for(Entity e : entities){     Prints info about everything but walls
+
+            if(e instanceof Wall || e == null)
+                continue;
+
+            System.out.println(e.toString());
+        }*/
     }
 
     boolean isEntityAtPosition(XY pos)
     {
-        for (Entity e : entities)
+        for (Entity e : entitySet.getEntities())
         {
             if (e != null) {
                 if (e.getPosition().equals(pos))
@@ -129,7 +141,7 @@ public class Board {
     }
 
     public Entity getEntityAtPosition(XY location) {
-        for (Entity e : entities) {
+        for (Entity e : entitySet.getEntities()) {
             if (e != null) {        // This statement works!
                 if (e.getPosition().equals(location)) {     //This statement is never called
                     return e;

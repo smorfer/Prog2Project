@@ -17,7 +17,8 @@ public class BadBeast extends Beast {
 
     public void bite(Entity target){
         if(biteCounter == 7){
-            this.die();
+            //this.die();       Wrong in this class!
+            System.out.println("BadBeast " + this.getID() + " bited 7 times!");
         }
 
         target.updateEnergy(this.getEnergy());
@@ -26,7 +27,7 @@ public class BadBeast extends Beast {
 
     @Override
     public String toString() {
-        return this.getClass().getName() + " {" +
+        return this.getClass().getSimpleName() + " {" +
                 "ID=" + ID +
                 ", energy=" + energy +
                 ", position=" + position.toString() +
