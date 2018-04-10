@@ -1,13 +1,13 @@
 package core;
 
-import Entities.Entity;
-import Entities.Wall;
-import Entities.beasts.BadBeast.BadBeast;
-import Entities.beasts.GoodBeast;
-import Entities.plants.BadPlant;
-import Entities.plants.GoodPlant;
-import Entities.squirrels.MasterSquirrel.MasterSquirrel;
-import Entities.squirrels.MiniSquirrel.MiniSquirrel;
+import entities.Entity;
+import entities.Wall;
+import entities.beasts.BadBeast.BadBeast;
+import entities.beasts.GoodBeast;
+import entities.plants.BadPlant;
+import entities.plants.GoodPlant;
+import entities.squirrels.MasterSquirrel.MasterSquirrel;
+import entities.squirrels.MiniSquirrel.MiniSquirrel;
 
 public enum EntityType {
     GOOD_BEAST, BAD_BEAST, GOOD_PLANT, BAD_PLANT,

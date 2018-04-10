@@ -1,7 +1,7 @@
-package Entities.beasts.BadBeast;
+package entities.beasts.BadBeast;
 
-import Entities.Entity;
-import Entities.beasts.Beast;
+import entities.Entity;
+import entities.beasts.Beast;
 import geom.XY;
 
 public class BadBeast extends Beast {
@@ -28,9 +28,9 @@ public class BadBeast extends Beast {
     @Override
     public String toString() {
         return this.getClass().getSimpleName() + " {" +
-                "ID=" + ID +
-                ", energy=" + energy +
-                ", position=" + position.toString() +
+                "ID=" + getID() +
+                ", energy=" + getEnergy() +
+                ", position=" + getPosition().toString() +
                 ", Bite Counter: " + biteCounter + " }";
     }
 

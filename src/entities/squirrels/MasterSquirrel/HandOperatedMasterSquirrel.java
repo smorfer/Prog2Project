@@ -1,4 +1,4 @@
-package Entities.squirrels.MasterSquirrel;
+package entities.squirrels.MasterSquirrel;
 
 import geom.XY;
 

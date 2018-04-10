@@ -1,13 +1,4 @@
-import Entities.EntitySet;
-import Entities.beasts.BadBeast.BadBeast;
-import Entities.beasts.GoodBeast;
-import Entities.plants.BadPlant;
-import Entities.plants.GoodPlant;
-import Entities.squirrels.MasterSquirrel.HandOperatedMasterSquirrel;
-import Entities.squirrels.MasterSquirrel.MasterSquirrel;
-import Entities.squirrels.MiniSquirrel.MiniSquirrel;
 import core.Board;
-import geom.XY;
 
 public class Main {
 

@@ -1,6 +1,5 @@
-package Entities.plants;
+package entities.plants;
 
-import Entities.Entity;
 import geom.XY;
 
 public class GoodPlant extends Plant {

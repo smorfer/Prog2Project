@@ -1,13 +1,6 @@
-package Entities.squirrels;
+package entities.squirrels;
 
-import Entities.Entity;
-import Entities.EntitySet;
-import Entities.Wall;
-import Entities.beasts.BadBeast.BadBeast;
-import Entities.beasts.GoodBeast;
-import Entities.plants.GoodPlant;
-import Entities.plants.Plant;
-import Entities.squirrels.MiniSquirrel.MiniSquirrel;
+import entities.Entity;
 import geom.XY;
 
 public abstract class Squirrel extends Entity {
@@ -57,8 +50,8 @@ public abstract class Squirrel extends Entity {
     public abstract XY getDirection();
 
     public void move(XY direction){
-        XY loc = new XY(position, direction);
-        this.position = new XY(position, direction);
+        XY loc = new XY(getPosition(), direction);
+        this.setPosition(new XY(getPosition(), direction));
     }
 
 //    public boolean canMove(XY targetLocation){                                    Wrong in this class!

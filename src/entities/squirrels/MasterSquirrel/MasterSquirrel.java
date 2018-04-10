@@ -1,10 +1,6 @@
-package Entities.squirrels.MasterSquirrel;
+package entities.squirrels.MasterSquirrel;
 
-import Entities.Entity;
-import Entities.EntitySet;
-import Entities.Wall;
-import Entities.squirrels.MiniSquirrel.MiniSquirrel;
-import Entities.squirrels.Squirrel;
+import entities.squirrels.Squirrel;
 import geom.XY;
 
 public abstract class MasterSquirrel extends Squirrel {
@@ -24,7 +20,7 @@ public abstract class MasterSquirrel extends Squirrel {
     }
 
     public void spawnMiniSquirrel(int energy){
-        this.energy -= energy;
+        this.updateEnergy(-energy);
         //TODO: This has to be somewhere else
     }
 

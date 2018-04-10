@@ -1,8 +1,6 @@
-package Entities.beasts.BadBeast;
+package entities.beasts.BadBeast;
 
-import Entities.Entity;
-import Entities.EntitySet;
-import Entities.squirrels.MasterSquirrel.MasterSquirrel;
+import entities.Entity;
 import geom.XY;
 
 public class BadBeastSimpleBot {
