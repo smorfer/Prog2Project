@@ -21,6 +21,7 @@ public class Board {
     public Board()
     {
         entitySet = new EntitySet(BoardConfig.ENTITY_QUANTITY);
+
         int entitiesIndex = 0;
         for (int height = 1; height <= BoardConfig.SIZE; height++)
         {
@@ -56,6 +57,7 @@ public class Board {
         }
 
         entitySet.addEntity(new HandOperatedMasterSquirrel(200, getFreePosition()));
+        entitySet.addEntity(new MiniSquirrel(200, getFreePosition(), 29828));
     }
 
     public String toString() {
@@ -116,13 +118,11 @@ public class Board {
         }
         System.out.print(rets);
 
-        /*for(Entity e : entities){     Prints info about everything but walls
+        for(Entity e : entitySet.getEntities()){
 
-            if(e instanceof Wall || e == null)
-                continue;
-
+            if(e instanceof MasterSquirrel)
             System.out.println(e.toString());
-        }*/
+        }
     }
 
     boolean isEntityAtPosition(XY pos)
@@ -172,7 +172,7 @@ public class Board {
                 data[location.getX()][location.getY()] = e;
             }
 
-            return new FlattenedBoard(data);
+            return new FlattenedBoard(data, entitySet);
 
 
 

@@ -1,6 +1,9 @@
 package entities.squirrels.MasterSquirrel;
 
 import core.EntityContext;
+import entities.beasts.GoodBeast;
+import entities.plants.Plant;
+import entities.squirrels.MiniSquirrel.MiniSquirrel;
 import entities.squirrels.Squirrel;
 import geom.XY;
 
@@ -25,6 +28,18 @@ public abstract class MasterSquirrel extends Squirrel {
         this.updateEnergy(-energy);
         //TODO: This has to be somewhere else
     }
+
+    public void hit(EntityContext entityContext, MiniSquirrel miniSquirrel){
+        if(miniSquirrel.getMasterID() == this.getID()){
+            this.updateEnergy(miniSquirrel.getEnergy());
+        } else{
+            this.updateEnergy(+150);
+        }
+
+        entityContext.kill(miniSquirrel);
+    }
+
+
 
     public XY getPreviousLocation() {
         return previousLocation;

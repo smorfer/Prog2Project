@@ -22,7 +22,7 @@ public class MiniSquirrel extends Squirrel {
 
     @Override
     public XY getDirection() {
-        return null;
+        return new XY(XY.ORIGIN);
     }
 
     public int getMasterID() {

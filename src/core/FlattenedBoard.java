@@ -1,6 +1,7 @@
 package core;
 
 import entities.Entity;
+import entities.EntitySet;
 import entities.Wall;
 import entities.beasts.BadBeast;
 import entities.beasts.GoodBeast;
@@ -13,12 +14,13 @@ import geom.XY;
 public class FlattenedBoard implements EntityContext{
     //    x  y
     private Entity[][] entities;
+    private EntitySet entitySet;
 
 
-    // TODO: Move muss auch die data (entities array positionen) verändern!
+    FlattenedBoard(Entity[][] data, EntitySet entitySet){
 
-    FlattenedBoard(Entity[][] data){
         entities = data;
+        this.entitySet = entitySet;
     }
 
     @Override
@@ -34,7 +36,8 @@ public class FlattenedBoard implements EntityContext{
         if(squirrelCollision(masterSquirrel, direction, targetEntity)) return;
 
         if(targetEntity instanceof MiniSquirrel){
-            // MasterSquirrel.collide(miniSquirrel)
+            masterSquirrel.hit(this, (MiniSquirrel) targetEntity);
+            moveEntity(masterSquirrel, direction);
         }
     }
 
@@ -46,7 +49,7 @@ public class FlattenedBoard implements EntityContext{
         if(squirrelCollision(miniSquirrel, direction, targetEntity)) return;
 
         if(targetEntity instanceof MasterSquirrel){
-            // MiniSquirrel.collide(masterSquirrel)
+            // miniSquirrel.collide(masterSquirrel)
         }
 
     }
@@ -71,7 +74,7 @@ public class FlattenedBoard implements EntityContext{
         if(targetEntity == null){
             //badBeast.move(direction);
         } else if(targetEntity instanceof Squirrel){
-            // collide method in Squirrel
+            badBeast.bite(this, targetEntity);
         }
 
     }
@@ -82,24 +85,22 @@ public class FlattenedBoard implements EntityContext{
             moveEntity(squirrel, direction);
             return true;
         } else if (targetEntity instanceof Plant) {
-            //squirrel.collide(targetEntity)
-            System.out.println("Hit Plant");
+            squirrel.hit(this, (Plant)targetEntity);
             moveEntity(squirrel, direction);
             return true;
         } else if (targetEntity instanceof GoodBeast){
-            // do good beast collision
-            System.out.println("Hit Good Beast");
+            squirrel.hit(this, (GoodBeast)targetEntity);
             moveEntity(squirrel, direction);
             return true;
         } else if(targetEntity instanceof BadBeast){
-            // dont move
+            squirrel.hit(this, (BadBeast)targetEntity);
             System.out.println("Hit Bad Beast");
             // do bad beast collision
             return true;
         } else if(targetEntity instanceof Wall){
             // dont move
             System.out.println("Hit Wall");
-            // do wall collision
+            squirrel.hit(this, (Wall)targetEntity);
             return true;
         }
 
@@ -129,7 +130,8 @@ public class FlattenedBoard implements EntityContext{
 
     @Override
     public void kill(Entity entity) {
-
+        entitySet.removeEntity(entity.getID());
+        entities[entity.getPosition().getX()][entity.getPosition().getY()] = null;
     }
 
     @Override

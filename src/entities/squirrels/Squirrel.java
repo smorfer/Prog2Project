@@ -2,6 +2,10 @@ package entities.squirrels;
 
 import core.EntityContext;
 import entities.Entity;
+import entities.Wall;
+import entities.beasts.BadBeast;
+import entities.beasts.GoodBeast;
+import entities.plants.Plant;
 import geom.XY;
 
 public abstract class Squirrel extends Entity {
@@ -43,6 +47,25 @@ public abstract class Squirrel extends Entity {
 //        }
 //    }
 
+    public void hit(EntityContext entityContext, Plant plant){
+
+        this.updateEnergy(plant.getEnergy());
+        entityContext.kill(plant);
+    }
+
+    public void hit(EntityContext entityContext, GoodBeast goodBeast){
+        this.updateEnergy(goodBeast.getEnergy());
+        entityContext.kill(goodBeast);
+    }
+
+    public void hit(EntityContext entityContext, BadBeast badBeast){
+        badBeast.bite(entityContext, this);
+    }
+
+    public void hit(EntityContext entityContext, Wall wall){
+        this.updateEnergy(wall.getEnergy());
+    }
+
 
     public abstract XY getDirection();
 
@@ -51,22 +74,6 @@ public abstract class Squirrel extends Entity {
         this.setPosition(new XY(getPosition(), direction));
     }
 
-//    public boolean canMove(XY targetLocation){                                    Wrong in this class!
-//        Entity targets[] = EntitySet.getEntitiesAtPosition(targetLocation);
-//        boolean canMove = true;
-//        if (targets != null)
-//        {
-//            for (Entity target : targets) {
-//                if (target != null && this.getID() != target.getID()) {
-//
-//                    canMove = (!(target instanceof Wall));
-//                    this.hit(target);
-//                }
-//            }
-//        }
-//
-//        return canMove;
-//    }
 
 
 }

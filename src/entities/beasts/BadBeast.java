@@ -17,9 +17,9 @@ public class BadBeast extends Beast {
         biteCounter = 0;
     }
 
-    public void bite(Entity target){
+    public void bite(EntityContext context, Entity target){
         if(biteCounter == 7){
-            //this.die();       Wrong in this class!
+            context.kill(this);
             System.out.println("BadBeast " + this.getID() + " bited 7 times!");
         }
 
