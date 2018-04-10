@@ -172,7 +172,7 @@ public class Board {
                 data[location.getX()][location.getY()] = e;
             }
 
-            return new FlattenedBoard(data, entitySet);
+            return new FlattenedBoard(data, entitySet, this);
 
 
 

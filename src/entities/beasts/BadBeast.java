@@ -12,15 +12,14 @@ public class BadBeast extends Beast {
     private int biteCounter;
     public BadBeast(XY position) {
         super(INIT_ENERGY, position);
-        // Change energy here!
-
+        //Change energy here!
         biteCounter = 0;
     }
 
     public void bite(EntityContext context, Entity target){
         if(biteCounter == 7){
-            context.kill(this);
-            System.out.println("BadBeast " + this.getID() + " bited 7 times!");
+            context.killAndReplace(this);
+            biteCounter = 0;
         }
 
         target.updateEnergy(this.getEnergy());

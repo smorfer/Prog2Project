@@ -13,63 +13,51 @@ public abstract class Squirrel extends Entity {
         super(energy, position);
     }
 
+    private int freezeCounter = 0;
 
+    private boolean isFrozen(){
 
-//    public void hit(Entity entity){       This is the collision handler, wrong in this class!
-//        if(entity instanceof Plant){
-//
-//            this.updateEnergy(entity.getEnergy());
-//            entity.die();
-//
-//        } else if(entity instanceof BadBeast){
-//
-//            ((BadBeast) entity).bite(this);
-//
-//        } else if(entity instanceof GoodBeast){
-//
-//            this.updateEnergy(entity.getEnergy());
-//            entity.die();
-//
-//        } else if (entity instanceof Wall){
-//
-//            this.updateEnergy(entity.getEnergy());
-//
-//        } else if(entity instanceof MiniSquirrel){
-//
-//            if (((MiniSquirrel) entity).getMasterID() == this.getID()) {
-//                this.updateEnergy(entity.getEnergy());
-//                entity.die();
-//            } else{
-//                this.updateEnergy(+150);
-//                entity.die();
-//            }
-//
-//        }
-//    }
+        assert freezeCounter>=0 : "Freeze Counter < 0";
+
+        if(freezeCounter >= 3){
+            freezeCounter = 0;
+            return true;
+        } else if(freezeCounter == 0) {
+            return false;
+        } else {
+            freezeCounter++;
+            return true;
+        }
+    }
 
     public void hit(EntityContext entityContext, Plant plant){
 
         this.updateEnergy(plant.getEnergy());
-        entityContext.kill(plant);
+        entityContext.killAndReplace(plant);
     }
 
     public void hit(EntityContext entityContext, GoodBeast goodBeast){
         this.updateEnergy(goodBeast.getEnergy());
-        entityContext.kill(goodBeast);
+        entityContext.killAndReplace(goodBeast);
     }
 
     public void hit(EntityContext entityContext, BadBeast badBeast){
+
         badBeast.bite(entityContext, this);
     }
 
     public void hit(EntityContext entityContext, Wall wall){
         this.updateEnergy(wall.getEnergy());
-    }
+        freezeCounter = 1;
 
+    }
 
     public abstract XY getDirection();
 
     public void move(XY direction){
+        if(isFrozen())
+            return;
+
         XY loc = new XY(getPosition(), direction);
         this.setPosition(new XY(getPosition(), direction));
     }
