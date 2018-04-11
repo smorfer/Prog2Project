@@ -133,7 +133,19 @@ public class FlattenedBoard implements EntityContext{
 
     @Override
     public Squirrel nearestPlayerEntity(XY location) {
-        return null;
+        double distance = Double.MAX_VALUE;
+        Squirrel nearest = null;
+
+        for(Entity e : entitySet.getEntities()){
+            if(e instanceof Squirrel){
+                distance = XY.distanceToTarget(location) < distance ? XY.distanceToTarget(location) : distance;
+                nearest = (Squirrel)e;
+            }
+        }
+
+        return nearest;
+
+
     }
 
     @Override
