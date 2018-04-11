@@ -6,6 +6,8 @@ import entities.beasts.Beast;
 import entities.beasts.BeastSimpleBot;
 import geom.XY;
 
+//TODO: BadBeast has to seek Squirrels
+
 public class BadBeast extends Beast {
     private static final int INIT_ENERGY = -150;
     private static BeastSimpleBot bot = new BeastSimpleBot();

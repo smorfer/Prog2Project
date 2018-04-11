@@ -16,6 +16,10 @@ public class MiniSquirrel extends Squirrel {
 
     @Override
     public void nextStep(EntityContext entityContext) {
+        if(this.getEnergy() <= 0){
+            entityContext.kill(this);
+        }
+
         entityContext.tryMove(this, getDirection());
         this.updateEnergy(-1);
     }

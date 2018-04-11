@@ -18,4 +18,6 @@ public class GoodBeast extends Beast {
     public void nextStep(EntityContext entityContext) {
         entityContext.tryMove(this, bot.getDirection());
     }
+
+    // TODO: GoodBeast has to Walk away from Squirrel
 }

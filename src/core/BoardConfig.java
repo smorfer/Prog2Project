@@ -4,7 +4,7 @@ public class BoardConfig {
     protected static final int SIZE = 15;
     protected static final int BADBEAST_QUANTITY = 2;
     protected static final int GOODBEAST_QUANTITY = 3;
-    protected static final int BADPLANT_QUANTITY = 1;
+    protected static final int BADPLANT_QUANTITY = 3;
     protected static final int GOODPLANT_QUANTITY = 3;
     protected static final int BORDER = SIZE*4 - 4;
     protected static final int WALL_QUANTITY = 7; //Ignoring borders
