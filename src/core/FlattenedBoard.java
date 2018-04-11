@@ -12,7 +12,7 @@ import entities.squirrels.Squirrel;
 import geom.XY;
 
 public class FlattenedBoard implements EntityContext{
-    //    x  y
+    //            x  y
     private Entity[][] entities;
     private EntitySet entitySet;
     private Board board;
@@ -84,7 +84,6 @@ public class FlattenedBoard implements EntityContext{
         if(targetEntity == null){
             moveEntity(badBeast, direction);
             return;
-            //badBeast.move(direction);
         }
 
         if(targetEntity instanceof Squirrel){
