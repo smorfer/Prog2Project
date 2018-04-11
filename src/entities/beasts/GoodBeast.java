@@ -16,7 +16,7 @@ public class GoodBeast extends Beast {
 
     @Override
     public void nextStep(EntityContext entityContext) {
-        entityContext.tryMove(this, bot.getDirection(entityContext, this.getPosition()));
+        entityContext.tryMove(this, XY.invertVector(bot.getDirection(entityContext, this.getPosition())));
     }
 
     // TODO: GoodBeast has to Walk away from Squirrel

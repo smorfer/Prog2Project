@@ -21,12 +21,18 @@ public abstract class Beast extends Entity{
             moveCounter = 0;
 
         }
-        moveCounter++;
     }
 
     public boolean canMove(){
 
-        return (moveCounter++%4==0);
+        return (moveCounter%4==0);
+    }
+
+    public void addMoveCounter(){
+        moveCounter++;
+
+        if(moveCounter>4)
+            moveCounter=0;
     }
 
 

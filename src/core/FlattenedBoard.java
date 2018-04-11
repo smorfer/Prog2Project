@@ -76,8 +76,8 @@ public class FlattenedBoard implements EntityContext, BoardView{
         }
 
         if(targetEntity == null) {
-            //if((goodBeast.canMove()))
                 moveEntity(goodBeast, direction);
+                goodBeast.addMoveCounter();
 
             return;
         }
@@ -92,9 +92,8 @@ public class FlattenedBoard implements EntityContext, BoardView{
         Entity targetEntity = entities[newLocation.getX()][newLocation.getY()];
 
         if(targetEntity == null){
-            //if((badBeast.canMove()))
                 moveEntity(badBeast, direction);
-
+                badBeast.addMoveCounter();
             return;
         }
 

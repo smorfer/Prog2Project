@@ -122,4 +122,8 @@ public final class XY {
         }
 
     }
+
+    public static XY invertVector(XY vector){
+        return new XY(-vector.getX(), -vector.getY());
+    }
 }

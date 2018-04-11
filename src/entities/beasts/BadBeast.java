@@ -40,6 +40,7 @@ public class BadBeast extends Beast {
 
     @Override
     public void nextStep(EntityContext entityContext) {
+
         entityContext.tryMove(this, bot.getDirection(entityContext, this.getPosition()));
     }
 }
