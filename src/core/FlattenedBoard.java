@@ -11,7 +11,9 @@ import entities.squirrels.MiniSquirrel.MiniSquirrel;
 import entities.squirrels.Squirrel;
 import geom.XY;
 
-public class FlattenedBoard implements EntityContext{
+public class FlattenedBoard implements EntityContext, BoardView{
+
+
     //            x  y
     private Entity[][] entities;
     private EntitySet entitySet;
@@ -26,8 +28,14 @@ public class FlattenedBoard implements EntityContext{
     }
 
     @Override
+    public EntityType getEntityType(int x, int y) {
+        Entity entity = entitySet.getEntityAtPosition(x, y);
+        return entity != null ? EntityType.getEntityType(entity) : null;
+    }
+
+    @Override
     public XY getSize() {
-        return null;
+        return new XY(entities.length,entities[0].length);
     }
 
     @Override
