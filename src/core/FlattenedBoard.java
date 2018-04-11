@@ -29,7 +29,7 @@ public class FlattenedBoard implements EntityContext, BoardView{
 
     @Override
     public EntityType getEntityType(int x, int y) {
-        Entity entity = entitySet.getEntityAtPosition(x, y);
+        Entity entity = entitySet.getEntityAtPosition(x,y);
         return entity != null ? EntityType.getEntityType(entity) : null;
     }
 
@@ -76,7 +76,9 @@ public class FlattenedBoard implements EntityContext, BoardView{
         }
 
         if(targetEntity == null) {
-            moveEntity(goodBeast, direction);
+            //if((goodBeast.canMove()))
+                moveEntity(goodBeast, direction);
+
             return;
         }
 
@@ -90,7 +92,9 @@ public class FlattenedBoard implements EntityContext, BoardView{
         Entity targetEntity = entities[newLocation.getX()][newLocation.getY()];
 
         if(targetEntity == null){
-            moveEntity(badBeast, direction);
+            //if((badBeast.canMove()))
+                moveEntity(badBeast, direction);
+
             return;
         }
 
@@ -145,7 +149,7 @@ public class FlattenedBoard implements EntityContext, BoardView{
         Squirrel nearest = null;
 
         for(Entity e : entitySet.getEntities()){
-            if(e instanceof Squirrel){
+            if(e instanceof MasterSquirrel){
                 distance = XY.distanceToTarget(location) < distance ? XY.distanceToTarget(location) : distance;
                 nearest = (Squirrel)e;
             }

@@ -10,12 +10,13 @@ import geom.XY;
 
 public class BadBeast extends Beast {
     private static final int INIT_ENERGY = -150;
-    private static BeastSimpleBot bot = new BeastSimpleBot();
+    private static BeastSimpleBot bot;
     private int biteCounter;
     public BadBeast(XY position) {
         super(INIT_ENERGY, position);
         //Change energy here!
         biteCounter = 0;
+        bot = new BeastSimpleBot();
     }
 
     public void bite(EntityContext context, Entity target){
@@ -39,6 +40,6 @@ public class BadBeast extends Beast {
 
     @Override
     public void nextStep(EntityContext entityContext) {
-        entityContext.tryMove(this, bot.getDirection());
+        entityContext.tryMove(this, bot.getDirection(entityContext, this.getPosition()));
     }
 }

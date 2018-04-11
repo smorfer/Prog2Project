@@ -95,4 +95,31 @@ public final class XY {
 
         return Math.sqrt(Math.pow(x,2f) + Math.pow(y,2f));
     }
+
+    public static XY normalize(XY vector){
+
+        int x = vector.getX();
+        int y = vector.getY();
+
+        if(x == 0 && y == 0){
+            return ORIGIN;
+        }
+
+        if(x == 0){
+            return new XY(0, y/Math.abs(y));
+        }
+
+        if(y == 0){
+            return new XY(x/Math.abs(x), 0);
+        }
+
+        if(Math.abs(x) > Math.abs(y)){
+            return new XY(x/Math.abs(x),0);
+        } else if(Math.abs(x) > Math.abs(y)){
+            return new XY(0, y/Math.abs(y));
+        } else{
+            return new XY(x/Math.abs(x),y/Math.abs(y));
+        }
+
+    }
 }
