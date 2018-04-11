@@ -10,4 +10,5 @@ public class BeastSimpleBot {
     public XY getDirection(){
         return XY.inputToDirection(XY.getRandomNumber());
     }
+
 }

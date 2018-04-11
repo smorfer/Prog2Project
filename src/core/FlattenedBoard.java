@@ -1,6 +1,7 @@
 package core;
 
 import entities.Entity;
+import entities.EntitySet;
 import entities.Wall;
 import entities.beasts.BadBeast;
 import entities.beasts.GoodBeast;
@@ -11,14 +12,17 @@ import entities.squirrels.Squirrel;
 import geom.XY;
 
 public class FlattenedBoard implements EntityContext{
-    //    x  y
+    //            x  y
     private Entity[][] entities;
+    private EntitySet entitySet;
+    private Board board;
 
 
-    // TODO: Move muss auch die data (entities array positionen) verändern!
+    FlattenedBoard(Entity[][] data, EntitySet entitySet, Board board){
 
-    FlattenedBoard(Entity[][] data){
         entities = data;
+        this.entitySet = entitySet;
+        this.board = board;
     }
 
     @Override
@@ -34,7 +38,8 @@ public class FlattenedBoard implements EntityContext{
         if(squirrelCollision(masterSquirrel, direction, targetEntity)) return;
 
         if(targetEntity instanceof MiniSquirrel){
-            // MasterSquirrel.collide(miniSquirrel)
+            masterSquirrel.hit(this, (MiniSquirrel) targetEntity);
+            moveEntity(masterSquirrel, direction);
         }
     }
 
@@ -46,7 +51,7 @@ public class FlattenedBoard implements EntityContext{
         if(squirrelCollision(miniSquirrel, direction, targetEntity)) return;
 
         if(targetEntity instanceof MasterSquirrel){
-            // MiniSquirrel.collide(masterSquirrel)
+            ((MasterSquirrel) targetEntity).hit(this, miniSquirrel);
         }
 
     }
@@ -56,11 +61,19 @@ public class FlattenedBoard implements EntityContext{
         XY newLocation = new XY(goodBeast.getPosition(), direction);
         Entity targetEntity = entities[newLocation.getX()][newLocation.getY()];
 
-        //move! if target null
 
-        if(targetEntity instanceof Squirrel){
-            // collide method in Squirrel
+        if(targetEntity instanceof Squirrel) {
+            ((Squirrel) targetEntity).hit(this, goodBeast);
+            return;
         }
+
+        if(targetEntity == null) {
+            moveEntity(goodBeast, direction);
+            return;
+        }
+
+
+
     }
 
     @Override
@@ -69,9 +82,13 @@ public class FlattenedBoard implements EntityContext{
         Entity targetEntity = entities[newLocation.getX()][newLocation.getY()];
 
         if(targetEntity == null){
-            //badBeast.move(direction);
-        } else if(targetEntity instanceof Squirrel){
-            // collide method in Squirrel
+            moveEntity(badBeast, direction);
+            return;
+        }
+
+        if(targetEntity instanceof Squirrel){
+            badBeast.bite(this, targetEntity);
+            return;
         }
 
     }
@@ -82,24 +99,20 @@ public class FlattenedBoard implements EntityContext{
             moveEntity(squirrel, direction);
             return true;
         } else if (targetEntity instanceof Plant) {
-            //squirrel.collide(targetEntity)
-            System.out.println("Hit Plant");
+            squirrel.hit(this, (Plant)targetEntity);
             moveEntity(squirrel, direction);
             return true;
         } else if (targetEntity instanceof GoodBeast){
-            // do good beast collision
-            System.out.println("Hit Good Beast");
+            squirrel.hit(this, (GoodBeast)targetEntity);
             moveEntity(squirrel, direction);
             return true;
         } else if(targetEntity instanceof BadBeast){
-            // dont move
-            System.out.println("Hit Bad Beast");
+            squirrel.hit(this, (BadBeast)targetEntity);
             // do bad beast collision
             return true;
         } else if(targetEntity instanceof Wall){
             // dont move
-            System.out.println("Hit Wall");
-            // do wall collision
+            squirrel.hit(this, (Wall)targetEntity);
             return true;
         }
 
@@ -110,10 +123,11 @@ public class FlattenedBoard implements EntityContext{
     public void moveEntity(Entity entity, XY direction){
         entities[entity.getPosition().getX()][entity.getPosition().getY()] = null;
 
-        XY targetLocation = new XY(entity.getPosition(), direction);
-        entities[targetLocation.getX()][targetLocation.getY()] = entity;
-
         entity.move(direction);
+
+        entities[entity.getPosition().getX()][entity.getPosition().getY()] = entity;
+
+
 
     }
 
@@ -124,12 +138,18 @@ public class FlattenedBoard implements EntityContext{
 
     @Override
     public void killAndReplace(Entity entity) {
+        XY newPos = board.getFreePosition();
+        entities[entity.getPosition().getX()][entity.getPosition().getY()] = null;
+
+        entity.setPosition(newPos);
+        entities[entity.getPosition().getX()][entity.getPosition().getY()] = entity;
 
     }
 
     @Override
     public void kill(Entity entity) {
-
+        entitySet.removeEntity(entity.getID());
+        entities[entity.getPosition().getX()][entity.getPosition().getY()] = null;
     }
 
     @Override

@@ -16,6 +16,7 @@ public abstract class Beast extends Entity{
     public void move(XY direction){
         if(moveCounter % 4 == 0){
             this.setPosition(new XY(getPosition(), direction));
+
         }
         moveCounter++;
 

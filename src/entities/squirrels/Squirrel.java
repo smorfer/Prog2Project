@@ -2,6 +2,10 @@ package entities.squirrels;
 
 import core.EntityContext;
 import entities.Entity;
+import entities.Wall;
+import entities.beasts.BadBeast;
+import entities.beasts.GoodBeast;
+import entities.plants.Plant;
 import geom.XY;
 
 public abstract class Squirrel extends Entity {
@@ -9,64 +13,55 @@ public abstract class Squirrel extends Entity {
         super(energy, position);
     }
 
+    private int freezeCounter = 0;
 
+    private boolean isFrozen(){
 
-//    public void hit(Entity entity){       This is the collision handler, wrong in this class!
-//        if(entity instanceof Plant){
-//
-//            this.updateEnergy(entity.getEnergy());
-//            entity.die();
-//
-//        } else if(entity instanceof BadBeast){
-//
-//            ((BadBeast) entity).bite(this);
-//
-//        } else if(entity instanceof GoodBeast){
-//
-//            this.updateEnergy(entity.getEnergy());
-//            entity.die();
-//
-//        } else if (entity instanceof Wall){
-//
-//            this.updateEnergy(entity.getEnergy());
-//
-//        } else if(entity instanceof MiniSquirrel){
-//
-//            if (((MiniSquirrel) entity).getMasterID() == this.getID()) {
-//                this.updateEnergy(entity.getEnergy());
-//                entity.die();
-//            } else{
-//                this.updateEnergy(+150);
-//                entity.die();
-//            }
-//
-//        }
-//    }
+        assert freezeCounter>=0 : "Freeze Counter < 0";
 
+        if(freezeCounter >= 3){
+            freezeCounter = 0;
+            return true;
+        } else if(freezeCounter == 0) {
+            return false;
+        } else {
+            freezeCounter++;
+            return true;
+        }
+    }
+
+    public void hit(EntityContext entityContext, Plant plant){
+
+        this.updateEnergy(plant.getEnergy());
+        entityContext.killAndReplace(plant);
+    }
+
+    public void hit(EntityContext entityContext, GoodBeast goodBeast){
+        this.updateEnergy(goodBeast.getEnergy());
+        entityContext.killAndReplace(goodBeast);
+    }
+
+    public void hit(EntityContext entityContext, BadBeast badBeast){
+
+        badBeast.bite(entityContext, this);
+    }
+
+    public void hit(EntityContext entityContext, Wall wall){
+        this.updateEnergy(wall.getEnergy());
+        freezeCounter = 1;
+
+    }
 
     public abstract XY getDirection();
 
     public void move(XY direction){
+        if(isFrozen())
+            return;
+
         XY loc = new XY(getPosition(), direction);
         this.setPosition(new XY(getPosition(), direction));
     }
 
-//    public boolean canMove(XY targetLocation){                                    Wrong in this class!
-//        Entity targets[] = EntitySet.getEntitiesAtPosition(targetLocation);
-//        boolean canMove = true;
-//        if (targets != null)
-//        {
-//            for (Entity target : targets) {
-//                if (target != null && this.getID() != target.getID()) {
-//
-//                    canMove = (!(target instanceof Wall));
-//                    this.hit(target);
-//                }
-//            }
-//        }
-//
-//        return canMove;
-//    }
 
 
 }
