@@ -52,7 +52,6 @@ public abstract class Squirrel extends Entity {
 
     }
 
-    public abstract XY getDirection();
 
     public void move(XY direction){
         if(isFrozen())

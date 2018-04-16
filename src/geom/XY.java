@@ -109,6 +109,7 @@ public final class XY {
                 return DOWN_RIGHT;
             case ORIGIN:
                 return ORIGIN;
+            default: return ORIGIN;
         }
     }
 

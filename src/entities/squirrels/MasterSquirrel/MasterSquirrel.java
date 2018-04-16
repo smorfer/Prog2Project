@@ -6,6 +6,7 @@ import entities.plants.Plant;
 import entities.squirrels.MiniSquirrel.MiniSquirrel;
 import entities.squirrels.Squirrel;
 import geom.XY;
+import ui.MoveCommand;
 
 public abstract class MasterSquirrel extends Squirrel {
     private static final int INIT_ENERGY = 1000;
@@ -18,9 +19,11 @@ public abstract class MasterSquirrel extends Squirrel {
 
     @Override
     public void nextStep(EntityContext entityContext) {
-        previousLocation = new XY(this.getPosition());
+    }
 
-        entityContext.tryMove(this, getDirection());
+    public void doNextStep(EntityContext entityContext, MoveCommand moveCommand){
+        previousLocation = new XY(this.getPosition());
+        entityContext.tryMove(this, XY.commandToMove(moveCommand));
 
     }
 

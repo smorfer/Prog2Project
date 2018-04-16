@@ -1,4 +1,4 @@
-package core;
+package core; // Diese Lösung gehört Luis Schweigard und Samuel Glogger
 
 import entities.Entity;
 import entities.EntitySet;
@@ -11,6 +11,7 @@ import entities.squirrels.MasterSquirrel.HandOperatedMasterSquirrel;
 import entities.squirrels.MasterSquirrel.MasterSquirrel;
 import entities.squirrels.MiniSquirrel.MiniSquirrel;
 import geom.XY;
+import ui.MoveCommand;
 
 import java.util.Random;
 
@@ -132,14 +133,12 @@ public class Board {
 
     }
 
-    public void callNextStep(){
-        nextStep();
-    }
 
-    public void nextStep()
+
+    public void nextStep(MoveCommand moveCommand)
     {
         EntityContext data = getData();
-        Entity master = null;
+        MasterSquirrel master = null;
         for (Entity e : entitySet.getEntities())
         {
             if(e instanceof MasterSquirrel){
@@ -154,7 +153,7 @@ public class Board {
         }
 
         if (master != null) {
-            master.nextStep(data);
+            master.doNextStep(data, moveCommand);
         }
 
 

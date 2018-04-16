@@ -24,8 +24,8 @@ public class MiniSquirrel extends Squirrel {
         this.updateEnergy(-1);
     }
 
-    @Override
-    public XY getDirection() {
+
+    private XY getDirection() {
         return new XY(XY.ORIGIN);
     }
 

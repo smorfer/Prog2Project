@@ -26,10 +26,12 @@ public class Game {
 //    }
 
     public static void run() {
+        MoveCommand command;
         while (true) {
             render();
-            processInput();
-            update();
+            command = processInput();
+            update(command);
+
         }
     }
 
@@ -37,13 +39,12 @@ public class Game {
         ui.render(state.flattenedBoard());
     }
 
-    protected static void processInput(){
-        MoveCommand moveCommand = ui.getCommand(); // Hier muss der command weitergegeben werden an MasterSquirrel
-
+    protected static MoveCommand processInput(){
+        return ui.getCommand(); // Hier muss der command weitergegeben werden an MasterSquirrel
     }
 
-    protected static void update(){
-        board.callNextStep();
+    protected static void update(MoveCommand moveCommand){
+        board.nextStep(moveCommand);
     }
 }
 

@@ -15,15 +15,6 @@ public class HandOperatedMasterSquirrel extends MasterSquirrel {
         super(position);
     }
 
-    public XY getDirection() {
-        int direction = sc.nextInt();
-
-        if(direction > 9){
-            spawnMiniSquirrel(200);  //This is successfully called
-            return XY.ORIGIN;
-        }
-        return inputToDirection(direction);
-    }
 
     @Override
     public void nextStep(EntityContext entityContext) {
