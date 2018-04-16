@@ -19,7 +19,6 @@ public class FlattenedBoard implements EntityContext, BoardView{
     private EntitySet entitySet;
     private Board board;
 
-
     FlattenedBoard(Entity[][] data, EntitySet entitySet, Board board){
 
         entities = data;
@@ -30,7 +29,7 @@ public class FlattenedBoard implements EntityContext, BoardView{
     @Override
     public EntityType getEntityType(int x, int y) {
         Entity entity = entitySet.getEntityAtPosition(x,y);
-        return entity != null ? EntityType.getEntityType(entity) : null;
+        return EntityType.getEntityType(entity);
     }
 
     @Override

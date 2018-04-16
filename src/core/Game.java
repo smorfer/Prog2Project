@@ -1,18 +1,31 @@
 package core;
 
+import geom.XY;
+import ui.MoveCommand;
 import ui.UI;
 
 public class Game {
 
-    private State state;
-    private UI ui;
+    private static State state;
+    private static UI ui;
+    private static Board board;
 
-    public Game(State state)
-    {
-        this.state = state;
+    public static void main(String[] args) {
+
+        ui = new ui.ConsoleUI();
+        board = new Board();
+        state = new State(board);
+        run();
+
+
     }
 
-    public void run() {
+//    public Game(State state)
+//    {
+//        this.state = state;
+//    }
+
+    public static void run() {
         while (true) {
             render();
             processInput();
@@ -20,16 +33,17 @@ public class Game {
         }
     }
 
-    public void render(){
+    protected static void render(){
         ui.render(state.flattenedBoard());
     }
 
-    public void processInput(){
-        ui.getCommand(); // Hier muss der command weitergegeben werden an MasterSquirrel
+    protected static void processInput(){
+        MoveCommand moveCommand = ui.getCommand(); // Hier muss der command weitergegeben werden an MasterSquirrel
+
     }
 
-    public void update(){
-
+    protected static void update(){
+        board.callNextStep();
     }
 }
 

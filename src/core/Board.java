@@ -143,7 +143,7 @@ public class Board {
         for (Entity e : entitySet.getEntities())
         {
             if(e instanceof MasterSquirrel){
-                master = e;
+                master = (MasterSquirrel)e;
                 continue;
             }
 
@@ -153,10 +153,10 @@ public class Board {
             }
         }
 
-        if(master == null)
-            return;
+        if (master != null) {
+            master.nextStep(data);
+        }
 
-        master.nextStep(data);
 
     }
 }
