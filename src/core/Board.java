@@ -17,6 +17,7 @@ import java.util.Random;
 public class Board {
 
     EntitySet entitySet;
+    FlattenedBoard flattenedBoard;
 
     public Board()
     {
@@ -73,57 +74,7 @@ public class Board {
         return rets;
     }
 
-    public void printBoard()
-    {
-        String rets = "\n";
-        for (int height = 0; height < BoardConfig.SIZE; height++)
-        {
-            for(int width = 0; width < BoardConfig.SIZE; width++)
-            {
-                Entity entity = getEntityAtPosition(new XY(width,height));
-                if(entity instanceof BadPlant)
-                {
-                    rets += "V\t";
-                }
-                else if (entity instanceof GoodPlant)
-                {
-                    rets += "P\t";
-                }
-                else if(entity instanceof BadBeast)
-                {
-                    rets += "K\t";
-                }
-                else if(entity instanceof GoodBeast)
-                {
-                    rets += "B\t";
-                }
-                else if (entity instanceof Wall)
-                {
-                    rets += "W\t";
-                }
-                else if (entity instanceof MasterSquirrel)
-                {
-                    rets += "S\t";
-                }
-                else if(entity instanceof MiniSquirrel)
-                {
-                    rets += "M\t";
-                }
-                else
-                {
-                    rets += ".\t";
-                }
-            }
-            rets += "\n";
-        }
-        System.out.print(rets);
 
-        for(Entity e : entitySet.getEntities()){
-
-            if(e instanceof MasterSquirrel)
-            System.out.println(e.toString());
-        }
-    }
 
     boolean isEntityAtPosition(XY pos)
     {
@@ -163,6 +114,7 @@ public class Board {
 
     public FlattenedBoard getData(){
 
+        if (flattenedBoard == null) {
             Entity[][] data = new Entity[BoardConfig.SIZE][BoardConfig.SIZE];
 
             for (Entity e : entitySet.getEntities()) {
@@ -171,8 +123,10 @@ public class Board {
                 XY location = e.getPosition();
                 data[location.getX()][location.getY()] = e;
             }
+            flattenedBoard = new FlattenedBoard(data, entitySet, this);
+        }
 
-            return new FlattenedBoard(data, entitySet, this);
+        return flattenedBoard;
 
 
 
@@ -180,7 +134,6 @@ public class Board {
 
     public void callNextStep(){
         nextStep();
-        printBoard();
     }
 
     public void nextStep()

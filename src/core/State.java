@@ -12,4 +12,9 @@ public class State {
     public void update(){
 
     }
+
+    public FlattenedBoard flattenedBoard()
+    {
+        return board.getData();
+    }
 }

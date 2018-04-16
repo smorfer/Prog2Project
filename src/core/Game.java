@@ -1,8 +1,11 @@
 package core;
 
+import ui.UI;
+
 public class Game {
 
     private State state;
+    private UI ui;
 
     public Game(State state)
     {
@@ -17,9 +20,13 @@ public class Game {
         }
     }
 
-    public void render(){}
+    public void render(){
+        ui.render(state.flattenedBoard());
+    }
 
-    public void processInput(){}
+    public void processInput(){
+        ui.getCommand(); // Hier muss der command weitergegeben werden an MasterSquirrel
+    }
 
     public void update(){
 
