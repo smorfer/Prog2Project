@@ -19,5 +19,5 @@ public class GoodBeast extends Beast {
         entityContext.tryMove(this, XY.invertVector(bot.getDirection(entityContext, this.getPosition())));
     }
 
-    // TODO: GoodBeast has to Walk away from Squirrel
+
 }

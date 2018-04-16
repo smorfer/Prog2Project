@@ -106,6 +106,8 @@ public class FlattenedBoard implements EntityContext, BoardView{
 
     public boolean squirrelCollision(Squirrel squirrel, XY direction, Entity targetEntity) {
 
+        //TODO: Maybe Generics? Code duplication...
+
         if (targetEntity == null) {
             moveEntity(squirrel, direction);
             return true;
