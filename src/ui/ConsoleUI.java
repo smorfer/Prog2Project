@@ -63,8 +63,6 @@ public class ConsoleUI implements UI {
                 return MoveCommand.DOWN_RIGHT;
             case "4":
                 return MoveCommand.LEFT;
-            case "5":
-                return MoveCommand.SPAWN;
             case "6":
                 return MoveCommand.RIGHT;
             case "7":

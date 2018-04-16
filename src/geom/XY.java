@@ -1,5 +1,7 @@
 package geom;
 
+import ui.MoveCommand;
+
 import java.util.Random;
 
 public final class XY {
@@ -81,6 +83,31 @@ public final class XY {
             case 1:
                 return DOWN_LEFT;
             default:
+                return ORIGIN;
+        }
+    }
+
+    public static XY commandToMove(MoveCommand moveCommand)
+    {
+        switch (moveCommand)
+        {
+            case UP:
+                return UP;
+            case DOWN:
+                return DOWN;
+            case LEFT:
+                return LEFT;
+            case RIGHT:
+                return RIGHT;
+            case UP_LEFT:
+                return UP_LEFT;
+            case UP_RIGHT:
+                return UP_RIGHT;
+            case DOWN_LEFT:
+                return DOWN_LEFT;
+            case DOWN_RIGHT:
+                return DOWN_RIGHT;
+            case ORIGIN:
                 return ORIGIN;
         }
     }
