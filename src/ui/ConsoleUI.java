@@ -46,7 +46,9 @@ public class ConsoleUI implements UI {
             }
             rets += "\n";
         }
-        System.out.print(rets);
+        System.out.println(rets);
+
+
 
     }
 

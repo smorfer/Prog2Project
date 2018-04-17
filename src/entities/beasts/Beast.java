@@ -1,12 +1,13 @@
 package entities.beasts;
 
 import core.EntityContext;
+import entities.Character;
 import entities.Entity;
 import entities.squirrels.Squirrel;
 import geom.XY;
 
 
-public abstract class Beast extends Entity{
+public abstract class Beast extends Character{
     private int moveCounter = 0;
 
 

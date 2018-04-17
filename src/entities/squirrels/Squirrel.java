@@ -1,6 +1,7 @@
 package entities.squirrels;
 
 import core.EntityContext;
+import entities.Character;
 import entities.Entity;
 import entities.Wall;
 import entities.beasts.BadBeast;
@@ -8,7 +9,7 @@ import entities.beasts.GoodBeast;
 import entities.plants.Plant;
 import geom.XY;
 
-public abstract class Squirrel extends Entity {
+public abstract class Squirrel extends Character {
     public Squirrel(int energy, XY position) {
         super(energy, position);
     }

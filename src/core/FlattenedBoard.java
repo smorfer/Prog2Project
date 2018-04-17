@@ -163,6 +163,7 @@ public class FlattenedBoard implements EntityContext, BoardView{
     @Override
     public void killAndReplace(Entity entity) {
         XY newPos = board.getFreePosition();
+
         entities[entity.getPosition().getX()][entity.getPosition().getY()] = null;
 
         entity.setPosition(newPos);

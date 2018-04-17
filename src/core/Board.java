@@ -36,6 +36,8 @@ public class Board {
             }
         }
 
+        entitySet.addEntity(new HandOperatedMasterSquirrel(200, getFreePosition()));
+
 
         for(int BadBeastCounter = 0; BadBeastCounter < BoardConfig.BADBEAST_QUANTITY; BadBeastCounter++)
         {
@@ -58,7 +60,7 @@ public class Board {
             entitySet.addEntity(new Wall(getFreePosition()));
         }
 
-        entitySet.addEntity(new HandOperatedMasterSquirrel(200, getFreePosition()));
+
         entitySet.addEntity(new MiniSquirrel(200, getFreePosition(), 29828));
     }
 
@@ -66,7 +68,7 @@ public class Board {
         String rets = "";
         for (Entity e : entitySet.getEntities())
         {
-            if (e != null)
+            if (e instanceof MasterSquirrel)
             {
                 rets += e.toString() + "\n";
 
@@ -138,11 +140,12 @@ public class Board {
     public void nextStep(MoveCommand moveCommand)
     {
         EntityContext data = getData();
+
         MasterSquirrel master = null;
         for (Entity e : entitySet.getEntities())
         {
             if(e instanceof MasterSquirrel){
-                master = (MasterSquirrel)e;
+                ((MasterSquirrel)e).doNextStep(data, moveCommand);
                 continue;
             }
 
@@ -151,11 +154,6 @@ public class Board {
                 e.nextStep(data);
             }
         }
-
-        if (master != null) {
-            master.doNextStep(data, moveCommand);
-        }
-
 
     }
 }
