@@ -105,8 +105,6 @@ public class FlattenedBoard implements EntityContext, BoardView{
 
     public boolean squirrelCollision(Squirrel squirrel, XY direction, Entity targetEntity) {
 
-        //TODO: Maybe Generics? Code duplication...
-
         if (targetEntity == null) {
             moveEntity(squirrel, direction);
             return true;
@@ -119,7 +117,7 @@ public class FlattenedBoard implements EntityContext, BoardView{
             moveEntity(squirrel, direction);
             return true;
         } else if(targetEntity instanceof BadBeast){
-            if (XY.distanceToTarget(XY.vectorToTarget(squirrel.getPosition(), targetEntity.getPosition())) <= 1f) { // Preventing "long range" attacks
+            if (XY.distanceToTarget(XY.vectorToTarget(squirrel.getPosition(), targetEntity.getPosition())) <= 1f) { // Preventing "long range"
                 squirrel.hit(this, (BadBeast)targetEntity);
             }
             // do bad beast collision
