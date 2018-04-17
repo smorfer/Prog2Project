@@ -28,6 +28,8 @@ public interface EntityContext {
 
     EntityType getEntityType(Entity entity); // Vielleicht default?
 
+    void spawnMiniSquirrel(int energy, XY loc, int ID);
+
 
 }
 

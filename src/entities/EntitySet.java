@@ -49,6 +49,26 @@ public class EntitySet {
         return entities;
     }
 
+    public Character[] getCharacters(){
+        Character[] temp = new Character[entities.length];
+        int index = 0;
+
+        for(int i = 0; i < entities.length; i++){
+            if(entities[i] instanceof Character) {
+                temp[index] = (Character) entities[i];
+                index++;
+            }
+        }
+
+        Character[] characters = new Character[index+1];
+
+        for(int i = 0; i<characters.length; i++){
+            characters[i] = temp[i];
+        }
+
+        return characters;
+    }
+
 
 
     public Entity getEntityAtPosition(int x, int y)

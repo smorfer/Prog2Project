@@ -22,13 +22,18 @@ public abstract class MasterSquirrel extends Squirrel {
     }
 
     public void doNextStep(EntityContext entityContext, MoveCommand moveCommand){
+        if(moveCommand == MoveCommand.SPAWN_MINI){
+            this.spawnMiniSquirrel(entityContext, 200);
+        }
+
         previousLocation = new XY(this.getPosition());
         entityContext.tryMove(this, XY.commandToMove(moveCommand));
         System.out.println(this.toString());
     }
 
-    public void spawnMiniSquirrel(int energy){
+    private void spawnMiniSquirrel(EntityContext entityContext, int energy){
         this.updateEnergy(-energy);
+        entityContext.spawnMiniSquirrel(energy, this.getPreviousLocation(), this.getID());
         //TODO: This has to be somewhere else
     }
 

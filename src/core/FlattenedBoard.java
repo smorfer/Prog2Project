@@ -171,6 +171,10 @@ public class FlattenedBoard implements EntityContext, BoardView{
 
     }
 
+    public void spawnMiniSquirrel(int energy, XY loc, int ID){
+        entitySet.addEntity(new MiniSquirrel(energy, loc, ID));
+    }
+
     @Override
     public void kill(Entity entity) {
         entitySet.removeEntity(entity.getID());

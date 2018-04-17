@@ -142,16 +142,16 @@ public class Board {
         EntityContext data = getData();
 
         MasterSquirrel master = null;
-        for (Entity e : entitySet.getEntities())
+        for (entities.Character c : entitySet.getCharacters())
         {
-            if(e instanceof MasterSquirrel){
-                ((MasterSquirrel)e).doNextStep(data, moveCommand);
+            if(c instanceof MasterSquirrel){
+                ((MasterSquirrel)c).doNextStep(data, moveCommand);
                 continue;
             }
 
-            if (e != null)
+            if (c != null)
             {
-                e.nextStep(data);
+                c.nextStep(data);
             }
         }
 

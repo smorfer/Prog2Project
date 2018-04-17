@@ -73,6 +73,8 @@ public class ConsoleUI implements UI {
                 return MoveCommand.UP;
             case "9":
                 return MoveCommand.UP_RIGHT;
+            case "200":
+                return MoveCommand.SPAWN_MINI;
             default:
                 return MoveCommand.ORIGIN;
 
