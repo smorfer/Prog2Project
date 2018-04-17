@@ -119,7 +119,9 @@ public class FlattenedBoard implements EntityContext, BoardView{
             moveEntity(squirrel, direction);
             return true;
         } else if(targetEntity instanceof BadBeast){
-            squirrel.hit(this, (BadBeast)targetEntity);
+            if (XY.distanceToTarget(XY.vectorToTarget(squirrel.getPosition(), targetEntity.getPosition())) <= 1f) { // Preventing "long range" attacks
+                squirrel.hit(this, (BadBeast)targetEntity);
+            }
             // do bad beast collision
             return true;
         } else if(targetEntity instanceof Wall){
