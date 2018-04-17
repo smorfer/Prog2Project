@@ -6,26 +6,20 @@ import ui.UI;
 
 public class Game {
 
-    private static State state;
-    private static UI ui;
-    private static Board board;
-
-    public static void main(String[] args) {
-
-        ui = new ui.ConsoleUI();
-        board = new Board();
-        state = new State(board);
-        run();
+    private State state;
+    private UI ui;
+    private Board board;
 
 
+
+    public Game(State state, UI ui, Board board)
+    {
+        this.state = state;
+        this.ui = ui;
+        this.board = board;
     }
 
-//    public Game(State state)
-//    {
-//        this.state = state;
-//    }
-
-    public static void run() {
+    public void run() {
         MoveCommand command;
         while (true) {
             render();
@@ -35,15 +29,15 @@ public class Game {
         }
     }
 
-    protected static void render(){
+    protected void render(){
         ui.render(state.flattenedBoard());
     }
 
-    protected static MoveCommand processInput(){
+    protected MoveCommand processInput(){
         return ui.getCommand(); // Hier muss der command weitergegeben werden an MasterSquirrel
     }
 
-    protected static void update(MoveCommand moveCommand){
+    protected void update(MoveCommand moveCommand){
         board.nextStep(moveCommand);
     }
 }
