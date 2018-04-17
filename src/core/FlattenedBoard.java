@@ -171,8 +171,13 @@ public class FlattenedBoard implements EntityContext, BoardView{
 
     }
 
-    public void spawnMiniSquirrel(int energy, XY loc, int ID){
+    public int spawnMiniSquirrel(int energy, XY loc, int ID){
+        if(this.getEntityType(loc.getX(), loc.getY()) != EntityType.NONE){
+            return 0;
+        }
+
         entitySet.addEntity(new MiniSquirrel(energy, loc, ID));
+        return -200;
     }
 
     @Override

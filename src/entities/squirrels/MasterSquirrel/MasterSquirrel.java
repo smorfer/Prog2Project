@@ -32,8 +32,7 @@ public abstract class MasterSquirrel extends Squirrel {
     }
 
     private void spawnMiniSquirrel(EntityContext entityContext, int energy){
-        this.updateEnergy(-energy);
-        entityContext.spawnMiniSquirrel(energy, this.getPreviousLocation(), this.getID());
+        this.updateEnergy(entityContext.spawnMiniSquirrel(energy, this.getPreviousLocation(), this.getID()));
         //TODO: This has to be somewhere else
     }
 
