@@ -21,6 +21,7 @@ public class Game {
 
     public void run() {
         MoveCommand command;
+
         while (true) {
             render();
             command = processInput();

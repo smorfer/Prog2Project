@@ -3,10 +3,15 @@ package ui;
 import core.BoardView;
 import core.EntityType;
 import geom.XY;
+import ui.CommandHandler.*;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class ConsoleUI implements UI {
+    private CommandScanner commandScanner = new CommandScanner(GameCommandTypes.values(), new BufferedReader(new InputStreamReader(System.in)));
+    private GameCommandProcessor gameCommandProcessor = new GameCommandProcessor();
     @Override
     public void render(BoardView view) {
         String rets = "\n";
@@ -54,30 +59,21 @@ public class ConsoleUI implements UI {
 
     @Override
     public MoveCommand getCommand() {
-        Scanner input = new Scanner(System.in);
-        switch (input.next())
-        {
-            case "1":
-                return MoveCommand.DOWN_LEFT;
-            case "2":
-                return MoveCommand.DOWN;
-            case "3":
-                return MoveCommand.DOWN_RIGHT;
-            case "4":
-                return MoveCommand.LEFT;
-            case "6":
-                return MoveCommand.RIGHT;
-            case "7":
-                return MoveCommand.UP_LEFT;
-            case "8":
-                return MoveCommand.UP;
-            case "9":
-                return MoveCommand.UP_RIGHT;
-            case "200":
-                return MoveCommand.SPAWN_MINI;
-            default:
-                return MoveCommand.ORIGIN;
+        Command command;
+        try {
+            command = commandScanner.next();
+            MoveCommand moveCommand = gameCommandProcessor.process(command);
 
+            if(moveCommand != null){
+                return moveCommand;
+            } else {
+                return MoveCommand.ORIGIN;
+            }
+
+        } catch (ScanException e) {
+            System.out.println("Unknown Command!");
+            return MoveCommand.ORIGIN;
         }
+
     }
 }
