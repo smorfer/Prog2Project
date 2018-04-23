@@ -1,6 +1,7 @@
 package core;
 
 import geom.XY;
+import ui.CommandHandler.GameCommandProcessor;
 import ui.MoveCommand;
 import ui.UI;
 
@@ -24,8 +25,8 @@ public class Game {
 
         while (true) {
             render();
-            command = processInput();
-            update(command);
+            processInput();
+            //update();
 
         }
     }
@@ -34,14 +35,16 @@ public class Game {
         ui.render(state.flattenedBoard());
     }
 
-    protected MoveCommand processInput(){
-        return ui.getCommand(); // Hier muss der command weitergegeben werden an MasterSquirrel
+    protected void processInput(){
+        GameCommandProcessor processor = new GameCommandProcessor(board);
+        try {
+            processor.process(ui.getCommand());
+        } catch (Exception e) {
+            System.out.println("Command not found!");
+        }
     }
 
-    protected void update(MoveCommand moveCommand){
-        if (moveCommand !=null) {
-            board.nextStep(moveCommand);
-        }
+    protected void update(){
     }
 }
 

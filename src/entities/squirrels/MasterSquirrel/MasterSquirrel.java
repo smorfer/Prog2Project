@@ -17,9 +17,6 @@ public abstract class MasterSquirrel extends Squirrel {
         //Change energy here!
     }
 
-    @Override
-    public void nextStep(EntityContext entityContext) {
-    }
 
     public void doNextStep(EntityContext entityContext, MoveCommand moveCommand){
         if(moveCommand == MoveCommand.SPAWN_MINI){
@@ -29,11 +26,12 @@ public abstract class MasterSquirrel extends Squirrel {
         previousLocation = new XY(this.getPosition());
         entityContext.tryMove(this, XY.commandToMove(moveCommand));
         System.out.println(this.toString());
+
+
     }
 
-    private void spawnMiniSquirrel(EntityContext entityContext, int energy){
+    public void spawnMiniSquirrel(EntityContext entityContext, int energy){
         this.updateEnergy(entityContext.spawnMiniSquirrel(energy, this.getPreviousLocation(), this.getID()));
-        //TODO: This has to be somewhere else
     }
 
     public void hit(EntityContext entityContext, MiniSquirrel miniSquirrel){

@@ -1,5 +1,6 @@
 package ui.CommandHandler;
 
+import core.Board;
 import ui.MoveCommand;
 
 import java.io.BufferedReader;
@@ -10,16 +11,24 @@ import java.lang.reflect.Method;
 
 public class GameCommandProcessor {
 
+    private Board board;
+
+    public GameCommandProcessor(Board board){
+        this.board = board;
+    }
+
 
     public void process(Command command) {
         GameCommandTypes commandType = (GameCommandTypes) command.getCommandType();
         Object[] params = command.getParams();
-        CommandExecutor commandExecutor = new CommandExecutor();
+        CommandExecutor commandExecutor = new CommandExecutor(board);
+        Method method = null;
 
         try {
-            Method method;
+
 
             if(params.length == 1){
+
                 method = commandExecutor.getClass().getDeclaredMethod(command.getCommandType().getMethodName(), Object.class);
                 method.invoke(commandExecutor, params);
             } else {
@@ -30,7 +39,11 @@ public class GameCommandProcessor {
 
 
         } catch(Exception e){
-            System.out.println("Wrong syntax!");
+            if(method != null) {
+                System.out.println("Wrong syntax for Method: <" + command.getCommandType().getName() + "> !");
+            } else {
+                System.out.println("Method must not be null!");
+            }
         }
 
     }

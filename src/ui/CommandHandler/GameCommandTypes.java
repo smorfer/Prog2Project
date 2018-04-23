@@ -9,10 +9,10 @@ public enum GameCommandTypes implements CommandTypeInfo{
     HELP("help", "help", " \t \t \t* list all commands"),
     EXIT("exit", "exit", " \t \t \t* exit program"),
     ALL("all" , "all"," \t \t \t* not useful for now"),
-    MOVE("move", "move", " \t\t\t* does move", String.class),
+    MOVE("move", "move", " \t\t\t* <direction> moves in direction", String.class),
     MASTER_ENERGY("master_energy", "getMasterEnergy", " \t* get energy of MasterSquirrel"),
-    SPAWN_MINI("spawn_mini", "spawnMiniSquirrel", " \t* <energy> spawns a mini squirrel", int.class), //TODO: This is not recognized yet
-    DO_NOTHING("do_nothing", "nextStep", " \t* not useful right now");
+    SPAWN_MINI("spawn_mini", "spawnMiniSquirrel", " \t* <energy> spawns a mini squirrel", String.class);
+
 
 
     private String name;

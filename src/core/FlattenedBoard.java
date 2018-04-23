@@ -177,13 +177,17 @@ public class FlattenedBoard implements EntityContext, BoardView{
         }
 
         entitySet.addEntity(new MiniSquirrel(energy, loc, ID));
-        return -200;
+        return -energy;
     }
 
     @Override
     public void kill(Entity entity) {
         entitySet.removeEntity(entity.getID());
         entities[entity.getPosition().getX()][entity.getPosition().getY()] = null;
+    }
+
+    public EntitySet getEntitySet() {
+        return entitySet;
     }
 
     @Override

@@ -17,8 +17,8 @@ import java.util.Random;
 
 public class Board {
 
-    EntitySet entitySet;
-    FlattenedBoard flattenedBoard;
+    private EntitySet entitySet;
+    private FlattenedBoard flattenedBoard;
 
     public Board()
     {
@@ -130,9 +130,17 @@ public class Board {
         }
 
         return flattenedBoard;
+    }
 
+    //TODO: Think about the location of this method
+    public void spawnMiniSquirrel(Object energy){
+        MasterSquirrel squirrel;
 
-
+        for(Entity e : getData().getEntitySet().getEntities()){
+            if(e instanceof MasterSquirrel){
+                ((MasterSquirrel) e).spawnMiniSquirrel(getData(), Integer.parseInt((String)energy));
+            }
+        }
     }
 
 

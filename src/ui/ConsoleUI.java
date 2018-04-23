@@ -11,7 +11,6 @@ import java.util.Scanner;
 
 public class ConsoleUI implements UI {
     private CommandScanner commandScanner = new CommandScanner(GameCommandTypes.values(), new BufferedReader(new InputStreamReader(System.in)));
-    private GameCommandProcessor gameCommandProcessor = new GameCommandProcessor();
     @Override
     public void render(BoardView view) {
         String rets = "\n";
@@ -58,17 +57,8 @@ public class ConsoleUI implements UI {
     }
 
     @Override
-    public MoveCommand getCommand() {
-        Command command;
-        try {
-            command = commandScanner.next();
-            GameCommandProcessor processor = new GameCommandProcessor();
-            processor.process(command);
-            return null;
-        } catch (ScanException e) {
-            System.out.println("Unknown Command!");
-            return null;
-        }
+    public Command getCommand() {
+        return commandScanner.next();
 
     }
 }
