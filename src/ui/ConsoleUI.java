@@ -62,17 +62,11 @@ public class ConsoleUI implements UI {
         Command command;
         try {
             command = commandScanner.next();
-            MoveCommand moveCommand = gameCommandProcessor.process(command);
-
-            if(moveCommand != null){
-                return moveCommand;
-            } else {
-                return MoveCommand.ORIGIN;
-            }
+            return gameCommandProcessor.process(command);
 
         } catch (ScanException e) {
             System.out.println("Unknown Command!");
-            return MoveCommand.ORIGIN;
+            return null;
         }
 
     }

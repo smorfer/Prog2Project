@@ -1,39 +1,41 @@
 package ui.CommandHandler;
 
+import java.util.Arrays;
+
 public enum GameCommandTypes implements CommandTypeInfo{
 
-    HELP("help", "  * list all commands"),
-    EXIT("exit", "  * exit program"),
-    ALL("all" , "  * not useful for now"),
-    DOWN_LEFT("down_left", "  * MasterSquirrel moves down left"),
-    DOWN("down", "  * MasterSquirrel moves down"),
-    DOWN_RIGHT("down_right", "  * MasterSquirrel moves down right"),
-    LEFT("left", "  * MasterSquirrel moves left"),
-    RIGHT("right", "  * MasterSquirrel moves right"),
-    UP_LEFT("up_left", "  * MasterSquirrel moves up left"),
-    UP("up", "  * MasterSquirrel moves up"),
-    UP_RIGHT("up_right", "  * MasterSquirrel moves up right"),
-    MASTER_ENERGY("master_energy", "  * get energy of MasterSquirrel"),		
-    SPAWN_MINI("spawn_mini", "  * spawn a MiniSquirrel"),
-    DO_NOTHING("none", "  * MasterSquirrel doesn't move");
+    HELP("help", "help", " \t \t \t* list all commands"),
+    EXIT("exit", "exit", " \t \t \t* exit program"),
+    ALL("all" , "all"," \t \t \t* not useful for now"),
+    DOWN_LEFT("down_left", "nextStep", " \t \t* MasterSquirrel moves down left"),
+    DOWN("down", "nextStep", " \t \t \t* MasterSquirrel moves down"),
+    DOWN_RIGHT("down_right", "nextStep", " \t* MasterSquirrel moves down right"),
+    LEFT("left", "nextStep", " \t\t \t* MasterSquirrel moves left"),
+    RIGHT("right", "nextStep", " \t \t \t* MasterSquirrel moves right"),
+    UP_LEFT("up_left", "nextStep", " \t \t* MasterSquirrel moves up left"),
+    UP("up", "nextStep", " \t \t \t* MasterSquirrel moves up"),
+    UP_RIGHT("up_right", "nextStep", " \t \t* MasterSquirrel moves up right"),
+    MASTER_ENERGY("master_energy", "getMasterEnergy", " \t* get energy of MasterSquirrel"),
+    SPAWN_MINI("spawnMini", "spawnMiniSquirrel", " \t \t* <energy> spawns a mini squirrel", int.class),
+    DO_NOTHING("do_nothing", "nextStep", "not useful right now");
+
+
 
 
 
     private String name;
     private String helpText;
     private Class<?> [] paramTypes;
+    private String methodName;
 
-    GameCommandTypes(String name, String helpText) {
+
+    GameCommandTypes(String name, String methodName, String helpText, Class<?>... paramTypes) {
         this.name = name;
         this.helpText = helpText;
+        this.paramTypes = paramTypes;
+        this.methodName = methodName;
     }
 
-    GameCommandTypes(String name, String helpText, Class<?> param1, Class<?> param2) {
-        this.name = name;
-        this.helpText = helpText;
-        this.paramTypes = new Class<?>[] {param1, param2};
-
-    }
 
 
     @Override
@@ -53,10 +55,10 @@ public enum GameCommandTypes implements CommandTypeInfo{
 
     @Override
     public String toString() {
-        if(paramTypes == null) {
-            return this.name + this.helpText + "\n";
-        } else {
-            return this.name + " " + this.helpText + " param1 type: " + this.paramTypes[0] + " param2 type: " + this.paramTypes[1] + "\n";
-        }
+        return name + " " + helpText;
+    }
+
+    public String getMethodName() {
+        return methodName;
     }
 }

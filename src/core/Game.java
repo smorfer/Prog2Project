@@ -39,7 +39,9 @@ public class Game {
     }
 
     protected void update(MoveCommand moveCommand){
-        board.nextStep(moveCommand);
+        if (moveCommand !=null) {
+            board.nextStep(moveCommand);
+        }
     }
 }
 

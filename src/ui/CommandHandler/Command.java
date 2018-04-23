@@ -18,4 +18,10 @@ public class Command {
         return params;
     }
 
+    @Override
+    public String toString() {
+        return "Command{" +
+                "commandType=" + commandType +
+                '}';
+    }
 }

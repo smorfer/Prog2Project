@@ -14,7 +14,7 @@ public class CommandScanner {
     }
 
     public Command next() throws ScanException {
-        System.out.println("Enter a ui.CommandHandler.Command!");
+        System.out.println("Enter a Command!");
         String command = readLine();
 
         if (command == null)
@@ -23,23 +23,21 @@ public class CommandScanner {
         String[] splitCommand = command.split(" ");
         String commandName = splitCommand[0].toLowerCase();
 
+
         for (CommandTypeInfo info : commandTypeInfos) {
             if(info.getName().toLowerCase().equals(commandName.toLowerCase())){
-                if (splitCommand.length == 1) {
-                    return new Command(info, null);
-                } else {
-                    Object[] args = new Object[splitCommand.length-1];
-                    for(int i = 1; i < splitCommand.length; i++){
-                        args[i-1] = splitCommand[i];
-                    }
 
-                    return new Command(info, args);
+                Object[] args = new Object[splitCommand.length-1];
+
+                for(int i = 1; i < splitCommand.length; i++){
+                    args[i-1] = splitCommand[i];
                 }
-            }
 
+                return new Command(info, args);
+            }
         }
 
-        throw new ScanException("ui.CommandHandler.Command not found!");
+        throw new ScanException("Command not found!");
     }
 
 
