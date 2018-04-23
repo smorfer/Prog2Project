@@ -63,7 +63,7 @@ public class GameCommandProcessor {
         }
     }
 
-    private static String help(){
+    private String help(){
         StringBuilder s = new StringBuilder("List of Commands: \n");
 
         for(CommandTypeInfo e : GameCommandTypes.values()){
