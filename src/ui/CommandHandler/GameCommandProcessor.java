@@ -49,6 +49,14 @@ public class GameCommandProcessor {
             case DO_NOTHING:
                 return MoveCommand.ORIGIN;
 
+            case SPAWN_MINI:
+                System.out.println("todo: MiniSquirrelSpawn implementation in GameCommandProcessor");
+                return null;
+
+            case MASTER_ENERGY:
+                System.out.println("todo: MasterEnergy implementation in GameCommandProcessor");
+                return null;
+
             default:
                 return null;
 

@@ -16,8 +16,8 @@ public enum GameCommandTypes implements CommandTypeInfo{
     UP("up", "nextStep", " \t \t \t* MasterSquirrel moves up"),
     UP_RIGHT("up_right", "nextStep", " \t \t* MasterSquirrel moves up right"),
     MASTER_ENERGY("master_energy", "getMasterEnergy", " \t* get energy of MasterSquirrel"),
-    SPAWN_MINI("spawnMini", "spawnMiniSquirrel", " \t \t* <energy> spawns a mini squirrel", int.class),
-    DO_NOTHING("do_nothing", "nextStep", "not useful right now");
+    SPAWN_MINI("spawnMini", "spawnMiniSquirrel", " \t \t* <energy> spawns a mini squirrel", int.class), //TODO: This is not recognized yet
+    DO_NOTHING("do_nothing", "nextStep", " \t* not useful right now");
 
 
 
