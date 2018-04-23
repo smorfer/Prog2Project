@@ -5,62 +5,34 @@ import ui.MoveCommand;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public class GameCommandProcessor {
 
 
-    public MoveCommand process(Command command) {
-
+    public void process(Command command) {
         GameCommandTypes commandType = (GameCommandTypes) command.getCommandType();
         Object[] params = command.getParams();
-        switch (commandType) {
-            case EXIT:
-                System.exit(0);
-            case HELP:
-                System.out.println(help());
-                return null;
-            case ALL:
-                System.out.println("No usage found yet");
-                return null;
-            case DOWN:
-                return MoveCommand.DOWN;
+        CommandExecutor commandExecutor = new CommandExecutor();
 
-            case DOWN_LEFT:
-                return MoveCommand.DOWN_LEFT;
+        try {
+            Method method;
 
-            case DOWN_RIGHT:
-                return MoveCommand.DOWN_RIGHT;
+            if(params.length == 1){
+                method = commandExecutor.getClass().getDeclaredMethod(command.getCommandType().getMethodName(), Object.class);
+                method.invoke(commandExecutor, params);
+            } else {
+                method = commandExecutor.getClass().getDeclaredMethod(command.getCommandType().getMethodName());
+                method.invoke(commandExecutor);
+            }
 
-            case LEFT:
-                return MoveCommand.LEFT;
 
-            case RIGHT:
-                return MoveCommand.RIGHT;
 
-            case UP:
-                return MoveCommand.UP;
-
-            case UP_LEFT:
-                return MoveCommand.UP_LEFT;
-
-            case UP_RIGHT:
-                return MoveCommand.UP_RIGHT;
-
-            case DO_NOTHING:
-                return MoveCommand.ORIGIN;
-
-            case SPAWN_MINI:
-                System.out.println("todo: MiniSquirrelSpawn implementation in GameCommandProcessor");
-                return null;
-
-            case MASTER_ENERGY:
-                System.out.println("todo: MasterEnergy implementation in GameCommandProcessor");
-                return null;
-
-            default:
-                return null;
-
+        } catch(Exception e){
+            System.out.println("Wrong syntax!");
         }
+
     }
 
     private String help(){

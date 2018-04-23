@@ -1,5 +1,7 @@
 package ui.CommandHandler;
 
+import ui.MoveCommand;
+
 import java.util.Arrays;
 
 public enum GameCommandTypes implements CommandTypeInfo{
@@ -7,20 +9,10 @@ public enum GameCommandTypes implements CommandTypeInfo{
     HELP("help", "help", " \t \t \t* list all commands"),
     EXIT("exit", "exit", " \t \t \t* exit program"),
     ALL("all" , "all"," \t \t \t* not useful for now"),
-    DOWN_LEFT("down_left", "nextStep", " \t \t* MasterSquirrel moves down left"),
-    DOWN("down", "nextStep", " \t \t \t* MasterSquirrel moves down"),
-    DOWN_RIGHT("down_right", "nextStep", " \t* MasterSquirrel moves down right"),
-    LEFT("left", "nextStep", " \t\t \t* MasterSquirrel moves left"),
-    RIGHT("right", "nextStep", " \t \t \t* MasterSquirrel moves right"),
-    UP_LEFT("up_left", "nextStep", " \t \t* MasterSquirrel moves up left"),
-    UP("up", "nextStep", " \t \t \t* MasterSquirrel moves up"),
-    UP_RIGHT("up_right", "nextStep", " \t \t* MasterSquirrel moves up right"),
+    MOVE("move", "move", " \t\t\t* does move", String.class),
     MASTER_ENERGY("master_energy", "getMasterEnergy", " \t* get energy of MasterSquirrel"),
     SPAWN_MINI("spawn_mini", "spawnMiniSquirrel", " \t* <energy> spawns a mini squirrel", int.class), //TODO: This is not recognized yet
     DO_NOTHING("do_nothing", "nextStep", " \t* not useful right now");
-
-
-
 
 
     private String name;

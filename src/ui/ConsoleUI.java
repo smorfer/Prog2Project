@@ -62,8 +62,9 @@ public class ConsoleUI implements UI {
         Command command;
         try {
             command = commandScanner.next();
-            return gameCommandProcessor.process(command);
-
+            GameCommandProcessor processor = new GameCommandProcessor();
+            processor.process(command);
+            return null;
         } catch (ScanException e) {
             System.out.println("Unknown Command!");
             return null;
