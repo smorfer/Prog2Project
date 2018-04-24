@@ -1,6 +1,6 @@
 package ui.CommandHandler;
 
-import Exceptions.ScanException;
+import exceptions.ScanException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -39,7 +39,7 @@ public class CommandScanner {
             }
         }
 
-        throw new Exceptions.ScanException("CommandScanner did not read a viable command!");
+        throw new exceptions.ScanException("CommandScanner did not read a viable command!");
     }
 
 

@@ -1,6 +1,7 @@
 package ui.CommandHandler;
 
 import core.Board;
+import exceptions.NotEnoughEnergyException;
 import ui.MoveCommand;
 
 import java.io.BufferedReader;

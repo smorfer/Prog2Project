@@ -1,9 +1,7 @@
 package entities.squirrels.MasterSquirrel;
 
-import Exceptions.NotEnoughEnergyException;
+import exceptions.NotEnoughEnergyException;
 import core.EntityContext;
-import entities.beasts.GoodBeast;
-import entities.plants.Plant;
 import entities.squirrels.MiniSquirrel.MiniSquirrel;
 import entities.squirrels.Squirrel;
 import geom.XY;

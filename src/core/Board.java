@@ -10,6 +10,7 @@ import entities.plants.GoodPlant;
 import entities.squirrels.MasterSquirrel.HandOperatedMasterSquirrel;
 import entities.squirrels.MasterSquirrel.MasterSquirrel;
 import entities.squirrels.MiniSquirrel.MiniSquirrel;
+import exceptions.NotEnoughEnergyException;
 import geom.XY;
 import ui.MoveCommand;
 
@@ -139,7 +140,11 @@ public class Board {
 
         for(Entity e : getData().getEntitySet().getEntities()){
             if(e instanceof MasterSquirrel){
-                ((MasterSquirrel) e).spawnMiniSquirrel(getData(), energyMini);
+                try {
+                    ((MasterSquirrel) e).spawnMiniSquirrel(getData(), energyMini);
+                } catch (NotEnoughEnergyException e1) {
+                    System.out.println(e1.getMessage());
+                }
             }
         }
     }
