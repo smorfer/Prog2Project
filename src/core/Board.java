@@ -135,10 +135,11 @@ public class Board {
     //TODO: Think about the location of this method
     public void spawnMiniSquirrel(Object energy){
         MasterSquirrel squirrel;
+        int energyMini = Integer.parseInt((String)energy);
 
         for(Entity e : getData().getEntitySet().getEntities()){
             if(e instanceof MasterSquirrel){
-                ((MasterSquirrel) e).spawnMiniSquirrel(getData(), Integer.parseInt((String)energy));
+                ((MasterSquirrel) e).spawnMiniSquirrel(getData(), energyMini);
             }
         }
     }

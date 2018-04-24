@@ -1,5 +1,7 @@
 package ui.CommandHandler;
 
+import Exceptions.ScanException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 
@@ -37,7 +39,7 @@ public class CommandScanner {
             }
         }
 
-        throw new ScanException("Command not found!");
+        throw new Exceptions.ScanException("Command not found!");
     }
 
 

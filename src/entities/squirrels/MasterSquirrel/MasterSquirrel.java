@@ -1,5 +1,6 @@
 package entities.squirrels.MasterSquirrel;
 
+import Exceptions.NotEnoughEnergyException;
 import core.EntityContext;
 import entities.beasts.GoodBeast;
 import entities.plants.Plant;
@@ -30,7 +31,11 @@ public abstract class MasterSquirrel extends Squirrel {
 
     }
 
-    public void spawnMiniSquirrel(EntityContext entityContext, int energy){
+    public void spawnMiniSquirrel(EntityContext entityContext, int energy) throws NotEnoughEnergyException{
+        if(this.getEnergy() <= energy){
+            throw new NotEnoughEnergyException();
+        }
+
         this.updateEnergy(entityContext.spawnMiniSquirrel(energy, this.getPreviousLocation(), this.getID()));
     }
 
