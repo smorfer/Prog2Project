@@ -40,7 +40,7 @@ public class Game {
         try {
             processor.process(ui.getCommand());
         } catch (Exception e) {
-            System.out.println("Command not found!");
+            System.out.println("Command not found! " + e.getMessage());
         }
     }
 

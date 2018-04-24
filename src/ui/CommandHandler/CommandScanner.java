@@ -39,7 +39,7 @@ public class CommandScanner {
             }
         }
 
-        throw new Exceptions.ScanException("Command not found!");
+        throw new Exceptions.ScanException("CommandScanner did not read a viable command!");
     }
 
 

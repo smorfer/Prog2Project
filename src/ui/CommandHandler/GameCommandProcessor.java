@@ -28,7 +28,6 @@ public class GameCommandProcessor {
 
 
             if(params.length == 1){
-
                 method = commandExecutor.getClass().getDeclaredMethod(command.getCommandType().getMethodName(), Object.class);
                 method.invoke(commandExecutor, params);
             } else {
@@ -40,9 +39,9 @@ public class GameCommandProcessor {
 
         } catch(Exception e){
             if(method != null) {
-                System.out.println("Wrong syntax for Method: <" + command.getCommandType().getName() + "> !");
+                System.out.println("CommandProcessor: Wrong usage of command: <" + command.getCommandType().getName() + "> !");
             } else {
-                System.out.println("Method must not be null!");
+                System.out.println("CommandProcessor: Command can't be null!");
             }
         }
 
