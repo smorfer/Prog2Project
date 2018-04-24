@@ -42,6 +42,4 @@ public class CommandExecutor {
         System.out.println("all() in CommandExecutor not implemented yet!");
     }
 
-    //TODO: Implement all GameCommandType Methods!
-    //TODO: Handle MoveCOmmand in Processor (via State)
 }
