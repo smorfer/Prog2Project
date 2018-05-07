@@ -47,9 +47,7 @@ public class FxUI extends Scene implements UI {
                     nextCommand = new Command(GameCommandTypes.MOVE, MoveCommand.LEFT);
                     break;
                 case S:
-                    if (nextCommand.getCommandType() == null) {
-                        nextCommand = new Command(GameCommandTypes.MOVE, MoveCommand.ORIGIN);
-                    }
+                    nextCommand = new Command(GameCommandTypes.MOVE, MoveCommand.ORIGIN);
                     break;
                 case D:
                     nextCommand = new Command(GameCommandTypes.MOVE, MoveCommand.RIGHT);
@@ -83,6 +81,11 @@ public class FxUI extends Scene implements UI {
 
     @Override
     public void render(final BoardView view) {
+
+        if(nextCommand == null){
+            nextCommand = new Command(GameCommandTypes.MOVE, MoveCommand.ORIGIN);   //TODO: this isnt right here!
+        }
+
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
