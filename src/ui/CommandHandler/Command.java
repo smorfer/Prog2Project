@@ -4,7 +4,7 @@ public class Command {
     private CommandTypeInfo commandType;
     private Object[] params;
 
-    public Command(CommandTypeInfo commandType, Object[] params){
+    public Command(CommandTypeInfo commandType, Object... params){
         this.commandType = commandType;
         this.params = params;
     }

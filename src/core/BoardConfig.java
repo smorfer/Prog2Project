@@ -19,7 +19,9 @@ public class BoardConfig {
             MASTERSQUIRREL_QUANTITY +
             MINISQUIRREL_QUANTITY;
 
-
+    public static int getSize(){
+        return SIZE;
+    }
 
     //TODO: getConfig() Methode, flattenedBoard(), GameImpl (MasterSquirrel Instance)
 }

@@ -12,6 +12,12 @@ public class CommandExecutor {
     }
 
     public void move(Object moveString){
+
+        if(moveString instanceof MoveCommand){
+            board.nextStep((MoveCommand) moveString);
+            return;
+        }
+
         board.nextStep(MoveCommand.parseMoveCommand((String)moveString));
     }
 

@@ -25,8 +25,6 @@ public class GameCommandProcessor {
         Method method = null;
 
         try {
-
-
             if(params.length == 1){
 
                 method = commandExecutor.getClass().getDeclaredMethod(command.getCommandType().getMethodName(), Object.class);
@@ -35,16 +33,14 @@ public class GameCommandProcessor {
                 method = commandExecutor.getClass().getDeclaredMethod(command.getCommandType().getMethodName());
                 method.invoke(commandExecutor);
             }
-
-
-
-        } catch(Exception e){
-            if(method != null) {
-                System.out.println("Wrong syntax for Method: <" + command.getCommandType().getName() + "> !");
-            } else {
-                System.out.println("Method must not be null!");
-            }
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
         }
+
 
     }
 
