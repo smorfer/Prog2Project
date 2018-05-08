@@ -1,5 +1,7 @@
 package core;
 
+import core.gameTypes.Game;
+import core.gameTypes.SinglePlayerGame;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import ui.ConsoleUI;
@@ -23,9 +25,9 @@ public class Launcher extends Application {
 
         final Game game;
         if (fxMode) {
-            game = new Game(state, fxUI, board);
+            game = new SinglePlayerGame(state, fxUI, board);
         } else {
-            game = new Game(state, consoleUI, board);
+            game = new SinglePlayerGame(state, consoleUI, board);
         }
 
         primaryStage.setScene(fxUI);

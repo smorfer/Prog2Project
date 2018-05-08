@@ -1,5 +1,7 @@
-package core;
+package core.gameTypes;
 
+import core.Board;
+import core.State;
 import geom.XY;
 import ui.CommandHandler.GameCommandProcessor;
 import ui.MoveCommand;
@@ -8,13 +10,13 @@ import ui.UI;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Game {
+public abstract class Game {
 
-    private State state;
-    private UI ui;
-    private Board board;
-    private static final int FPS = 10;
-    private static final int REFRESH_RATE = 2;
+    State state;
+    UI ui;
+    Board board;
+    private static final int FPS = 30;
+    private static final int REFRESH_RATE = 5;
 
 
 
@@ -43,24 +45,14 @@ public class Game {
             }
         }, 0, 1000/REFRESH_RATE);
 
-        //update();
     }
 
     protected void render(){
         ui.render(state.flattenedBoard());
     }
 
-    protected void processInput(){
-        GameCommandProcessor processor = new GameCommandProcessor(board);
-        try {
-            processor.process(ui.getCommand());
-        } catch (Exception e) {
-            System.out.println("No command!");
-        }
-    }
+    protected abstract void processInput();
 
-    protected void update(){
-    }
 }
 
 

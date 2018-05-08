@@ -36,8 +36,6 @@ public class Board {
             }
         }
 
-        entitySet.addEntity(new HandOperatedMasterSquirrel(200, getFreePosition()));
-
 
         for(int BadBeastCounter = 0; BadBeastCounter < BoardConfig.BADBEAST_QUANTITY; BadBeastCounter++)
         {
@@ -61,7 +59,7 @@ public class Board {
         }
 
 
-        entitySet.addEntity(new MiniSquirrel(200, getFreePosition(), 29828));
+
     }
 
     public String toString() {
@@ -105,7 +103,7 @@ public class Board {
         return null;
     }
 
-    XY getFreePosition()
+    public XY getFreePosition()
     {
         Random rnd = new Random();
         XY spawn;
