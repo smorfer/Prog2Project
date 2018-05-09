@@ -47,9 +47,7 @@ public abstract class Game {
 
     }
 
-    protected void render(){
-        ui.render(state.flattenedBoard());
-    }
+    protected abstract void render();
 
     protected abstract void processInput();
 

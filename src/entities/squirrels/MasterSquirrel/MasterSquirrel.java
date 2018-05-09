@@ -44,7 +44,17 @@ public abstract class MasterSquirrel extends Squirrel {
         entityContext.kill(miniSquirrel);
     }
 
+    @Override
+    public void updateEnergy(int deltaEnergy) {
 
+        if(this.getEnergy()+deltaEnergy <= 0) {
+            super.updateEnergy(-(this.getEnergy()-1));
+        }else{
+            super.updateEnergy(deltaEnergy);
+        }
+
+
+    }
 
     public XY getPreviousLocation() {
         return previousLocation;

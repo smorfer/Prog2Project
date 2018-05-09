@@ -1,7 +1,9 @@
 package ui.CommandHandler;
 
 import core.Board;
+import javafx.application.Platform;
 import ui.MoveCommand;
+import ui.NewWindow;
 
 public class CommandExecutor {
 
@@ -22,14 +24,30 @@ public class CommandExecutor {
     }
 
     public void help(){
-        StringBuilder str = new StringBuilder("List of commands: \n");
 
-        for(GameCommandTypes type : GameCommandTypes.values()){
-            str.append(type.toString());
-            str.append("\n");
-        }
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                new NewWindow("Help", getHelpText());
+            }
+        });
 
-        System.out.println(str);
+    }
+
+    public String getHelpText(){
+
+        StringBuilder sb = new StringBuilder("Help: \n");
+        sb.append("Q move up left\n");
+        sb.append("W move up\n");
+        sb.append("E move up right\n");
+        sb.append("A move left\n");
+        sb.append("D move right\n");
+        sb.append("Y move down left\n");
+        sb.append("X move down\n");
+        sb.append("C move down right\n");
+        sb.append("P spawn MiniSquirrel with 100 energy\n");
+        return sb.toString();
+
     }
 
     public void exit(){
@@ -48,6 +66,5 @@ public class CommandExecutor {
         System.out.println("all() in CommandExecutor not implemented yet!");
     }
 
-    //TODO: Implement all GameCommandType Methods!
-    //TODO: Handle MoveCOmmand in Processor (via State)
+
 }

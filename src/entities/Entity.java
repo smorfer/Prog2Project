@@ -1,6 +1,7 @@
 package entities;
 
 import core.EntityContext;
+import entities.squirrels.MasterSquirrel.MasterSquirrel;
 import geom.XY;
 import ID.IDManager;
 

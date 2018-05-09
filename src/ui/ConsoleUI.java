@@ -61,4 +61,9 @@ public class ConsoleUI implements UI {
         return commandScanner.next();
 
     }
+
+    @Override
+    public void message(String message) {
+        System.out.println(message);
+    }
 }

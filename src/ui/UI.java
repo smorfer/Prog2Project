@@ -9,5 +9,6 @@ public interface UI {
 
     public Command getCommand();
 
+    public void message (String message);
 
 }

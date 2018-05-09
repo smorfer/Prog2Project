@@ -36,7 +36,7 @@ public class FxUI extends Scene implements UI {
         VBox top = new VBox();
         top.getChildren().add(boardCanvas);
         top.getChildren().add(statusLabel);
-        statusLabel.setText("Hallo Welt");
+        statusLabel.setText("0");
         final FxUI fxUI = new FxUI(top, boardCanvas, statusLabel);
         fxUI.setOnKeyPressed(value -> {
             switch (value.getCode()) {
@@ -70,6 +70,12 @@ public class FxUI extends Scene implements UI {
                 case P:
                     nextCommand = new Command(GameCommandTypes.SPAWN_MINI, "100");
                     break;
+                case ESCAPE:
+                    nextCommand = new Command(GameCommandTypes.EXIT);
+                    break;
+                case H:
+                    nextCommand = new Command(GameCommandTypes.HELP);
+                    break;
                 default:
                     break;
             }
@@ -85,6 +91,7 @@ public class FxUI extends Scene implements UI {
         if(nextCommand == null){
             nextCommand = new Command(GameCommandTypes.MOVE, MoveCommand.ORIGIN);   //TODO: this isnt right here!
         }
+
 
         Platform.runLater(new Runnable() {
             @Override

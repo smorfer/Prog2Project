@@ -43,14 +43,4 @@ public class GameCommandProcessor {
 
 
     }
-
-    private String help(){
-        StringBuilder s = new StringBuilder("List of Commands: \n");
-
-        for(CommandTypeInfo e : GameCommandTypes.values()){
-            s.append(e.toString());
-            s.append("\n");
-        }
-        return s.toString();
-    }
 }
