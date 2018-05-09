@@ -2,6 +2,7 @@ package core.botImpl;
 
 import botapi.ControllerContext;
 import core.EntityType;
+import entities.squirrels.MiniSquirrel.MiniSquirrel;
 import geom.XY;
 
 public class MiniSquirrelBot {
@@ -9,7 +10,12 @@ public class MiniSquirrelBot {
 
 
     //Inner Class:
-    private class ControllerContextImpl implements ControllerContext{
+    private class ControllerContextImpl extends MiniSquirrel implements ControllerContext{
+
+        public ControllerContextImpl(int energy, XY position, int masterID) {
+            super(energy, position, masterID);
+        }
+
         @Override
         public XY getViewLowerLeft() {
             return null;
