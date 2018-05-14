@@ -181,7 +181,7 @@ public class FlattenedBoard implements EntityContext, BoardView{
             return 0;
         }
 
-        entitySet.addEntity(new MiniSquirrel(energy, loc, ID));
+        entitySet.addEntity(new MiniSquirrel(loc, ID));
         return -energy;
     }
 

@@ -1,20 +1,48 @@
 package entities.squirrelBots;
 
+import botapi.BotController;
+import botapi.BotControllerFactory;
 import botapi.ControllerContext;
+import core.EntityContext;
 import core.EntityType;
+import core.botImpl.BotControllerFactoryImpl;
 import entities.squirrels.MiniSquirrel.MiniSquirrel;
 import geom.XY;
 
-public class MiniSquirrelBot {
+public class MiniSquirrelBot extends MiniSquirrel{
+
+    private final BotControllerFactory botControllerFactory = new BotControllerFactoryImpl();
+    private final BotController miniBotController = botControllerFactory.createMiniBotController();
+    private ControllerContextImpl controllerContext;
+
+    public MiniSquirrelBot(XY position, int masterID) {
+        super(position, masterID);
+    }
+
+    public ControllerContext getControllerContext(EntityContext entityContext){
+        if(controllerContext == null){
+            this.controllerContext = new ControllerContextImpl(entityContext);
+        }
+
+        return controllerContext;
+    }
+
+    @Override
+    public void nextStep(EntityContext entityContext) {
+        miniBotController.nextStep(this.getControllerContext(entityContext));
+    }
 
 
 
     //Inner Class:
-    private class ControllerContextImpl extends MiniSquirrel implements ControllerContext{
+    private class ControllerContextImpl implements ControllerContext{
 
-        public ControllerContextImpl(int energy, XY position, int masterID) {
-            super(energy, position, masterID);
+        EntityContext entityContext;
+
+        ControllerContextImpl(EntityContext entityContext){
+            this.entityContext = entityContext;
         }
+
 
         @Override
         public XY getViewLowerLeft() {
@@ -33,7 +61,7 @@ public class MiniSquirrelBot {
 
         @Override
         public void move(XY direction) {
-
+            entityContext.tryMove(MiniSquirrelBot.this, direction);
         }
 
         @Override

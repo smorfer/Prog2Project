@@ -1,5 +1,6 @@
 package entities.squirrelBots;
 
+import ID.IDManager;
 import botapi.BotController;
 import botapi.BotControllerFactory;
 import botapi.ControllerContext;
@@ -8,7 +9,10 @@ import core.EntityType;
 import core.botImpl.BotControllerFactoryImpl;
 import entities.Entity;
 import entities.squirrels.MasterSquirrel.MasterSquirrel;
+import entities.squirrels.MiniSquirrel.MiniSquirrel;
 import geom.XY;
+
+import java.net.IDN;
 
 public class MasterSquirrelBot extends MasterSquirrel {
 
@@ -63,17 +67,19 @@ public class MasterSquirrelBot extends MasterSquirrel {
 
         @Override
         public void move(XY direction) {
+            MasterSquirrelBot.this.previousLocation = MasterSquirrelBot.this.getPosition();
             entityContext.tryMove(MasterSquirrelBot.this, direction);
+
         }
 
         @Override
         public void spawnMiniBot(int energy) {
-            spawnMiniSquirrel(entityContext, energy);
+            MasterSquirrelBot.this.spawnMiniSquirrel(entityContext, energy);
         }
 
         @Override
         public int getEnergy() {
-            return 0;
+            return MasterSquirrelBot.this.getEnergy();
         }
     }
 }

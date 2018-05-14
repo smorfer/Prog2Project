@@ -60,7 +60,13 @@ public final class XY {
 
     public static int getRandomNumber(){
         Random rnd = new Random();
-        return rnd.nextInt(8)+1;
+        int i = rnd.nextInt(8)+1;
+
+        while(i==5){
+           i = rnd.nextInt(8)+1;
+        }
+
+        return i;
     }
 
     public static XY inputToDirection(int selector) {
@@ -83,7 +89,7 @@ public final class XY {
             case 1:
                 return DOWN_LEFT;
             default:
-                return ORIGIN;
+                return DOWN;
         }
     }
 

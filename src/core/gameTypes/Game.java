@@ -16,7 +16,7 @@ public abstract class Game {
     UI ui;
     Board board;
     static final int FPS = 30;
-    static final int REFRESH_RATE = 2;
+    static final int REFRESH_RATE = 5;
 
 
 

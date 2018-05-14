@@ -7,9 +7,10 @@ import geom.XY;
 public class MiniSquirrel extends Squirrel {
 
     private int masterID;
+    private static final int INIT_ENERGY = 200;
 
-    public MiniSquirrel(int energy, XY position, int masterID) {
-        super(energy, position);
+    public MiniSquirrel( XY position, int masterID) {
+        super(INIT_ENERGY, position);
         this.masterID = masterID;
         //Change energy here!
     }
