@@ -36,7 +36,9 @@ public class MasterSquirrelBot extends MasterSquirrel {
 
     @Override
     public void nextStep(EntityContext entityContext) {
-        masterBotController.nextStep(this.getControllerContext(entityContext));
+        if (!isFrozen()){
+            masterBotController.nextStep(this.getControllerContext(entityContext));
+        }
     }
 
 

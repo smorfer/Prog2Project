@@ -16,7 +16,7 @@ public abstract class Squirrel extends Character {
 
     private int freezeCounter = 0;
 
-    private boolean isFrozen(){
+    protected boolean isFrozen(){
 
         assert freezeCounter>=0 : "Freeze Counter < 0";
 

@@ -11,6 +11,7 @@ public class MasterBotController implements BotController {
     // This is the actual Bot!
     //TODO: Do not let Sumael Golger work on this!
     //TODO: This requires intelligence!
+    //TODO: @Radlertrinker: Go fuck yourself
 
     @Override
     public void nextStep(ControllerContext view) {
