@@ -30,7 +30,7 @@ public interface EntityContext {
 
     Entity getEntityAt(int x, int y);
 
-    int spawnMiniSquirrel(int energy, XY loc, int ID);
+    int spawnMiniSquirrel(int energy,MiniSquirrel miniSquirrel);
 
 
 }

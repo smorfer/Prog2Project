@@ -35,9 +35,9 @@ public abstract class MasterSquirrel extends Squirrel {
         if(this.getEnergy() == 1) return;
 
         if(this.getEnergy() - energy >= 1){
-            this.updateEnergy(entityContext.spawnMiniSquirrel(energy, this.getPreviousLocation(), this.getID()));
+            this.updateEnergy(entityContext.spawnMiniSquirrel(energy, new MiniSquirrel(this.getPreviousLocation(), this.getID())));
         } else {
-            this.updateEnergy(entityContext.spawnMiniSquirrel(this.getEnergy() - 1 , this.getPreviousLocation(), this.getID()));
+            this.updateEnergy(entityContext.spawnMiniSquirrel(this.getEnergy() - 1 , new MiniSquirrel(this.getPreviousLocation(), this.getID())));
         }
 
     }

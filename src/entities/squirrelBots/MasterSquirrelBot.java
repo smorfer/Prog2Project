@@ -41,6 +41,18 @@ public class MasterSquirrelBot extends MasterSquirrel {
         }
     }
 
+    @Override
+    public void spawnMiniSquirrel(EntityContext entityContext, int energy){
+
+        if(this.getEnergy() == 1) return;
+
+        if(this.getEnergy() - energy >= 1){
+            this.updateEnergy(entityContext.spawnMiniSquirrel(energy, new MiniSquirrelBot(this.getPreviousLocation(), this.getID())));
+        } else {
+            this.updateEnergy(entityContext.spawnMiniSquirrel(this.getEnergy() - 1 , new MiniSquirrelBot(this.getPreviousLocation(), this.getID())));
+        }
+
+    }
 
     //Inner Class:
     private class ControllerContextImpl implements ControllerContext {
