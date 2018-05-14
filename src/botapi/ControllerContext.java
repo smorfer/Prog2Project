@@ -8,6 +8,6 @@ public interface ControllerContext {
     public XY getViewUpperRight();
     public EntityType getEntityAt(XY xy);
     public void move(XY direction);
-    public void spawnMiniBot(XY direction, int energy); //TODO: MiniSpawning!
+    public void spawnMiniBot(int energy); //TODO: MiniSpawning!
     public int getEnergy();
 }

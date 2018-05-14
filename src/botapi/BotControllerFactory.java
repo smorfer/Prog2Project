@@ -1,6 +1,8 @@
 package botapi;
 
+import botapi.BotController;
+
 public interface BotControllerFactory {
-    public BotController createMasterBotController();
-    public BotController createMiniBotController();
+    BotController createMasterBotController();
+    BotController createMiniBotController();
 }

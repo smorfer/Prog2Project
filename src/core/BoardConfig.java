@@ -23,5 +23,4 @@ public class BoardConfig {
         return SIZE;
     }
 
-    //TODO: getConfig() Methode, flattenedBoard(), GameImpl (MasterSquirrel Instance)
 }

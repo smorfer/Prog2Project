@@ -1,5 +1,7 @@
 package botapi;
 
+import botapi.ControllerContext;
+
 public interface BotController {
-    public void nextStep(ControllerContext view);
+    void nextStep(ControllerContext view);
 }

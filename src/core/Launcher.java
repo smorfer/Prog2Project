@@ -1,5 +1,6 @@
 package core;
 
+import core.gameTypes.BotGame;
 import core.gameTypes.Game;
 import core.gameTypes.SinglePlayerGame;
 import javafx.application.Application;
@@ -10,6 +11,7 @@ import ui.FxUI;
 
 public class Launcher extends Application {
     private boolean fxMode = true;
+    private boolean botMode = true;
 
     public static void main(String[] args) {
         Application.launch(args);
@@ -25,9 +27,9 @@ public class Launcher extends Application {
 
         final Game game;
         if (fxMode) {
-            game = new SinglePlayerGame(state, fxUI, board);
+            game = botMode ? new BotGame(state, fxUI, board) : new SinglePlayerGame(state, fxUI, board);
         } else {
-            game = new SinglePlayerGame(state, consoleUI, board);
+            game = botMode ? new BotGame(state, consoleUI, board) : new SinglePlayerGame(state, consoleUI, board);
         }
 
         primaryStage.setScene(fxUI);
@@ -44,16 +46,3 @@ public class Launcher extends Application {
     }
 }
 
-/*public class Launcher {
-    public static void main(String[] args) {
-
-        ConsoleUI ui = new ui.ConsoleUI();
-        Board board = new Board();
-        State state = new State(board);
-        Game instance = new Game(state, ui, board);
-        instance.run();
-
-
-
-    }
-}*/

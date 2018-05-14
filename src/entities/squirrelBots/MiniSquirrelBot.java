@@ -1,4 +1,4 @@
-package core.botImpl;
+package entities.squirrelBots;
 
 import botapi.ControllerContext;
 import core.EntityType;
@@ -37,7 +37,7 @@ public class MiniSquirrelBot {
         }
 
         @Override
-        public void spawnMiniBot(XY direction, int energy) {
+        public void spawnMiniBot(int energy) {
 
         }
 

@@ -161,6 +161,11 @@ public class FlattenedBoard implements EntityContext, BoardView{
     }
 
     @Override
+    public Entity getEntityAt(int x, int y) {
+        return this.board.getData().getEntitySet().getEntityAtPosition(x,y);
+    }
+
+    @Override
     public void killAndReplace(Entity entity) {
         XY newPos = board.getFreePosition();
 

@@ -150,7 +150,7 @@ public class Board {
         MasterSquirrel master = null;
         for (entities.Character c : entitySet.getCharacters())
         {
-            if(c instanceof MasterSquirrel){
+            if(c instanceof HandOperatedMasterSquirrel){
                 ((MasterSquirrel)c).doNextStep(data, moveCommand);
                 continue;
             }
