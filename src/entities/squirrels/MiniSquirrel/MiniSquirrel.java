@@ -27,7 +27,7 @@ public class MiniSquirrel extends Squirrel {
 
 
     private XY getDirection() {
-        return new XY(XY.ORIGIN);
+        return XY.inputToDirection(XY.getRandomNumber());
     }
 
     public int getMasterID() {
