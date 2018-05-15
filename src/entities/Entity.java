@@ -5,10 +5,13 @@ import entities.squirrels.MasterSquirrel.MasterSquirrel;
 import geom.XY;
 import ID.IDManager;
 
+
+
 public abstract class Entity {
     private final int ID;
     private int energy;
     private XY position;
+
 
     public Entity(int energy, XY position) {
         this.ID = IDManager.getNextID();

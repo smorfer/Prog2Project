@@ -11,6 +11,9 @@ import entities.squirrels.MiniSquirrel.MiniSquirrel;
 import entities.squirrels.Squirrel;
 import geom.XY;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class FlattenedBoard implements EntityContext, BoardView{
 
 
@@ -18,6 +21,7 @@ public class FlattenedBoard implements EntityContext, BoardView{
     private Entity[][] entities;
     private EntitySet entitySet;
     private Board board;
+    private static Logger logger = Logger.getLogger(FlattenedBoard.class.getName());
 
     FlattenedBoard(Entity[][] data, EntitySet entitySet, Board board){
 
@@ -39,12 +43,16 @@ public class FlattenedBoard implements EntityContext, BoardView{
 
     @Override
     public void tryMove(MasterSquirrel masterSquirrel, XY direction) {
+        logger.log(Level.INFO, "MasterSquirrel " + masterSquirrel.getID() + " tries to move in direction " + direction.toString());
         XY newLocation = new XY(masterSquirrel.getPosition(), direction);
         Entity targetEntity = entities[newLocation.getX()][newLocation.getY()];
 
         if(squirrelCollision(masterSquirrel, direction, targetEntity)) return;
 
         if(targetEntity instanceof MiniSquirrel){
+
+            logger.log(Level.INFO, "MasterSquirrel " + masterSquirrel.getID() + " tries to absorb MiniSquirrel " + targetEntity.getID());
+
             masterSquirrel.hit(this, (MiniSquirrel) targetEntity);
             moveEntity(masterSquirrel, direction);
         }
@@ -78,11 +86,7 @@ public class FlattenedBoard implements EntityContext, BoardView{
                 moveEntity(goodBeast, direction);
                 goodBeast.addMoveCounter();
 
-            return;
         }
-
-
-
     }
 
     @Override
@@ -97,8 +101,8 @@ public class FlattenedBoard implements EntityContext, BoardView{
         }
 
         if(targetEntity instanceof Squirrel){
+            logger.log(Level.INFO, "BadBeast " + badBeast.getID() + " tries to bite Squirrel " + targetEntity.getID());
             badBeast.bite(this, targetEntity);
-            return;
         }
 
     }
@@ -109,14 +113,17 @@ public class FlattenedBoard implements EntityContext, BoardView{
             moveEntity(squirrel, direction);
             return true;
         } else if (targetEntity instanceof Plant) {
+            logger.log(Level.INFO, "Squirrel " + squirrel.getID() + " tries to absorb Plant " + targetEntity.getID());
             squirrel.hit(this, (Plant)targetEntity);
             moveEntity(squirrel, direction);
             return true;
         } else if (targetEntity instanceof GoodBeast){
+            logger.log(Level.INFO, "Squirrel " + squirrel.getID() + " tries to absorb GoodBeast " + targetEntity.getID());
             squirrel.hit(this, (GoodBeast)targetEntity);
             moveEntity(squirrel, direction);
             return true;
         } else if(targetEntity instanceof BadBeast){
+            logger.log(Level.INFO, "Squirrel " + squirrel.getID() + " tries to attack BadBeast " + targetEntity.getID());
             if (XY.distanceToTarget(XY.vectorToTarget(squirrel.getPosition(), targetEntity.getPosition())) <= 1f) { // Preventing "long range"
                 squirrel.hit(this, (BadBeast)targetEntity);
             }
@@ -124,6 +131,7 @@ public class FlattenedBoard implements EntityContext, BoardView{
             return true;
         } else if(targetEntity instanceof Wall){
             // dont move
+            logger.log(Level.INFO, "Squirrel " + squirrel.getID() + " tries to walk on Wall " + targetEntity.getID());
             squirrel.hit(this, (Wall)targetEntity);
             return true;
         }

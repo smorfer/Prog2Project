@@ -1,7 +1,7 @@
 package core;
 
 public class BoardConfig {
-     static final int SIZE = 25;
+     private static final int SIZE = 25;
      static final int BADBEAST_QUANTITY = 2;
      static final int GOODBEAST_QUANTITY = 3;
      static final int BADPLANT_QUANTITY = 3;
@@ -18,6 +18,17 @@ public class BoardConfig {
             WALL_QUANTITY +
             MASTERSQUIRREL_QUANTITY +
             MINISQUIRREL_QUANTITY;
+
+    private static final int FPS = 30;
+    private static final int REFRESH_RATE = 5;
+
+    public static int getFPS() {
+        return FPS;
+    }
+
+    public static int getRefreshRate() {
+        return REFRESH_RATE;
+    }
 
     public static int getSize(){
         return SIZE;

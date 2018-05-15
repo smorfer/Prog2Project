@@ -1,6 +1,7 @@
 package core.gameTypes;
 
 import core.Board;
+import core.BoardConfig;
 import core.State;
 import geom.XY;
 import ui.CommandHandler.GameCommandProcessor;
@@ -15,8 +16,8 @@ public abstract class Game {
     State state;
     UI ui;
     Board board;
-    static final int FPS = 30;
-    static final int REFRESH_RATE = 5;
+    static final int FPS = BoardConfig.getFPS();
+    static final int REFRESH_RATE = BoardConfig.getRefreshRate();
 
 
 

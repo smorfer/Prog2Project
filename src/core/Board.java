@@ -25,11 +25,11 @@ public class Board {
         entitySet = new EntitySet(BoardConfig.ENTITY_QUANTITY);
 
         int entitiesIndex = 0;
-        for (int height = 1; height <= BoardConfig.SIZE; height++)
+        for (int height = 1; height <= BoardConfig.getSize(); height++)
         {
-            for (int width = 1; width <= BoardConfig.SIZE; width++ )
+            for (int width = 1; width <= BoardConfig.getSize(); width++ )
             {
-                if (height == 1 || width == 1 || height == BoardConfig.SIZE || width == BoardConfig.SIZE)
+                if (height == 1 || width == 1 || height == BoardConfig.getSize() || width == BoardConfig.getSize())
                 {
                     entitySet.addEntity(new Wall(new XY(width-1,height-1)));
                 }
@@ -108,7 +108,7 @@ public class Board {
         Random rnd = new Random();
         XY spawn;
         do {
-            spawn = new XY(rnd.nextInt(BoardConfig.SIZE),rnd.nextInt(BoardConfig.SIZE));
+            spawn = new XY(rnd.nextInt(BoardConfig.getSize()),rnd.nextInt(BoardConfig.getSize()));
         } while (isEntityAtPosition(spawn));
         return spawn;
     }
@@ -116,7 +116,7 @@ public class Board {
     public FlattenedBoard getData(){
 
         if (flattenedBoard == null) {
-            Entity[][] data = new Entity[BoardConfig.SIZE][BoardConfig.SIZE];
+            Entity[][] data = new Entity[BoardConfig.getSize()][BoardConfig.getSize()];
 
             for (Entity e : entitySet.getEntities()) {
                 if (e == null) continue;
