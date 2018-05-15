@@ -1,7 +1,7 @@
 package core;
 
 public class BoardConfig {
-     private static final int SIZE = 25;
+     private static final int SIZE = 30;
      static final int BADBEAST_QUANTITY = 2;
      static final int GOODBEAST_QUANTITY = 3;
      static final int BADPLANT_QUANTITY = 3;

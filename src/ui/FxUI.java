@@ -18,6 +18,8 @@ import ui.CommandHandler.GameCommandTypes;
 
 public class FxUI extends Scene implements UI {
 
+    private static boolean fxDebugMode = false;
+
     private static int CELL_SIZE = 20;
     private static Command nextCommand = null;
 
@@ -145,6 +147,11 @@ public class FxUI extends Scene implements UI {
                     case MASTER_SQUIRREL:
                         gc.setFill(Color.BLUE);
                         gc.fillOval(j, i, CELL_SIZE, CELL_SIZE);
+
+                        if (fxDebugMode) {
+                            gc.setFill(Color.rgb(0,0,255,0.2));
+                            gc.fillRect(j-15*CELL_SIZE, i-15*CELL_SIZE,31*CELL_SIZE,31*CELL_SIZE);
+                        }
                         break;
                     case MINI_SQUIRREL:
                         gc.setFill(Color.AQUA);
