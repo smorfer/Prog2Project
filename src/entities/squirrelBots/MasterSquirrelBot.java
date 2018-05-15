@@ -67,12 +67,12 @@ public class MasterSquirrelBot extends MasterSquirrel {
 
         @Override
         public XY getViewLowerLeft() {
-            return null;
+            return new XY(getPosition().getX()-15,getPosition().getY()+15);
         }
 
         @Override
         public XY getViewUpperRight() {
-            return null;
+            return new XY(getPosition().getX()+15,getPosition().getY()-15);
         }
 
         @Override
