@@ -120,7 +120,7 @@ public final class XY {
         return new XY((target.getX()-loc.getX()), (target.getY() - loc.getY()));
     }
 
-    public static double distanceToTarget(XY vector){
+    public static double getVectorLength(XY vector){
         double x = vector.getX();
         double y = vector.getY();
 

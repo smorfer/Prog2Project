@@ -97,5 +97,11 @@ public class MasterSquirrelBot extends MasterSquirrel {
         public int getEnergy() {
             return MasterSquirrelBot.this.getEnergy();
         }
+
+        @Override
+        public void implode(int impactRadius)
+        {
+            System.out.println("Lululu!");
+        }
     }
 }
