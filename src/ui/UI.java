@@ -11,4 +11,5 @@ public interface UI {
 
     public void message (String message);
 
+
 }

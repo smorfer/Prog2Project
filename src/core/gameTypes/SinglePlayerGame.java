@@ -50,7 +50,8 @@ public class SinglePlayerGame extends Game{
             }
         }, 0, 1000/FPS);
 
-        timer1.scheduleAtFixedRate(new TimerTask() {
+        timer1.scheduleAtFixedRate(
+                new TimerTask() {
             @Override
             public void run() {
                 processInput();
