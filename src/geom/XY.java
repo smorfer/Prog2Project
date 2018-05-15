@@ -52,10 +52,7 @@ public final class XY {
 
     @Override
     public String toString() {
-        return "XY{" +
-                "X=" + X +
-                ", Y=" + Y +
-                '}';
+        return "XY{" + X + "|" + Y + "}";
     }
 
     public static int getRandomNumber(){

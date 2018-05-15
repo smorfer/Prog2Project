@@ -12,7 +12,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class SinglePlayerGame extends Game{
-    MasterSquirrel player;
+    private MasterSquirrel player;
     public SinglePlayerGame(State state, UI ui, Board board) {
         super(state, ui, board);
         player = new HandOperatedMasterSquirrel(200, board.getFreePosition());

@@ -7,6 +7,7 @@ import botapi.ControllerContext;
 import core.EntityContext;
 import core.EntityType;
 import core.botImpl.BotControllerFactoryImpl;
+import core.logging.ProxyLoggerFactory;
 import entities.Entity;
 import entities.squirrels.MasterSquirrel.MasterSquirrel;
 import entities.squirrels.MiniSquirrel.MiniSquirrel;
@@ -18,7 +19,7 @@ public class MasterSquirrelBot extends MasterSquirrel {
 
     private final BotControllerFactory botControllerFactory = new BotControllerFactoryImpl();
     private final BotController masterBotController = botControllerFactory.createMasterBotController();
-    private ControllerContextImpl controllerContext;
+    private ControllerContext controllerContext;
 
 
 
@@ -28,7 +29,8 @@ public class MasterSquirrelBot extends MasterSquirrel {
 
     public ControllerContext getControllerContext(EntityContext entityContext){
         if(controllerContext == null){
-            this.controllerContext = new ControllerContextImpl(entityContext);
+            ControllerContext controllerContext = new ControllerContextImpl(entityContext);
+            this.controllerContext = (ControllerContext)ProxyLoggerFactory.getProxy(controllerContext, this.getClass().getSimpleName());
         }
 
         return controllerContext;
