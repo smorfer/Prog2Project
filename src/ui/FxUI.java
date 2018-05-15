@@ -75,6 +75,8 @@ public class FxUI extends Scene implements UI {
                 case ESCAPE:
                     System.exit(0);
                     nextCommand = new Command(GameCommandTypes.EXIT);
+
+
                     break;
                 case H:
                     nextCommand = new Command(GameCommandTypes.HELP);
