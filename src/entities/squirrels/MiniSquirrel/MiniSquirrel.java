@@ -3,6 +3,7 @@ package entities.squirrels.MiniSquirrel;
 import core.EntityContext;
 import entities.squirrels.Squirrel;
 import geom.XY;
+import geom.XYSupport;
 
 public class MiniSquirrel extends Squirrel {
 
@@ -27,7 +28,7 @@ public class MiniSquirrel extends Squirrel {
 
 
     private XY getDirection() {
-        return XY.inputToDirection(XY.getRandomNumber());
+        return XYSupport.inputToDirection(XYSupport.getRandomNumber());
     }
 
     public int getMasterID() {

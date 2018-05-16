@@ -49,8 +49,7 @@ public abstract class Entity {
         return this.getClass().getSimpleName() + " {" +
                 "ID=" + ID +
                 ", energy=" + energy +
-                ", position=" + position.toString() +
-                " Distance to Origin: " + XY.getVectorLength(XY.vectorToTarget(XY.ORIGIN, position)) +"}";
+                ", position=" + position.toString() +"}";
     }
 
 

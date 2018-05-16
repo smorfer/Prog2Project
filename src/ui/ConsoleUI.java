@@ -14,9 +14,9 @@ public class ConsoleUI implements UI {
     @Override
     public void render(BoardView view) {
         String rets = "\n";
-        for (int height = 0; height < view.getSize().getY(); height++)
+        for (int height = 0; height < view.getSize().y; height++)
         {
-            for(int width = 0; width < view.getSize().getX(); width++)
+            for(int width = 0; width < view.getSize().x; width++)
             {
                 EntityType entityType = view.getEntityType(width,height);
                 switch (entityType)

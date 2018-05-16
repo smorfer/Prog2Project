@@ -122,7 +122,7 @@ public class Board {
                 if (e == null) continue;
 
                 XY location = e.getPosition();
-                data[location.getX()][location.getY()] = e;
+                data[location.x][location.y] = e;
             }
             flattenedBoard = new FlattenedBoard(data, entitySet, this);
         }

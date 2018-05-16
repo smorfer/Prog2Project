@@ -3,6 +3,7 @@ package core.botImpl;
 import botapi.BotController;
 import botapi.ControllerContext;
 import geom.XY;
+import geom.XYSupport;
 
 import java.util.Random;
 
@@ -14,7 +15,7 @@ public class MiniBotController implements BotController {
     @Override
     public void nextStep(ControllerContext view) {
 
-        view.move(XY.inputToDirection(XY.getRandomNumber()));
+        view.move(XYSupport.inputToDirection(XYSupport.getRandomNumber()));
         counter++;
 
         if(counter >= 20){

@@ -67,17 +67,17 @@ public class MasterSquirrelBot extends MasterSquirrel {
 
         @Override
         public XY getViewLowerLeft() {
-            return new XY(getPosition().getX()-15,getPosition().getY()+15);
+            return new XY(getPosition().x-15,getPosition().y+15);
         }
 
         @Override
         public XY getViewUpperRight() {
-            return new XY(getPosition().getX()+15,getPosition().getY()-15);
+            return new XY(getPosition().x+15,getPosition().y-15);
         }
 
         @Override
         public EntityType getEntityAt(XY xy) {
-            Entity entity = this.entityContext.getEntityAt(xy.getX(), xy.getY());
+            Entity entity = this.entityContext.getEntityAt(xy.x, xy.y);
             return this.entityContext.getEntityType(entity);
         }
 

@@ -3,6 +3,7 @@ package entities.beasts;
 import core.EntityContext;
 import entities.squirrels.Squirrel;
 import geom.XY;
+import geom.XYSupport;
 
 public class BeastSimpleBot {
 
@@ -11,13 +12,13 @@ public class BeastSimpleBot {
     public XY getDirection(EntityContext entityContext, XY currentLocation){
 
         XY target = getNearestSquirrel(entityContext, currentLocation);
-        XY vectorToTarget = XY.vectorToTarget(currentLocation, target);
+        XY vectorToTarget = XYSupport.vectorToTarget(currentLocation, target);
 
-        if(target != null && XY.getVectorLength(vectorToTarget) <= 6f){
-            return XY.normalize(vectorToTarget);
+        if(vectorToTarget.length() <= 6f){
+            return XYSupport.normalize(vectorToTarget);
         }
 
-        return XY.inputToDirection(XY.getRandomNumber());
+        return XYSupport.inputToDirection(XYSupport.getRandomNumber());
     }
 
     public XY getNearestSquirrel(EntityContext entityContext, XY currentLocation){

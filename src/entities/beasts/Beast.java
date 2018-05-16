@@ -18,7 +18,7 @@ public abstract class Beast extends Character{
 
     public void move(XY direction){
         if(canMove()){
-            this.setPosition(new XY(getPosition(), direction));
+            this.setPosition(getPosition().plus(direction));
             moveCounter = 0;
 
         }

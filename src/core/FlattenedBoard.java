@@ -45,8 +45,8 @@ public class FlattenedBoard implements EntityContext, BoardView{
     @Override
     public void tryMove(MasterSquirrel masterSquirrel, XY direction) {
         logger.log(Level.INFO, "MasterSquirrel " + masterSquirrel.getID() + " tries to move in direction " + direction.toString());
-        XY newLocation = new XY(masterSquirrel.getPosition(), direction);
-        Entity targetEntity = entities[newLocation.getX()][newLocation.getY()];
+        XY newLocation = masterSquirrel.getPosition().plus(direction);
+        Entity targetEntity = entities[newLocation.x][newLocation.y];
 
         if(squirrelCollision(masterSquirrel, direction, targetEntity)) return;
 
@@ -61,8 +61,8 @@ public class FlattenedBoard implements EntityContext, BoardView{
 
     @Override
     public void tryMove(MiniSquirrel miniSquirrel, XY direction) {
-        XY newLocation = new XY(miniSquirrel.getPosition(), direction);
-        Entity targetEntity = entities[newLocation.getX()][newLocation.getY()];
+        XY newLocation = miniSquirrel.getPosition().plus(direction);
+        Entity targetEntity = entities[newLocation.x][newLocation.y];
 
         if(squirrelCollision(miniSquirrel, direction, targetEntity)) return;
 
@@ -74,8 +74,8 @@ public class FlattenedBoard implements EntityContext, BoardView{
 
     @Override
     public void tryMove(GoodBeast goodBeast, XY direction) {
-        XY newLocation = new XY(goodBeast.getPosition(), direction);
-        Entity targetEntity = entities[newLocation.getX()][newLocation.getY()];
+        XY newLocation = goodBeast.getPosition().plus(direction);
+        Entity targetEntity = entities[newLocation.x][newLocation.y];
 
 
         if(targetEntity instanceof Squirrel) {
@@ -92,8 +92,8 @@ public class FlattenedBoard implements EntityContext, BoardView{
 
     @Override
     public void tryMove(BadBeast badBeast, XY direction) {
-        XY newLocation = new XY(badBeast.getPosition(), direction);
-        Entity targetEntity = entities[newLocation.getX()][newLocation.getY()];
+        XY newLocation = badBeast.getPosition().plus(direction);
+        Entity targetEntity = entities[newLocation.x][newLocation.y];
 
         if(targetEntity == null){
                 moveEntity(badBeast, direction);
@@ -125,9 +125,7 @@ public class FlattenedBoard implements EntityContext, BoardView{
             return true;
         } else if(targetEntity instanceof BadBeast){
             logger.log(Level.INFO, "Squirrel " + squirrel.getID() + " tries to attack BadBeast " + targetEntity.getID());
-            if (XY.getVectorLength(XY.vectorToTarget(squirrel.getPosition(), targetEntity.getPosition())) <= 1f) { // Preventing "long range"
-                squirrel.hit(this, (BadBeast)targetEntity);
-            }
+            squirrel.hit(this, (BadBeast)targetEntity);
             // do bad beast collision
             return true;
         } else if(targetEntity instanceof Wall){
@@ -142,11 +140,11 @@ public class FlattenedBoard implements EntityContext, BoardView{
     }
 
     public void moveEntity(Entity entity, XY direction){
-        entities[entity.getPosition().getX()][entity.getPosition().getY()] = null;
+        entities[entity.getPosition().x][entity.getPosition().y] = null;
 
         entity.move(direction);
 
-        entities[entity.getPosition().getX()][entity.getPosition().getY()] = entity;
+        entities[entity.getPosition().x][entity.getPosition().y] = entity;
 
 
 
@@ -159,8 +157,13 @@ public class FlattenedBoard implements EntityContext, BoardView{
 
         for(Entity e : entitySet.getEntities()){
             if(e instanceof MasterSquirrel){
-                distance = XY.getVectorLength(location) < distance ? XY.getVectorLength(location) : distance;
-                nearest = (Squirrel)e;
+                double newDistance = e.getPosition().distanceFrom(location);
+
+                if(newDistance < distance){
+                    nearest = (Squirrel)e;
+                    distance = newDistance;
+                }
+
             }
         }
 
@@ -178,15 +181,15 @@ public class FlattenedBoard implements EntityContext, BoardView{
     public void killAndReplace(Entity entity) {
         XY newPos = board.getFreePosition();
 
-        entities[entity.getPosition().getX()][entity.getPosition().getY()] = null;
+        entities[entity.getPosition().x][entity.getPosition().y] = null;
 
         entity.setPosition(newPos);
-        entities[entity.getPosition().getX()][entity.getPosition().getY()] = entity;
+        entities[entity.getPosition().x][entity.getPosition().y] = entity;
 
     }
 
     public int spawnMiniSquirrel(int energy,MiniSquirrel miniSquirrel){
-        if(this.getEntityType(miniSquirrel.getPosition().getX(), miniSquirrel.getPosition().getY()) != EntityType.NONE){
+        if(this.getEntityType(miniSquirrel.getPosition().x, miniSquirrel.getPosition().y) != EntityType.NONE){
             return 0;
         }
 
@@ -197,7 +200,7 @@ public class FlattenedBoard implements EntityContext, BoardView{
     @Override
     public void kill(Entity entity) {
         entitySet.removeEntity(entity.getID());
-        entities[entity.getPosition().getX()][entity.getPosition().getY()] = null;
+        entities[entity.getPosition().x][entity.getPosition().y] = null;
     }
 
     public EntitySet getEntitySet() {
@@ -218,15 +221,16 @@ public class FlattenedBoard implements EntityContext, BoardView{
         int collectedEnergy = 0;
         double impactArea = impactRadius * impactRadius * Math.PI;
 
-        for (int y = position.getY()-impactRadius; y <= position.getY()+impactRadius; y++){
-            for (int x = position.getX()-impactRadius; x <= position.getX()+impactRadius; x++){
+        for (int y = position.y-impactRadius; y <= position.y+impactRadius; y++){
+            for (int x = position.x-impactRadius; x <= position.x+impactRadius; x++){
                 Entity temp = getEntityAt(x,y);
 
-                if(temp == null || temp instanceof Wall || temp.getID() == squirrel.getID() || XY.getVectorLength(XY.vectorToTarget(squirrel.getPosition(),temp.getPosition())) > impactRadius) {
+                if(temp == null || temp instanceof Wall || temp.getID() == squirrel.getID() || squirrel.getPosition().distanceFrom(temp.getPosition()) > impactRadius) {
+                    //
                     continue;
                 }
 
-                double energyLoss = 200 * (squirrel.getEnergy() / impactArea) * (1-(XY.getVectorLength(XY.vectorToTarget(squirrel.getPosition(), temp.getPosition())))/impactRadius);
+                double energyLoss = 200 * (squirrel.getEnergy() / impactArea) * (1-squirrel.getPosition().distanceFrom(temp.getPosition())/impactRadius);
 
                 collectedEnergy += implosionEffect(squirrel, temp, energyLoss);
             }

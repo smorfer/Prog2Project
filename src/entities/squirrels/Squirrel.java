@@ -58,8 +58,7 @@ public abstract class Squirrel extends Character {
         if(isFrozen())
             return;
 
-        XY loc = new XY(getPosition(), direction);
-        this.setPosition(new XY(getPosition(), direction));
+        this.setPosition(getPosition().plus(direction));
     }
 
 

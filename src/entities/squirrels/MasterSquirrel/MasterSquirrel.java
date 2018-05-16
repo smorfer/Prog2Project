@@ -7,6 +7,7 @@ import entities.squirrelBots.MiniSquirrelBot;
 import entities.squirrels.MiniSquirrel.MiniSquirrel;
 import entities.squirrels.Squirrel;
 import geom.XY;
+import geom.XYSupport;
 import ui.MoveCommand;
 
 public abstract class MasterSquirrel extends Squirrel {
@@ -24,8 +25,8 @@ public abstract class MasterSquirrel extends Squirrel {
             this.spawnMiniSquirrel(entityContext, 200);
         }
 
-        previousLocation = new XY(this.getPosition());
-        entityContext.tryMove(this, XY.commandToMove(moveCommand));
+        previousLocation = this.getPosition();
+        entityContext.tryMove(this, XYSupport.commandToMove(moveCommand));
 
 
     }

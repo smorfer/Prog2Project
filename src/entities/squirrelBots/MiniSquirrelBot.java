@@ -46,12 +46,12 @@ public class MiniSquirrelBot extends MiniSquirrel{
 
         @Override
         public XY getViewLowerLeft() {
-            return new XY(getPosition().getX()-10,getPosition().getY()+10);
+            return new XY(getPosition().x-10,getPosition().y+10);
         }
 
         @Override
         public XY getViewUpperRight() {
-            return new XY(getPosition().getX()+10,getPosition().getY()-10);
+            return new XY(getPosition().x+10,getPosition().y-10);
         }
 
         @Override

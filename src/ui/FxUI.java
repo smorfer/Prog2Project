@@ -121,8 +121,8 @@ public class FxUI extends Scene implements UI {
         gc.clearRect(0, 0, boardCanvas.getWidth(), boardCanvas.getHeight());
         XY size = view.getSize();
 
-        for(int i = 0, a = 0; i < size.getY() * CELL_SIZE; i += CELL_SIZE, a++) {
-            for(int j = 0, b = 0; j < size.getX() * CELL_SIZE; j += CELL_SIZE, b++) {
+        for(int i = 0, a = 0; i < size.y * CELL_SIZE; i += CELL_SIZE, a++) {
+            for(int j = 0, b = 0; j < size.x * CELL_SIZE; j += CELL_SIZE, b++) {
                 switch(view.getEntityType(b, a)) {
                     case WALL:
                         gc.setFill(Color.DARKSLATEGRAY);
