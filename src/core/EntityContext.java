@@ -32,6 +32,7 @@ public interface EntityContext {
 
     int spawnMiniSquirrel(int energy,MiniSquirrel miniSquirrel);
 
+    void implodus(MiniSquirrel squirrel, int impactRadius);
 
 }
 

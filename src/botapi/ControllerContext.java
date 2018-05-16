@@ -10,4 +10,5 @@ public interface ControllerContext {
     public void move(XY direction);
     public void spawnMiniBot(int energy); //TODO: MiniSpawning!
     public int getEnergy();
+    public void implode(int impactRadius);
 }

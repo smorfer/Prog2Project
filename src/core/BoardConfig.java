@@ -1,13 +1,13 @@
 package core;
 
 public class BoardConfig {
-     private static final int SIZE = 30;
-     static final int BADBEAST_QUANTITY = 2;
-     static final int GOODBEAST_QUANTITY = 3;
-     static final int BADPLANT_QUANTITY = 3;
-     static final int GOODPLANT_QUANTITY = 3;
+     private static final int SIZE = 60;
+     static final int BADBEAST_QUANTITY = 10;
+     static final int GOODBEAST_QUANTITY = 15;
+     static final int BADPLANT_QUANTITY = 20;
+     static final int GOODPLANT_QUANTITY = 15;
      static final int BORDER = SIZE*4 - 4;
-     static final int WALL_QUANTITY = 2; //Ignoring borders
+     static final int WALL_QUANTITY = 30; //Ignoring borders
      static final int MASTERSQUIRREL_QUANTITY = 1;
      static final int MINISQUIRREL_QUANTITY = 8;
      static final int ENTITY_QUANTITY = BADBEAST_QUANTITY +

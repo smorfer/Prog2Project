@@ -1,7 +1,6 @@
 package entities.beasts;
 
 import core.EntityContext;
-import entities.Entity;
 import entities.squirrels.Squirrel;
 import geom.XY;
 
@@ -14,7 +13,7 @@ public class BeastSimpleBot {
         XY target = getNearestSquirrel(entityContext, currentLocation);
         XY vectorToTarget = XY.vectorToTarget(currentLocation, target);
 
-        if(target != null && XY.distanceToTarget(vectorToTarget) <= 6f){
+        if(target != null && XY.getVectorLength(vectorToTarget) <= 6f){
             return XY.normalize(vectorToTarget);
         }
 

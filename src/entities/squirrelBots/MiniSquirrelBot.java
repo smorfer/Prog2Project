@@ -73,6 +73,12 @@ public class MiniSquirrelBot extends MiniSquirrel{
         public int getEnergy() {
             return 0;
         }
+
+        @Override
+        public void implode(int impactRadius)
+        {
+            entityContext.implodus(MiniSquirrelBot.this, impactRadius);
+        }
     }
 
 }

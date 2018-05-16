@@ -5,6 +5,7 @@ import entities.EntitySet;
 import entities.Wall;
 import entities.beasts.BadBeast;
 import entities.beasts.GoodBeast;
+import entities.plants.BadPlant;
 import entities.plants.Plant;
 import entities.squirrels.MasterSquirrel.MasterSquirrel;
 import entities.squirrels.MiniSquirrel.MiniSquirrel;
@@ -124,7 +125,7 @@ public class FlattenedBoard implements EntityContext, BoardView{
             return true;
         } else if(targetEntity instanceof BadBeast){
             logger.log(Level.INFO, "Squirrel " + squirrel.getID() + " tries to attack BadBeast " + targetEntity.getID());
-            if (XY.distanceToTarget(XY.vectorToTarget(squirrel.getPosition(), targetEntity.getPosition())) <= 1f) { // Preventing "long range"
+            if (XY.getVectorLength(XY.vectorToTarget(squirrel.getPosition(), targetEntity.getPosition())) <= 1f) { // Preventing "long range"
                 squirrel.hit(this, (BadBeast)targetEntity);
             }
             // do bad beast collision
@@ -158,7 +159,7 @@ public class FlattenedBoard implements EntityContext, BoardView{
 
         for(Entity e : entitySet.getEntities()){
             if(e instanceof MasterSquirrel){
-                distance = XY.distanceToTarget(location) < distance ? XY.distanceToTarget(location) : distance;
+                distance = XY.getVectorLength(location) < distance ? XY.getVectorLength(location) : distance;
                 nearest = (Squirrel)e;
             }
         }
@@ -207,4 +208,81 @@ public class FlattenedBoard implements EntityContext, BoardView{
     public EntityType getEntityType(Entity entity) {
         return null;
     }
+
+    @Override
+    public void implodus(MiniSquirrel squirrel, int impactRadius)
+    {
+        XY position = squirrel.getPosition();
+        int collectedEnergy = 0;
+        double impactArea = impactRadius * impactRadius * Math.PI;
+
+        for (int y = position.getY()-impactRadius; y <= position.getY()+impactRadius; y++){
+            for (int x = position.getX()-impactRadius; x <= position.getX()+impactRadius; x++){
+                Entity temp = getEntityAt(x,y);
+
+                if(temp == null || temp instanceof Wall || temp.getID() == squirrel.getID() || XY.getVectorLength(XY.vectorToTarget(squirrel.getPosition(),temp.getPosition())) > impactRadius) {
+                    continue;
+                }
+
+                double energyLoss = 200 * (squirrel.getEnergy() / impactArea) * (1-(XY.getVectorLength(XY.vectorToTarget(squirrel.getPosition(), temp.getPosition())))/impactRadius);
+
+                collectedEnergy += implosionEffect(squirrel, temp, energyLoss);
+            }
+
+
+        }
+
+        getEntitySet().getEntity(squirrel.getMasterID()).updateEnergy(collectedEnergy);
+        kill(squirrel);
+    }
+
+    public int implosionEffect(MiniSquirrel squirrel, Entity target, double energyLoss){
+        //TODO: Implosion Effect
+
+        EntityType type = EntityType.getEntityType(target);
+
+        switch(type){
+            case MASTER_SQUIRREL:
+                if(target.getID() != squirrel.getMasterID()){
+                    target.updateEnergy(-(int)Math.round(energyLoss));
+                    return (int)Math.round(energyLoss);
+                }
+                return 0;
+            case MINI_SQUIRREL:
+                if(((MiniSquirrel)target).getMasterID() == squirrel.getMasterID()){
+                    return 0;
+                }
+
+                if(energyLoss > target.getEnergy()){
+                    int energy = target.getEnergy();
+                    this.kill(target);
+                    return energy;
+                } else {
+                    target.updateEnergy((int)Math.round(-energyLoss));
+                    return (int)Math.round(energyLoss);
+                }
+            case GOOD_BEAST:
+            case GOOD_PLANT:
+                if(energyLoss > target.getEnergy()){
+                    int energy = target.getEnergy();
+                    this.killAndReplace(target);
+                    return energy;
+                } else {
+                    target.updateEnergy((int)Math.round(-energyLoss));
+                    return (int)Math.round(energyLoss);
+                }
+            case BAD_BEAST:
+            case BAD_PLANT:
+                if (energyLoss > Math.abs(target.getEnergy())) {
+                    killAndReplace(target); //TODO: nachfrageb
+                } else {
+                    target.updateEnergy((int)Math.round(energyLoss));
+                }
+                return 0;
+            default:
+                return 0;
+
+        }
+    }
+
 }
