@@ -212,6 +212,8 @@ public class FlattenedBoard implements EntityContext, BoardView{
     @Override
     public void implodus(MiniSquirrel squirrel, int impactRadius)
     {
+
+        logger.log(Level.INFO, "MiniSquirrel " + squirrel.getID() + " tries to implode!");
         XY position = squirrel.getPosition();
         int collectedEnergy = 0;
         double impactArea = impactRadius * impactRadius * Math.PI;
@@ -237,7 +239,7 @@ public class FlattenedBoard implements EntityContext, BoardView{
     }
 
     public int implosionEffect(MiniSquirrel squirrel, Entity target, double energyLoss){
-        //TODO: Implosion Effect
+
 
         EntityType type = EntityType.getEntityType(target);
 
@@ -274,7 +276,7 @@ public class FlattenedBoard implements EntityContext, BoardView{
             case BAD_BEAST:
             case BAD_PLANT:
                 if (energyLoss > Math.abs(target.getEnergy())) {
-                    killAndReplace(target); //TODO: nachfrageb
+                    killAndReplace(target);
                 } else {
                     target.updateEnergy((int)Math.round(energyLoss));
                 }

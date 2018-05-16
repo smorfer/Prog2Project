@@ -101,7 +101,7 @@ public class MasterSquirrelBot extends MasterSquirrel {
         @Override
         public void implode(int impactRadius)
         {
-            System.out.println("Lululu!");
+
         }
     }
 }

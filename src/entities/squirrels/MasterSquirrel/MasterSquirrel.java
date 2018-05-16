@@ -3,6 +3,7 @@ package entities.squirrels.MasterSquirrel;
 import core.EntityContext;
 import entities.beasts.GoodBeast;
 import entities.plants.Plant;
+import entities.squirrelBots.MiniSquirrelBot;
 import entities.squirrels.MiniSquirrel.MiniSquirrel;
 import entities.squirrels.Squirrel;
 import geom.XY;
@@ -35,9 +36,9 @@ public abstract class MasterSquirrel extends Squirrel {
         if(this.getEnergy() == 1) return;
 
         if(this.getEnergy() - energy >= 1){
-            this.updateEnergy(entityContext.spawnMiniSquirrel(energy, new MiniSquirrel(this.getPreviousLocation(), this.getID())));
+            this.updateEnergy(entityContext.spawnMiniSquirrel(energy, new MiniSquirrelBot(this.getPreviousLocation(), this.getID())));
         } else {
-            this.updateEnergy(entityContext.spawnMiniSquirrel(this.getEnergy() - 1 , new MiniSquirrel(this.getPreviousLocation(), this.getID())));
+            this.updateEnergy(entityContext.spawnMiniSquirrel(this.getEnergy() - 1 , new MiniSquirrelBot(this.getPreviousLocation(), this.getID())));
         }
 
     }

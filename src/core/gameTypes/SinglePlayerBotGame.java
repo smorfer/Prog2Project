@@ -10,9 +10,9 @@ import ui.UI;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class BotGame extends Game{
+public class SinglePlayerBotGame extends Game{
     MasterSquirrel bot;
-    public BotGame(State state, UI ui, Board board) {
+    public SinglePlayerBotGame(State state, UI ui, Board board) {
         super(state, ui, board);
         bot = new MasterSquirrelBot(board.getFreePosition());
         board.getData().getEntitySet().addEntity(bot);
@@ -33,7 +33,7 @@ public class BotGame extends Game{
         timer1.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                BotGame.super.board.nextStep(MoveCommand.ORIGIN);
+                SinglePlayerBotGame.super.board.nextStep(MoveCommand.ORIGIN);
             }
         }, 0, 1000/REFRESH_RATE);
     }
