@@ -213,6 +213,7 @@ public class FlattenedBoard implements EntityContext, BoardView{
     }
 
     @Override
+    @Deprecated
     public EntityType getEntityType(Entity entity) {
         return null;
     }

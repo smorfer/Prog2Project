@@ -8,7 +8,7 @@ import geom.XYSupport;
 
 public class MiniSquirrel extends Squirrel {
 
-    private static final int INIT_ENERGY = 200;
+    private static final int INIT_ENERGY = 100;
     private MasterSquirrel masterSquirrel;
 
     public MiniSquirrel( XY position, MasterSquirrel masterSquirrel) {

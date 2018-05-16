@@ -72,7 +72,7 @@ public class MasterSquirrelBot extends MasterSquirrel {
 
         @Override
         public XY locate() {
-            return null;
+            return MasterSquirrelBot.this.getPosition();
         }
 
         @Override
@@ -94,9 +94,14 @@ public class MasterSquirrelBot extends MasterSquirrel {
         }
 
         @Override
-        public void spawnMiniBot(XY direction, int energy) {
+        public void spawnMiniBot(XY location, int energy) {
+
+            if(entityContext.getEntityAt(location.x, location.y) != null){
+                return;
+            }
+
             try {
-                MiniSquirrel ms = spawnMiniSquirrel(MasterSquirrelBot.this.getPosition().plus(direction), energy);
+                MiniSquirrel ms = spawnMiniSquirrel(location, energy);
                 MasterSquirrelBot.this.updateEnergy(-energy);
                 entityContext.addEntity(ms);
             } catch (NotEnoughEnergyException e) {

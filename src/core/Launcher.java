@@ -12,7 +12,7 @@ import ui.FxUI;
 
 public class Launcher extends Application {
     private boolean fxMode = true;
-    private boolean botMode = false;
+    private boolean botMode = true;
 
     public static void main(String[] args) {
         Application.launch(args);

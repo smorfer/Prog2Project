@@ -12,7 +12,7 @@ import geom.XYSupport;
 import ui.MoveCommand;
 
 public abstract class MasterSquirrel extends Squirrel {
-    private static final int INIT_ENERGY = 1000;
+    private static final int INIT_ENERGY = 2000;
 
     public XY previousLocation = this.getPosition();
     public MasterSquirrel(XY position) {

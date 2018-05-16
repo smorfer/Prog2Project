@@ -15,7 +15,7 @@ public class MasterBotController implements BotController {
         counter++;
 
         if(counter >= 6){
-            view.spawnMiniBot(new XY(4,4), 200);
+            view.spawnMiniBot(view.locate().plus(XYSupport.inputToDirection(XYSupport.getRandomNumber())), 200);
             counter = 0;
         }
     }
