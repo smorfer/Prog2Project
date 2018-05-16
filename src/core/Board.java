@@ -130,7 +130,7 @@ public class Board {
         return flattenedBoard;
     }
 
-    //TODO: Think about the location of this method
+
     public void spawnMiniSquirrel(Object energy){
         MasterSquirrel squirrel;
 

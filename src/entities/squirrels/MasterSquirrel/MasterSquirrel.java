@@ -26,7 +26,6 @@ public abstract class MasterSquirrel extends Squirrel {
 
         previousLocation = new XY(this.getPosition());
         entityContext.tryMove(this, XY.commandToMove(moveCommand));
-        System.out.println(this.toString());
 
 
     }
