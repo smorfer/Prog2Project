@@ -16,6 +16,7 @@ public class SinglePlayerBotGame extends Game{
         super(state, ui, board);
         bot = new MasterSquirrelBot(board.getFreePosition());
         board.getData().getEntitySet().addEntity(bot);
+        board.setMaster(bot);
     }
 
     @Override

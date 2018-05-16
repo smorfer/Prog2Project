@@ -1,11 +1,11 @@
-package ui.CommandHandler;
+package exceptions;
 
 public class ScanException extends RuntimeException{
-    ScanException(String message){
+    public ScanException(String message){
         super(message);
     }
 
-    ScanException(){
+    public ScanException(){
         super();
     }
 

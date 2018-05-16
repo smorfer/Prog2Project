@@ -6,6 +6,7 @@ import entities.plants.Plant;
 import entities.squirrelBots.MiniSquirrelBot;
 import entities.squirrels.MiniSquirrel.MiniSquirrel;
 import entities.squirrels.Squirrel;
+import exceptions.NotEnoughEnergyException;
 import geom.XY;
 import geom.XYSupport;
 import ui.MoveCommand;
@@ -21,9 +22,6 @@ public abstract class MasterSquirrel extends Squirrel {
 
 
     public void doNextStep(EntityContext entityContext, MoveCommand moveCommand){
-        if(moveCommand == MoveCommand.SPAWN_MINI){
-            this.spawnMiniSquirrel(entityContext, 200);
-        }
 
         previousLocation = this.getPosition();
         entityContext.tryMove(this, XYSupport.commandToMove(moveCommand));
@@ -31,16 +29,18 @@ public abstract class MasterSquirrel extends Squirrel {
 
     }
 
-    public void spawnMiniSquirrel(EntityContext entityContext, int energy){
+    public MiniSquirrel spawnMiniSquirrel(XY pos, int energy) throws NotEnoughEnergyException{
 
-        if(this.getEnergy() == 1) return;
+        if(this.getEnergy() < energy)
+            throw new NotEnoughEnergyException("Not enough energy to spawn a MiniSquirrel");
 
-        if(this.getEnergy() - energy >= 1){
-            this.updateEnergy(entityContext.spawnMiniSquirrel(energy, new MiniSquirrelBot(this.getPreviousLocation(), this.getID())));
-        } else {
-            this.updateEnergy(entityContext.spawnMiniSquirrel(this.getEnergy() - 1 , new MiniSquirrelBot(this.getPreviousLocation(), this.getID())));
+        if(this.getEnergy() - energy >= 1) {
+            this.updateEnergy(-energy);
+            return new MiniSquirrelBot(pos, this);
         }
 
+
+        return null;
     }
 
     public void hit(EntityContext entityContext, MiniSquirrel miniSquirrel){

@@ -55,7 +55,7 @@ public class CommandExecutor {
     }
 
     public void spawnMiniSquirrel(Object energy){
-        board.spawnMiniSquirrel(energy);
+        board.spawnMiniSquirrel(board.getMaster(), Integer.parseInt((String)energy));
     }
 
     public void getMasterEnergy(){

@@ -15,7 +15,7 @@ public class MiniBotController implements BotController {
     @Override
     public void nextStep(ControllerContext view) {
 
-        view.move(XYSupport.inputToDirection(XYSupport.getRandomNumber()));
+        //view.move(XYSupport.inputToDirection(XYSupport.getRandomNumber()));
         counter++;
 
         if(counter >= 20){

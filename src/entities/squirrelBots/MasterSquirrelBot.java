@@ -6,14 +6,19 @@ import botapi.BotControllerFactory;
 import botapi.ControllerContext;
 import core.EntityContext;
 import core.EntityType;
+import core.FlattenedBoard;
 import core.botImpl.BotControllerFactoryImpl;
 import core.logging.ProxyLoggerFactory;
 import entities.Entity;
 import entities.squirrels.MasterSquirrel.MasterSquirrel;
 import entities.squirrels.MiniSquirrel.MiniSquirrel;
+import exceptions.NotEnoughEnergyException;
+import exceptions.WrongMethodUsageException;
 import geom.XY;
 
 import java.net.IDN;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MasterSquirrelBot extends MasterSquirrel {
 
@@ -21,6 +26,7 @@ public class MasterSquirrelBot extends MasterSquirrel {
     private final BotController masterBotController = botControllerFactory.createMasterBotController();
     private ControllerContext controllerContext;
 
+    Logger logger = Logger.getLogger(this.getClass().getName());
 
 
     public MasterSquirrelBot(XY position) {
@@ -43,18 +49,7 @@ public class MasterSquirrelBot extends MasterSquirrel {
         }
     }
 
-    @Override
-    public void spawnMiniSquirrel(EntityContext entityContext, int energy){
 
-        if(this.getEnergy() == 1) return;
-
-        if(this.getEnergy() - energy >= 1){
-            this.updateEnergy(entityContext.spawnMiniSquirrel(energy, new MiniSquirrelBot(this.getPreviousLocation(), this.getID())));
-        } else {
-            this.updateEnergy(entityContext.spawnMiniSquirrel(this.getEnergy() - 1 , new MiniSquirrelBot(this.getPreviousLocation(), this.getID())));
-        }
-
-    }
 
     //Inner Class:
     private class ControllerContextImpl implements ControllerContext {
@@ -76,9 +71,19 @@ public class MasterSquirrelBot extends MasterSquirrel {
         }
 
         @Override
+        public XY locate() {
+            return null;
+        }
+
+        @Override
         public EntityType getEntityAt(XY xy) {
             Entity entity = this.entityContext.getEntityAt(xy.x, xy.y);
             return this.entityContext.getEntityType(entity);
+        }
+
+        @Override
+        public boolean isMine(XY xy) {
+            return false;
         }
 
         @Override
@@ -89,8 +94,14 @@ public class MasterSquirrelBot extends MasterSquirrel {
         }
 
         @Override
-        public void spawnMiniBot(int energy) {
-            MasterSquirrelBot.this.spawnMiniSquirrel(entityContext, energy);
+        public void spawnMiniBot(XY direction, int energy) {
+            try {
+                MiniSquirrel ms = spawnMiniSquirrel(MasterSquirrelBot.this.getPosition().plus(direction), energy);
+                MasterSquirrelBot.this.updateEnergy(-energy);
+                entityContext.addEntity(ms);
+            } catch (NotEnoughEnergyException e) {
+                logger.log(Level.FINE, "Tried to spawn MiniSquirrel, NotEnoughEnergyException thrown!");
+            }
         }
 
         @Override
@@ -99,9 +110,24 @@ public class MasterSquirrelBot extends MasterSquirrel {
         }
 
         @Override
-        public void implode(int impactRadius)
-        {
-
+        public XY directionOfMaster() {
+            return null;
         }
+
+        @Override
+        public long getRemainingSteps() {
+            return 0;
+        }
+
+        @Override
+        public void implode(int impactRadius) {
+            throw new WrongMethodUsageException("Method implode called in MasterSquirrel");
+        }
+
+
+
+
+
+
     }
 }

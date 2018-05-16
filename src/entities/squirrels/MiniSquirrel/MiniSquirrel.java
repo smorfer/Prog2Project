@@ -1,18 +1,19 @@
 package entities.squirrels.MiniSquirrel;
 
 import core.EntityContext;
+import entities.squirrels.MasterSquirrel.MasterSquirrel;
 import entities.squirrels.Squirrel;
 import geom.XY;
 import geom.XYSupport;
 
 public class MiniSquirrel extends Squirrel {
 
-    private int masterID;
     private static final int INIT_ENERGY = 200;
+    private MasterSquirrel masterSquirrel;
 
-    public MiniSquirrel( XY position, int masterID) {
+    public MiniSquirrel( XY position, MasterSquirrel masterSquirrel) {
         super(INIT_ENERGY, position);
-        this.masterID = masterID;
+        this.masterSquirrel = masterSquirrel;
         //Change energy here!
     }
 
@@ -31,7 +32,11 @@ public class MiniSquirrel extends Squirrel {
         return XYSupport.inputToDirection(XYSupport.getRandomNumber());
     }
 
+    public MasterSquirrel getMasterSquirrel(){
+        return masterSquirrel;
+    }
+
     public int getMasterID() {
-        return masterID;
+        return masterSquirrel.getID();
     }
 }

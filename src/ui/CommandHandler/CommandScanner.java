@@ -1,5 +1,7 @@
 package ui.CommandHandler;
 
+import exceptions.ScanException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 

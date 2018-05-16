@@ -34,5 +34,7 @@ public interface EntityContext {
 
     void implodus(MiniSquirrel squirrel, int impactRadius);
 
+    void addEntity(Entity entity);
+
 }
 

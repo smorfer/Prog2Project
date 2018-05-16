@@ -10,15 +10,20 @@ import entities.plants.GoodPlant;
 import entities.squirrels.MasterSquirrel.HandOperatedMasterSquirrel;
 import entities.squirrels.MasterSquirrel.MasterSquirrel;
 import entities.squirrels.MiniSquirrel.MiniSquirrel;
+import exceptions.NotEnoughEnergyException;
 import geom.XY;
 import ui.MoveCommand;
 
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Board {
 
     private EntitySet entitySet;
     private FlattenedBoard flattenedBoard;
+    Logger logger = Logger.getLogger(this.getClass().getName());
+    MasterSquirrel masterSquirrel;
 
     public Board()
     {
@@ -113,6 +118,22 @@ public class Board {
         return spawn;
     }
 
+    public XY getFreePositionAroundLoc(XY pos){
+        if(this.getEntityAtPosition(new XY(pos.x - 1, pos.y)) == null) {
+            return new XY(pos.x - 1, pos.y);
+        }
+        if(this.getEntityAtPosition(new XY(pos.x - 1, pos.y)) == null) {
+            return new XY(pos.x + 1, pos.y);
+        }
+        if(this.getEntityAtPosition(new XY(pos.x - 1, pos.y)) == null) {
+            return new XY(pos.x, pos.y - 1);
+        }
+        if(this.getEntityAtPosition(new XY(pos.x - 1, pos.y)) == null) {
+            return new XY(pos.x, pos.y + 1);
+        }
+        return null;
+    }
+
     public FlattenedBoard getData(){
 
         if (flattenedBoard == null) {
@@ -131,14 +152,35 @@ public class Board {
     }
 
 
-    public void spawnMiniSquirrel(Object energy){
+    public void spawnMiniSquirrel(MasterSquirrel master, int energy){
         MasterSquirrel squirrel;
 
         for(Entity e : getData().getEntitySet().getEntities()){
             if(e instanceof MasterSquirrel){
-                ((MasterSquirrel) e).spawnMiniSquirrel(getData(), Integer.parseInt((String)energy));
+                XY spawnLoc = getFreePositionAroundLoc(master.getPosition());
+
+                if(spawnLoc == null){
+                    logger.log(Level.FINE, "No valid spawn for MiniSquirrel found!");
+                    return;
+                }
+
+                try {
+                    MiniSquirrel ms = master.spawnMiniSquirrel(spawnLoc, energy);
+                    master.updateEnergy(-energy);
+                    this.getData().addEntity(ms);
+                } catch (NotEnoughEnergyException e1) {
+                    logger.log(Level.FINE, "Tried to spawn MiniSquirrel, NotEnoughEnergyException thrown!");
+                }
             }
         }
+    }
+
+    public void setMaster(MasterSquirrel squirrel){
+        this.masterSquirrel = squirrel;
+    }
+
+    public MasterSquirrel getMaster(){
+        return this.masterSquirrel;
     }
 
 

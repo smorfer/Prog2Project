@@ -178,6 +178,11 @@ public class FlattenedBoard implements EntityContext, BoardView{
     }
 
     @Override
+    public void addEntity(Entity entity) {
+        entitySet.addEntity(entity);
+    }
+
+    @Override
     public void killAndReplace(Entity entity) {
         XY newPos = board.getFreePosition();
 
@@ -238,7 +243,7 @@ public class FlattenedBoard implements EntityContext, BoardView{
 
         }
 
-        getEntitySet().getEntity(squirrel.getMasterID()).updateEnergy(collectedEnergy);
+        squirrel.getMasterSquirrel().updateEnergy(collectedEnergy);
         kill(squirrel);
     }
 
@@ -290,5 +295,7 @@ public class FlattenedBoard implements EntityContext, BoardView{
 
         }
     }
+
+
 
 }

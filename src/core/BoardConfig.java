@@ -20,7 +20,7 @@ public class BoardConfig {
             MINISQUIRREL_QUANTITY;
 
     private static final int FPS = 30;
-    private static final int REFRESH_RATE = 5;
+    private static final int REFRESH_RATE = 2;
 
     public static int getFPS() {
         return FPS;

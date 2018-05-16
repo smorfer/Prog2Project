@@ -6,6 +6,7 @@ import botapi.ControllerContext;
 import core.EntityContext;
 import core.EntityType;
 import core.botImpl.BotControllerFactoryImpl;
+import entities.squirrels.MasterSquirrel.MasterSquirrel;
 import entities.squirrels.MiniSquirrel.MiniSquirrel;
 import geom.XY;
 
@@ -15,8 +16,8 @@ public class MiniSquirrelBot extends MiniSquirrel{
     private final BotController miniBotController = botControllerFactory.createMiniBotController();
     private ControllerContextImpl controllerContext;
 
-    public MiniSquirrelBot(XY position, int masterID) {
-        super(position, masterID);
+    public MiniSquirrelBot(XY position, MasterSquirrel masterSquirrel) {
+        super(position, masterSquirrel);
     }
 
     public ControllerContext getControllerContext(EntityContext entityContext){
@@ -55,8 +56,18 @@ public class MiniSquirrelBot extends MiniSquirrel{
         }
 
         @Override
+        public XY locate() {
+            return null;
+        }
+
+        @Override
         public EntityType getEntityAt(XY xy) {
             return null;
+        }
+
+        @Override
+        public boolean isMine(XY xy) {
+            return false;
         }
 
         @Override
@@ -65,12 +76,22 @@ public class MiniSquirrelBot extends MiniSquirrel{
         }
 
         @Override
-        public void spawnMiniBot(int energy) {
+        public void spawnMiniBot(XY direction, int energy) {
 
         }
 
         @Override
         public int getEnergy() {
+            return 0;
+        }
+
+        @Override
+        public XY directionOfMaster() {
+            return null;
+        }
+
+        @Override
+        public long getRemainingSteps() {
             return 0;
         }
 

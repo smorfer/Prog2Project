@@ -26,8 +26,8 @@ public class GameCommandProcessor {
 
         try {
             if(params.length == 1){
-
                 method = commandExecutor.getClass().getDeclaredMethod(command.getCommandType().getMethodName(), Object.class);
+
                 method.invoke(commandExecutor, params);
             } else {
                 method = commandExecutor.getClass().getDeclaredMethod(command.getCommandType().getMethodName());

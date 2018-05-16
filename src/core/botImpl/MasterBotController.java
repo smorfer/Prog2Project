@@ -2,6 +2,7 @@ package core.botImpl;
 
 import botapi.BotController;
 import botapi.ControllerContext;
+import geom.XY;
 import geom.XYSupport;
 
 public class MasterBotController implements BotController {
@@ -14,7 +15,7 @@ public class MasterBotController implements BotController {
         counter++;
 
         if(counter >= 6){
-            view.spawnMiniBot(200);
+            view.spawnMiniBot(new XY(4,4), 200);
             counter = 0;
         }
     }
