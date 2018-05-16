@@ -18,7 +18,7 @@ import ui.CommandHandler.GameCommandTypes;
 
 public class FxUI extends Scene implements UI {
 
-    private static boolean fxDebugMode = false;
+    private static boolean fxDebugMode = true;
 
     private static int CELL_SIZE = 20;
     private static Command nextCommand = null;
