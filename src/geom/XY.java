@@ -53,7 +53,7 @@ public class XY {
         return distance.length();
     }
 
-
+    @Override
     public int hashCode() {
         return 0;
     }
