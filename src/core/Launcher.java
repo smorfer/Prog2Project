@@ -28,7 +28,7 @@ public class Launcher extends Application {
 
         final Game game;
         if (fxMode) {
-            game = botMode ? new SinglePlayerBotGame(state, fxUI, board) : new SinglePlayerGame(state, fxUI, board);
+            game = botMode ? new MultiPlayerBotGame(state, fxUI, board) : new SinglePlayerGame(state, fxUI, board);
         } else {
             game = botMode ? new SinglePlayerBotGame(state, consoleUI, board) : new SinglePlayerGame(state, consoleUI, board);
         }

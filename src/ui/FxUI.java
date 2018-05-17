@@ -18,7 +18,7 @@ import ui.CommandHandler.GameCommandTypes;
 
 public class FxUI extends Scene implements UI {
 
-    private static boolean fxDebugMode = true;
+    private static boolean fxDebugMode = false;
 
     private static int CELL_SIZE = 10;
     private static Command nextCommand = null;
@@ -38,6 +38,7 @@ public class FxUI extends Scene implements UI {
         VBox top = new VBox();
         top.getChildren().add(boardCanvas);
         top.getChildren().add(statusLabel);
+        //This code belongs to Samuel Glogger and Luis Schweigard
         statusLabel.setText("0");
         final FxUI fxUI = new FxUI(top, boardCanvas, statusLabel);
         fxUI.setOnKeyPressed(value -> {

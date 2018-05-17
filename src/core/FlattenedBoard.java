@@ -25,7 +25,6 @@ public class FlattenedBoard implements EntityContext, BoardView{
     private static Logger logger = Logger.getLogger(FlattenedBoard.class.getName());
 
     FlattenedBoard(Entity[][] data, EntitySet entitySet, Board board){
-
         entities = data;
         this.entitySet = entitySet;
         this.board = board;
@@ -221,8 +220,6 @@ public class FlattenedBoard implements EntityContext, BoardView{
     @Override
     public void implodus(MiniSquirrel squirrel, int impactRadius)
     {
-
-        logger.log(Level.INFO, "MiniSquirrel " + squirrel.getID() + " tries to implode!");
         XY position = squirrel.getPosition();
         int collectedEnergy = 0;
         double impactArea = impactRadius * impactRadius * Math.PI;
@@ -232,7 +229,6 @@ public class FlattenedBoard implements EntityContext, BoardView{
                 Entity temp = getEntityAt(x,y);
 
                 if(temp == null || temp instanceof Wall || temp.getID() == squirrel.getID() || squirrel.getPosition().distanceFrom(temp.getPosition()) > impactRadius) {
-                    //
                     continue;
                 }
 
@@ -246,6 +242,8 @@ public class FlattenedBoard implements EntityContext, BoardView{
 
         squirrel.getMasterSquirrel().updateEnergy(collectedEnergy);
         kill(squirrel);
+
+        logger.log(Level.INFO, "MiniSquirrel " + squirrel.getID() + " implodes and gives " + collectedEnergy +  " energy to MasterSquirrel " + squirrel.getMasterSquirrel().getID());
     }
 
     public int implosionEffect(MiniSquirrel squirrel, Entity target, double energyLoss){

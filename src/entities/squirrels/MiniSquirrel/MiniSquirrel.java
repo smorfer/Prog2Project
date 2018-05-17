@@ -11,7 +11,7 @@ public class MiniSquirrel extends Squirrel {
     private static final int INIT_ENERGY = 100;
     private MasterSquirrel masterSquirrel;
 
-    public MiniSquirrel( XY position, MasterSquirrel masterSquirrel) {
+    public MiniSquirrel(XY position, MasterSquirrel masterSquirrel) {
         super(INIT_ENERGY, position);
         this.masterSquirrel = masterSquirrel;
         //Change energy here!
