@@ -1,6 +1,7 @@
 package geom;
 
 
+import java.util.Objects;
 import java.util.Random;
 
 public class XY {
@@ -55,7 +56,7 @@ public class XY {
 
     @Override
     public int hashCode() {
-        return 0;
+        return Objects.hash(this.x, this.y);
     }
 
     public boolean equals(Object obj) {

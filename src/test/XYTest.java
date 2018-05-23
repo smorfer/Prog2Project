@@ -64,7 +64,8 @@ public class XYTest {
 
     @Test
     public void hashCodeTest(){
-        assertEquals(0, xy1.hashCode());
+        int hash = 31*(31+xy1.x) + xy1.y;
+        assertEquals(hash, xy1.hashCode());
     }
 
 
