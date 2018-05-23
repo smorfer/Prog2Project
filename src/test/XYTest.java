@@ -3,25 +3,37 @@ package test;
 import geom.XY;
 import geom.XYSupport;
 import org.junit.*;
+import org.junit.runners.Parameterized;
+
+
 import static org.junit.Assert.*;
+
 
 public class XYTest {
 
     private XY xy1;
-
+    private XY xy2;
+    private XY xy3;
     @Before
     public void setupTest(){
         xy1 = new XY(2,2);
+        xy2 = new XY(-2,-2);
+        xy3 = new XY(0,0);
+
     }
 
     @Test
     public void testPlusTest(){
-        assertNotEquals(xy1, xy1.plus(xy1));
+        assertEquals(xy1, xy1.plus(xy3));
+        assertNotEquals(xy1, xy1.plus(xy2));
+        assertNotEquals(xy3, xy3.plus(xy1));
     }
 
     @Test
     public void testMinusTest(){
         assertNotEquals(xy1, xy1.minus(xy1));
+        assertNotEquals(xy2, xy2.minus(xy1));
+        assertEquals(xy3, xy2.minus(xy2));
     }
 
     @Test
