@@ -21,8 +21,9 @@ public class MultiPlayerBotGame extends Game{
         super(state, ui, board);
         bot1 = new MasterSquirrelBot(board.getFreePosition());
         bot2 = new MasterSquirrelBot(board.getFreePosition());
-        board.getData().getEntitySet().addEntity(bot1);
-        board.getData().getEntitySet().addEntity(bot2);
+        board.getEntitySet().add(bot1);
+        board.getEntitySet().add(bot2);
+
     }
 
 

@@ -18,7 +18,7 @@ public class SinglePlayerGame extends Game{
     public SinglePlayerGame(State state, UI ui, Board board) {
         super(state, ui, board);
         player = new HandOperatedMasterSquirrel(200, new XY(BoardConfig.getSize()/2,BoardConfig.getSize()/2));
-        board.getData().getEntitySet().addEntity(player);
+        board.getEntitySet().add(player);
         board.setMaster(player);
     }
 

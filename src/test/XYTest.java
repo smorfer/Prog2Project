@@ -41,7 +41,6 @@ public class XYTest {
         XY solution = new XY(8,8);
         assertEquals(xy1.times(4), solution);
     }
-
     @Test
     public void lengthTest(){
         double length = Math.sqrt(Math.pow(xy1.x, 2)+ Math.pow(xy1.y, 2));

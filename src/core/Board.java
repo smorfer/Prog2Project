@@ -1,7 +1,6 @@
 package core; // Diese Lösung gehört Luis Schweigard und Samuel Glogger
 
 import entities.Entity;
-import entities.EntitySet;
 import entities.Wall;
 import entities.beasts.BadBeast;
 import entities.beasts.GoodBeast;
@@ -14,20 +13,23 @@ import exceptions.NotEnoughEnergyException;
 import geom.XY;
 import ui.MoveCommand;
 
+import java.util.List;
 import java.util.Random;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Board {
 
-    private EntitySet entitySet;
+    private List<Entity> entitySet;
     private FlattenedBoard flattenedBoard;
-    Logger logger = Logger.getLogger(this.getClass().getName());
-    MasterSquirrel masterSquirrel;
+    private Logger logger = Logger.getLogger(this.getClass().getName());
+    private MasterSquirrel masterSquirrel;
 
     public Board()
     {
-        entitySet = new EntitySet(BoardConfig.ENTITY_QUANTITY);
+        
+        entitySet = new CopyOnWriteArrayList<>();
 
         int entitiesIndex = 0;
         for (int height = 1; height <= BoardConfig.getSize(); height++)
@@ -36,7 +38,7 @@ public class Board {
             {
                 if (height == 1 || width == 1 || height == BoardConfig.getSize() || width == BoardConfig.getSize())
                 {
-                    entitySet.addEntity(new Wall(new XY(width-1,height-1)));
+                    entitySet.add(new Wall(new XY(width-1,height-1)));
                 }
             }
         }
@@ -44,23 +46,23 @@ public class Board {
 
         for(int BadBeastCounter = 0; BadBeastCounter < BoardConfig.BADBEAST_QUANTITY; BadBeastCounter++)
         {
-            entitySet.addEntity(new BadBeast(getFreePosition()));
+            entitySet.add(new BadBeast(getFreePosition()));
         }
         for(int GoodBeastCounter = 0; GoodBeastCounter < BoardConfig.GOODBEAST_QUANTITY; GoodBeastCounter++)
         {
-            entitySet.addEntity(new GoodBeast(getFreePosition()));
+            entitySet.add(new GoodBeast(getFreePosition()));
         }
         for(int BadPlantCounter = 0; BadPlantCounter < BoardConfig.BADPLANT_QUANTITY; BadPlantCounter++)
         {
-            entitySet.addEntity(new BadPlant(getFreePosition()));
+            entitySet.add(new BadPlant(getFreePosition()));
         }
         for(int GoodPlantCounter = 0; GoodPlantCounter < BoardConfig.GOODPLANT_QUANTITY; GoodPlantCounter++)
         {
-            entitySet.addEntity(new GoodPlant(getFreePosition()));
+            entitySet.add(new GoodPlant(getFreePosition()));
         }
         for(int WallCounter = 0; WallCounter < BoardConfig.WALL_QUANTITY; WallCounter++)
         {
-            entitySet.addEntity(new Wall(getFreePosition()));
+            entitySet.add(new Wall(getFreePosition()));
         }
 
 
@@ -69,7 +71,7 @@ public class Board {
 
     public String toString() {
         String rets = "";
-        for (Entity e : entitySet.getEntities())
+        for (Entity e : entitySet)
         {
             if (e instanceof MasterSquirrel)
             {
@@ -84,7 +86,7 @@ public class Board {
 
     boolean isEntityAtPosition(XY pos)
     {
-        for (Entity e : entitySet.getEntities())
+        for (Entity e : entitySet)
         {
             if (e != null) {
                 if (e.getPosition().equals(pos))
@@ -97,7 +99,7 @@ public class Board {
     }
 
     public Entity getEntityAtPosition(XY location) {
-        for (Entity e : entitySet.getEntities()) {
+        for (Entity e : entitySet) {
             if (e != null) {        // This statement works!
                 if (e.getPosition().equals(location)) {     //This statement is never called
                     return e;
@@ -135,27 +137,14 @@ public class Board {
     }
 
     public FlattenedBoard getData(){
-
-        if (flattenedBoard == null) {
-            Entity[][] data = new Entity[BoardConfig.getSize()][BoardConfig.getSize()];
-
-            for (Entity e : entitySet.getEntities()) {
-                if (e == null) continue;
-
-                XY location = e.getPosition();
-                data[location.x][location.y] = e;
-            }
-            flattenedBoard = new FlattenedBoard(data, entitySet, this);
-        }
-
-        return flattenedBoard;
+        return new FlattenedBoard(this);
     }
 
 
     public void spawnMiniSquirrel(MasterSquirrel master, int energy){
         MasterSquirrel squirrel;
 
-        for(Entity e : getData().getEntitySet().getEntities()){
+        for(Entity e : entitySet){
             if(e instanceof MasterSquirrel){
                 XY spawnLoc = getFreePositionAroundLoc(master.getPosition());
 
@@ -183,6 +172,10 @@ public class Board {
         return this.masterSquirrel;
     }
 
+    public List<Entity> getEntitySet(){
+        return entitySet;
+    }
+
 
 
     public void nextStep(MoveCommand moveCommand)
@@ -190,17 +183,19 @@ public class Board {
         EntityContext data = getData();
 
         MasterSquirrel master = null;
-        for (entities.Character c : entitySet.getCharacters())
-        {
-            if(c instanceof HandOperatedMasterSquirrel){
-                ((MasterSquirrel)c).doNextStep(data, moveCommand);
+        for (Entity e : entitySet){
+
+            if(!(e instanceof entities.Character)){
                 continue;
             }
 
-            if (c != null)
-            {
-                c.nextStep(data);
+            if(e instanceof HandOperatedMasterSquirrel){
+                ((MasterSquirrel)e).doNextStep(data, moveCommand);
+                continue;
             }
+
+            e.nextStep(data);
+
         }
 
     }

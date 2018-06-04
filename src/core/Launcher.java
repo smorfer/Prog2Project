@@ -10,9 +10,11 @@ import ui.ConsoleUI;
 import ui.FxUI;
 
 
+
 public class Launcher extends Application {
     private boolean fxMode = true;
     private boolean botMode = true;
+
 
     public static void main(String[] args) {
         Application.launch(args);
@@ -41,6 +43,7 @@ public class Launcher extends Application {
 
         primaryStage.show();
 
+        System.out.println("Starting Squirrel Game");
         game.run();
 
 

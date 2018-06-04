@@ -1,17 +1,16 @@
 package core;
 
 import entities.Entity;
-import entities.EntitySet;
 import entities.Wall;
 import entities.beasts.BadBeast;
 import entities.beasts.GoodBeast;
-import entities.plants.BadPlant;
 import entities.plants.Plant;
 import entities.squirrels.MasterSquirrel.MasterSquirrel;
 import entities.squirrels.MiniSquirrel.MiniSquirrel;
 import entities.squirrels.Squirrel;
 import geom.XY;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,19 +19,27 @@ public class FlattenedBoard implements EntityContext, BoardView{
 
     //            x  y
     private Entity[][] entities;
-    private EntitySet entitySet;
     private Board board;
     private static Logger logger = Logger.getLogger(FlattenedBoard.class.getName());
 
-    FlattenedBoard(Entity[][] data, EntitySet entitySet, Board board){
-        entities = data;
-        this.entitySet = entitySet;
+    FlattenedBoard(Board board){
         this.board = board;
+
+        Entity[][] data = new Entity[BoardConfig.getSize()][BoardConfig.getSize()];
+
+        for (Entity e : board.getEntitySet()) {
+            if (e == null) continue;
+
+            XY location = e.getPosition();
+            data[location.x][location.y] = e;
+        }
+
+        entities = data;
     }
 
     @Override
     public EntityType getEntityType(int x, int y) {
-        Entity entity = entitySet.getEntityAtPosition(x,y);
+        Entity entity = board.getEntityAtPosition(new XY(x,y));
         return EntityType.getEntityType(entity);
     }
 
@@ -154,7 +161,7 @@ public class FlattenedBoard implements EntityContext, BoardView{
         double distance = Double.MAX_VALUE;
         Squirrel nearest = null;
 
-        for(Entity e : entitySet.getEntities()){
+        for(Entity e : board.getEntitySet()){
             if(e instanceof MasterSquirrel){
                 double newDistance = e.getPosition().distanceFrom(location);
 
@@ -173,12 +180,12 @@ public class FlattenedBoard implements EntityContext, BoardView{
 
     @Override
     public Entity getEntityAt(int x, int y) {
-        return this.board.getData().getEntitySet().getEntityAtPosition(x,y);
+        return this.board.getEntityAtPosition(new XY(x,y));
     }
 
     @Override
     public void addEntity(Entity entity) {
-        entitySet.addEntity(entity);
+        board.getEntitySet().add(entity);
     }
 
     @Override
@@ -197,19 +204,16 @@ public class FlattenedBoard implements EntityContext, BoardView{
             return 0;
         }
 
-        entitySet.addEntity(miniSquirrel);
+        board.getEntitySet().add(miniSquirrel);
         return -energy;
     }
 
     @Override
     public void kill(Entity entity) {
-        entitySet.removeEntity(entity.getID());
+        board.getEntitySet().remove(entity);
         entities[entity.getPosition().x][entity.getPosition().y] = null;
     }
 
-    public EntitySet getEntitySet() {
-        return entitySet;
-    }
 
     @Override
     @Deprecated
