@@ -100,8 +100,8 @@ public class Board {
 
     public Entity getEntityAtPosition(XY location) {
         for (Entity e : entitySet) {
-            if (e != null) {        // This statement works!
-                if (e.getPosition().equals(location)) {     //This statement is never called
+            if (e != null) {
+                if (e.getPosition().equals(location)) {
                     return e;
                 }
             }
