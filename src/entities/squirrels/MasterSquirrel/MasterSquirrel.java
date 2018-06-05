@@ -11,7 +11,7 @@ import geom.XY;
 import geom.XYSupport;
 import ui.MoveCommand;
 
-public abstract class MasterSquirrel extends Squirrel {
+public class MasterSquirrel extends Squirrel {
     private static final int INIT_ENERGY = 2000;
 
     public XY previousLocation = this.getPosition();
@@ -28,6 +28,9 @@ public abstract class MasterSquirrel extends Squirrel {
 
 
     }
+
+    @Override
+    public void nextStep(EntityContext entityContext) { }
 
     public MiniSquirrel spawnMiniSquirrel(XY pos, int energy) throws NotEnoughEnergyException{
 
