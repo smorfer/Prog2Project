@@ -25,18 +25,18 @@ public class Board {
     private FlattenedBoard flattenedBoard;
     private Logger logger = Logger.getLogger(this.getClass().getName());
     private MasterSquirrel masterSquirrel;
+    private BoardConfig config = new BoardConfig();
 
-    public Board()
-    {
+    public Board(){
         
         entitySet = new CopyOnWriteArrayList<>();
 
         int entitiesIndex = 0;
-        for (int height = 1; height <= BoardConfig.getSize(); height++)
+        for (int height = 1; height <= config.getSize(); height++)
         {
-            for (int width = 1; width <= BoardConfig.getSize(); width++ )
+            for (int width = 1; width <= config.getSize(); width++ )
             {
-                if (height == 1 || width == 1 || height == BoardConfig.getSize() || width == BoardConfig.getSize())
+                if (height == 1 || width == 1 || height == config.getSize() || width == config.getSize())
                 {
                     entitySet.add(new Wall(new XY(width-1,height-1)));
                 }
@@ -44,23 +44,23 @@ public class Board {
         }
 
 
-        for(int BadBeastCounter = 0; BadBeastCounter < BoardConfig.BADBEAST_QUANTITY; BadBeastCounter++)
+        for(int BadBeastCounter = 0; BadBeastCounter < config.BADBEAST_QUANTITY; BadBeastCounter++)
         {
             entitySet.add(new BadBeast(getFreePosition()));
         }
-        for(int GoodBeastCounter = 0; GoodBeastCounter < BoardConfig.GOODBEAST_QUANTITY; GoodBeastCounter++)
+        for(int GoodBeastCounter = 0; GoodBeastCounter < config.GOODBEAST_QUANTITY; GoodBeastCounter++)
         {
             entitySet.add(new GoodBeast(getFreePosition()));
         }
-        for(int BadPlantCounter = 0; BadPlantCounter < BoardConfig.BADPLANT_QUANTITY; BadPlantCounter++)
+        for(int BadPlantCounter = 0; BadPlantCounter < config.BADPLANT_QUANTITY; BadPlantCounter++)
         {
             entitySet.add(new BadPlant(getFreePosition()));
         }
-        for(int GoodPlantCounter = 0; GoodPlantCounter < BoardConfig.GOODPLANT_QUANTITY; GoodPlantCounter++)
+        for(int GoodPlantCounter = 0; GoodPlantCounter < config.GOODPLANT_QUANTITY; GoodPlantCounter++)
         {
             entitySet.add(new GoodPlant(getFreePosition()));
         }
-        for(int WallCounter = 0; WallCounter < BoardConfig.WALL_QUANTITY; WallCounter++)
+        for(int WallCounter = 0; WallCounter < config.WALL_QUANTITY; WallCounter++)
         {
             entitySet.add(new Wall(getFreePosition()));
         }
@@ -70,16 +70,17 @@ public class Board {
     }
 
     public String toString() {
-        String rets = "";
+        StringBuilder str = new StringBuilder();
         for (Entity e : entitySet)
         {
             if (e instanceof MasterSquirrel)
             {
-                rets += e.toString() + "\n";
+                str.append(e.toString());
+                str.append("\n");
 
             }
         }
-        return rets;
+        return str.toString();
     }
 
 

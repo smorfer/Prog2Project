@@ -35,6 +35,7 @@ public class MasterSquirrelBot extends MasterSquirrel {
             Class<?> factoryClass = Class.forName("botimpls." + name + ".BotControllerFactoryImpl");
             factory = factoryClass.getConstructor().newInstance();
         } catch (NoSuchMethodException | InvocationTargetException | ClassNotFoundException | IllegalAccessException | InstantiationException e) {
+            logger.log(Level.SEVERE, "MasterSquirrelBot could not create FactoryImpl!");
             throw new CreatingBotByNameException("MasterSquirrelBot could not create FactoryImpl!");
         }
 
@@ -114,7 +115,7 @@ public class MasterSquirrelBot extends MasterSquirrel {
                 MasterSquirrelBot.this.updateEnergy(-energy);
                 entityContext.addEntity(ms);
             } catch (NotEnoughEnergyException e) {
-                logger.log(Level.FINE, "Tried to spawn MiniSquirrel, NotEnoughEnergyException thrown!");
+                logger.log(Level.WARNING, "Tried to spawn MiniSquirrel, NotEnoughEnergyException thrown!");
             }
         }
 
