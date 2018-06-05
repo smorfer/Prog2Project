@@ -22,14 +22,23 @@ import java.util.logging.Logger;
 public class Board {
 
     private List<Entity> entitySet;
+    private List<MasterSquirrel> masters;
     private FlattenedBoard flattenedBoard;
     private Logger logger = Logger.getLogger(this.getClass().getName());
-    private MasterSquirrel masterSquirrel;
     private BoardConfig config = new BoardConfig();
+    private int currentStepAmount = 0;
 
     public Board(){
-        
+
         entitySet = new CopyOnWriteArrayList<>();
+        fillBoard();
+        flattenedBoard = getData();
+
+    }
+
+    public void fillBoard(){
+
+        entitySet.clear();
 
         int entitiesIndex = 0;
         for (int height = 1; height <= config.getSize(); height++)
@@ -64,9 +73,6 @@ public class Board {
         {
             entitySet.add(new Wall(getFreePosition()));
         }
-
-
-
     }
 
     public String toString() {
@@ -165,13 +171,6 @@ public class Board {
         }
     }
 
-    public void setMaster(MasterSquirrel squirrel){
-        this.masterSquirrel = squirrel;
-    }
-
-    public MasterSquirrel getMaster(){
-        return this.masterSquirrel;
-    }
 
     public List<Entity> getEntitySet(){
         return entitySet;
@@ -199,9 +198,28 @@ public class Board {
 
         }
 
+        currentStepAmount++;
+
     }
 
     public BoardConfig getConfig(){
         return this.config;
+    }
+
+    public int getRemainingSteps(){
+        return this.getConfig().getMaxSteps() - this.currentStepAmount;
+    }
+
+
+    public List<MasterSquirrel> getMasters() {
+        return masters;
+    }
+
+    public void setMasters(List<MasterSquirrel> masters) {
+        this.masters = masters;
+    }
+
+    public void setCurrentStepAmount(int i){
+        this.currentStepAmount = i;
     }
 }

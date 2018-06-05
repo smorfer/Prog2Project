@@ -8,21 +8,24 @@ import ui.CommandHandler.GameCommandProcessor;
 import ui.MoveCommand;
 import ui.UI;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 @SuppressWarnings("Duplicates")
 public class MultiPlayerBotGame extends Game{
     private MasterSquirrel bot1;
     private MasterSquirrel bot2;
+    private MasterSquirrel bot3;
+    private MasterSquirrel bot4;
 
     public MultiPlayerBotGame(State state, UI ui, Board board) {
         super(state, ui, board);
         bot1 = new MasterSquirrelBot(board.getFreePosition(), board.getConfig().getBotNames().get(0));
-        bot2 = new MasterSquirrelBot(board.getFreePosition(), board.getConfig().getBotNames().get(1));
-        board.getEntitySet().add(bot1);
-        board.getEntitySet().add(bot2);
-
+        bot2 = new MasterSquirrelBot(board.getFreePosition(), board.getConfig().getBotNames().get(0));
+        bot3 = new MasterSquirrelBot(board.getFreePosition(), board.getConfig().getBotNames().get(1));
+        bot4 = new MasterSquirrelBot(board.getFreePosition(), board.getConfig().getBotNames().get(1));
+        masters.addAll(Arrays.asList(bot1, bot2, bot3, bot4));
+        board.getEntitySet().addAll(masters);
+        board.setMasters(masters);
     }
 
 
@@ -40,8 +43,27 @@ public class MultiPlayerBotGame extends Game{
     @Override
     protected void render() {
         ui.render(state.flattenedBoard());
+    }
+
+    @Override
+    public void resetGame() {
+
+        this.board = new Board();
+        this.state = new State(board);
+        board.fillBoard();
+        board.setCurrentStepAmount(0);
 
 
+
+        bot1 = new MasterSquirrelBot(board.getFreePosition(), board.getConfig().getBotNames().get(0));
+        bot2 = new MasterSquirrelBot(board.getFreePosition(), board.getConfig().getBotNames().get(0));
+        bot3 = new MasterSquirrelBot(board.getFreePosition(), board.getConfig().getBotNames().get(1));
+        bot4 = new MasterSquirrelBot(board.getFreePosition(), board.getConfig().getBotNames().get(1));
+
+        List<MasterSquirrel> newMasters = Arrays.asList(bot1, bot2, bot3, bot4);
+        board.getEntitySet().addAll(newMasters);
+        board.setMasters(newMasters);
+        this.masters = newMasters;
     }
 
     @Override
@@ -60,6 +82,16 @@ public class MultiPlayerBotGame extends Game{
                 new TimerTask() {
                     @Override
                     public void run() {
+                        if(board.getRemainingSteps() == 0){
+
+                            masters.forEach(e -> {
+                                System.out.println(((MasterSquirrelBot)e).getBotName() + " " + e.getEnergy());
+                            });
+                            
+
+                            resetGame();
+
+                        }
                         processInput();
                     }
                 }, 0, 1000/getREFRESH_RATE());

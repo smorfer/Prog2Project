@@ -2,7 +2,11 @@ package core.gameTypes;
 
 import core.Board;
 import core.State;
+import entities.squirrels.MasterSquirrel.MasterSquirrel;
 import ui.UI;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Game {
 
@@ -14,6 +18,8 @@ public abstract class Game {
 
 
 
+    protected List<MasterSquirrel> masters = new ArrayList<>();
+
     public Game(State state, UI ui, Board board)
     {
         this.state = state;
@@ -21,6 +27,10 @@ public abstract class Game {
         this.board = board;
         this.FPS = board.getConfig().getFPS();
         this.REFRESH_RATE = board.getConfig().getRefreshRate();
+    }
+
+    public void resetGame(){
+
     }
 
     public abstract void run();

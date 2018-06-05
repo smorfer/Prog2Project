@@ -26,9 +26,11 @@ public class MasterSquirrelBot extends MasterSquirrel {
     Logger logger = Logger.getLogger(this.getClass().getName());
 
     private final BotController masterBotController;
+    private String botName;
 
     public MasterSquirrelBot(XY position, String name) {
         super(position);
+        botName = name;
         Object factory;
 
         try {
@@ -59,6 +61,9 @@ public class MasterSquirrelBot extends MasterSquirrel {
         }
     }
 
+    public String getBotName() {
+        return botName;
+    }
 
 
     //Inner Class:

@@ -1,18 +1,16 @@
 package core;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class BoardConfig {
 
-    private List<String> botNames = new ArrayList<>();
+    private List<String> botNames = Arrays.asList("nextBot", "randomBot");
 
-    BoardConfig(){
-        botNames.add("nextBot");
-        botNames.add("randomBot");
-    }
+    //TODO: Move default energy values here
 
     private static final int SIZE = 50;
+    private int maxSteps = 50;
     int BADBEAST_QUANTITY = 5;
     int GOODBEAST_QUANTITY = 5;
     int BADPLANT_QUANTITY = 10;
@@ -31,7 +29,7 @@ public class BoardConfig {
             MINISQUIRREL_QUANTITY;
 
     private int FPS = 30;
-    private int REFRESH_RATE = 5;
+    private int REFRESH_RATE = 20;
 
 
     public int getFPS() {
@@ -52,4 +50,7 @@ public class BoardConfig {
         return botNames;
     }
 
+    public int getMaxSteps() {
+        return maxSteps;
+    }
 }
