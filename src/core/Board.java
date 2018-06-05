@@ -116,7 +116,7 @@ public class Board {
         Random rnd = new Random();
         XY spawn;
         do {
-            spawn = new XY(rnd.nextInt(BoardConfig.getSize()),rnd.nextInt(BoardConfig.getSize()));
+            spawn = new XY(rnd.nextInt(config.getSize()),rnd.nextInt(config.getSize()));
         } while (isEntityAtPosition(spawn));
         return spawn;
     }
@@ -199,5 +199,9 @@ public class Board {
 
         }
 
+    }
+
+    public BoardConfig getConfig(){
+        return this.config;
     }
 }

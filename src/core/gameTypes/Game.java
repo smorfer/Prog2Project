@@ -1,23 +1,16 @@
 package core.gameTypes;
 
 import core.Board;
-import core.BoardConfig;
 import core.State;
-import geom.XY;
-import ui.CommandHandler.GameCommandProcessor;
-import ui.MoveCommand;
 import ui.UI;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 public abstract class Game {
 
     State state;
     UI ui;
     Board board;
-    static final int FPS = BoardConfig.getFPS();
-    static final int REFRESH_RATE = BoardConfig.getRefreshRate();
+    private int FPS;
+    private int REFRESH_RATE;
 
 
 
@@ -26,6 +19,8 @@ public abstract class Game {
         this.state = state;
         this.ui = ui;
         this.board = board;
+        this.FPS = board.getConfig().getFPS();
+        this.REFRESH_RATE = board.getConfig().getRefreshRate();
     }
 
     public abstract void run();
@@ -34,6 +29,13 @@ public abstract class Game {
 
     protected abstract void processInput();
 
+    public int getFPS() {
+        return FPS;
+    }
+
+    public int getREFRESH_RATE() {
+        return REFRESH_RATE;
+    }
 }
 
 

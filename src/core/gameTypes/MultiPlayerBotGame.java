@@ -11,13 +11,15 @@ import ui.UI;
 import java.util.Timer;
 import java.util.TimerTask;
 
+@SuppressWarnings("Duplicates")
 public class MultiPlayerBotGame extends Game{
-    MasterSquirrel bot1;
-    MasterSquirrel bot2;
+    private MasterSquirrel bot1;
+    private MasterSquirrel bot2;
+
     public MultiPlayerBotGame(State state, UI ui, Board board) {
         super(state, ui, board);
-        bot1 = new MasterSquirrelBot(board.getFreePosition(), "randomBot");
-        bot2 = new MasterSquirrelBot(board.getFreePosition(), "randomBot");
+        bot1 = new MasterSquirrelBot(board.getFreePosition(), board.getConfig().getBotNames().get(0));
+        bot2 = new MasterSquirrelBot(board.getFreePosition(), board.getConfig().getBotNames().get(1));
         board.getEntitySet().add(bot1);
         board.getEntitySet().add(bot2);
 
@@ -52,7 +54,7 @@ public class MultiPlayerBotGame extends Game{
             public void run() {
                 render();
             }
-        }, 0, 1000/FPS);
+        }, 0, 1000/getFPS());
 
         timer1.scheduleAtFixedRate(
                 new TimerTask() {
@@ -60,6 +62,6 @@ public class MultiPlayerBotGame extends Game{
                     public void run() {
                         processInput();
                     }
-                }, 0, 1000/REFRESH_RATE);
+                }, 0, 1000/getREFRESH_RATE());
     }
 }

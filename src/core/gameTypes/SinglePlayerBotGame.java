@@ -30,14 +30,14 @@ public class SinglePlayerBotGame extends Game{
             public void run() {
                 render();
             }
-        }, 0, 1000/FPS);
+        }, 0, 1000/getFPS());
 
         timer1.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 SinglePlayerBotGame.super.board.nextStep(MoveCommand.ORIGIN);
             }
-        }, 0, 1000/REFRESH_RATE);
+        }, 0, 1000/getREFRESH_RATE());
     }
 
     @Override
