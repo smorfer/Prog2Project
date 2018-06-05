@@ -87,7 +87,7 @@ public class MultiPlayerBotGame extends Game{
                             masters.forEach(e -> {
                                 System.out.println(((MasterSquirrelBot)e).getBotName() + " " + e.getEnergy());
                             });
-                            
+
 
                             resetGame();
 
