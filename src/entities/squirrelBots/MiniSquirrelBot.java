@@ -5,7 +5,7 @@ import botapi.BotControllerFactory;
 import botapi.ControllerContext;
 import core.EntityContext;
 import core.EntityType;
-import core.botImpl.BotControllerFactoryImpl;
+import botimpls.randomBot.BotControllerFactoryImpl;
 import entities.squirrels.MasterSquirrel.MasterSquirrel;
 import entities.squirrels.MiniSquirrel.MiniSquirrel;
 import geom.XY;

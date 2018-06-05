@@ -14,9 +14,10 @@ public class SinglePlayerBotGame extends Game{
     MasterSquirrel bot;
     public SinglePlayerBotGame(State state, UI ui, Board board) {
         super(state, ui, board);
-        bot = new MasterSquirrelBot(board.getFreePosition());
-        board.getEntitySet().add(bot);
-        board.setMaster(bot);
+        bot = new MasterSquirrelBot(board.getFreePosition(), "randomBot");
+        masters.add(bot);
+        board.getEntitySet().addAll(masters);
+        board.setMasters(masters);
         //Wo hast du diesen schönen Code her? Gefunden auf github.de!
     }
 
@@ -30,14 +31,14 @@ public class SinglePlayerBotGame extends Game{
             public void run() {
                 render();
             }
-        }, 0, 1000/FPS);
+        }, 0, 1000/getFPS());
 
         timer1.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 SinglePlayerBotGame.super.board.nextStep(MoveCommand.ORIGIN);
             }
-        }, 0, 1000/REFRESH_RATE);
+        }, 0, 1000/getREFRESH_RATE());
     }
 
     @Override

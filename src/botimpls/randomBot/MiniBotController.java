@@ -1,8 +1,7 @@
-package core.botImpl;
+package botimpls.randomBot;
 
 import botapi.BotController;
 import botapi.ControllerContext;
-import geom.XY;
 import geom.XYSupport;
 
 import java.util.Random;

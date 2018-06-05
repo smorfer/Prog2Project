@@ -1,16 +1,25 @@
 package core;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class BoardConfig {
-     private static final int SIZE = 80;
-     static final int BADBEAST_QUANTITY = 10;
-     static final int GOODBEAST_QUANTITY = 15;
-     static final int BADPLANT_QUANTITY = 20;
-     static final int GOODPLANT_QUANTITY = 15;
-     static final int BORDER = SIZE*4 - 4;
-     static final int WALL_QUANTITY = 30; //Ignoring borders
-     static final int MASTERSQUIRREL_QUANTITY = 1;
-     static final int MINISQUIRREL_QUANTITY = 8;
-     static final int ENTITY_QUANTITY = BADBEAST_QUANTITY +
+
+    private List<String> botNames = Arrays.asList("nextBot", "randomBot");
+
+    //TODO: Move default energy values here
+
+    private static final int SIZE = 50;
+    private int maxSteps = 50;
+    int BADBEAST_QUANTITY = 5;
+    int GOODBEAST_QUANTITY = 5;
+    int BADPLANT_QUANTITY = 10;
+    int GOODPLANT_QUANTITY = 10;
+    int BORDER = SIZE*4 - 4;
+    int WALL_QUANTITY = 15; //Ignoring borders
+    int MASTERSQUIRREL_QUANTITY = 1;
+    int MINISQUIRREL_QUANTITY = 8;
+    int ENTITY_QUANTITY = BADBEAST_QUANTITY +
             GOODBEAST_QUANTITY +
             BADPLANT_QUANTITY +
             GOODPLANT_QUANTITY +
@@ -19,19 +28,29 @@ public class BoardConfig {
             MASTERSQUIRREL_QUANTITY +
             MINISQUIRREL_QUANTITY;
 
-    private static final int FPS = 30;
-    private static final int REFRESH_RATE = 5;
+    private int FPS = 30;
+    private int REFRESH_RATE = 20;
 
-    public static int getFPS() {
+
+    public int getFPS() {
         return FPS;
     }
 
-    public static int getRefreshRate() {
+    public int getRefreshRate() {
         return REFRESH_RATE;
     }
 
-    public static int getSize(){
+    public int getSize(){
         return SIZE;
     }
 
+    public void loadFromFile(){}; //TODO: Maven json if you know what i mean
+
+    public List<String> getBotNames(){
+        return botNames;
+    }
+
+    public int getMaxSteps() {
+        return maxSteps;
+    }
 }

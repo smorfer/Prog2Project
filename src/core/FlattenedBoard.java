@@ -10,7 +10,6 @@ import entities.squirrels.MiniSquirrel.MiniSquirrel;
 import entities.squirrels.Squirrel;
 import geom.XY;
 
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,7 +24,7 @@ public class FlattenedBoard implements EntityContext, BoardView{
     FlattenedBoard(Board board){
         this.board = board;
 
-        Entity[][] data = new Entity[BoardConfig.getSize()][BoardConfig.getSize()];
+        Entity[][] data = new Entity[board.getConfig().getSize()][board.getConfig().getSize()];
 
         for (Entity e : board.getEntitySet()) {
             if (e == null) continue;

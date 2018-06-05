@@ -1,8 +1,7 @@
-package core.botImpl;
+package botimpls.nextBot;
 
 import botapi.BotController;
 import botapi.ControllerContext;
-import geom.XY;
 import geom.XYSupport;
 
 public class MasterBotController implements BotController {
@@ -15,7 +14,7 @@ public class MasterBotController implements BotController {
         counter++;
 
         if(counter >= 6){
-            view.spawnMiniBot(view.locate().plus(XYSupport.inputToDirection(XYSupport.getRandomNumber())), 200);
+            view.spawnMiniBot(view.locate().plus(XYSupport.inputToDirection(XYSupport.getRandomNumber())), 100);
             counter = 0;
         }
     }

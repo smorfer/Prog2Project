@@ -23,10 +23,10 @@ public class Launcher extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        FxUI fxUI = FxUI.createInstance(BoardConfig.getSize());
         ConsoleUI consoleUI = new ui.ConsoleUI();
         Board board = new Board();
         State state = new State(board);
+        FxUI fxUI = FxUI.createInstance(board.getConfig().getSize());
 
         final Game game;
         if (fxMode) {

@@ -1,7 +1,6 @@
 package core.gameTypes;
 
 import core.Board;
-import core.BoardConfig;
 import core.State;
 import entities.squirrels.MasterSquirrel.HandOperatedMasterSquirrel;
 import entities.squirrels.MasterSquirrel.MasterSquirrel;
@@ -17,9 +16,9 @@ public class SinglePlayerGame extends Game{
     private MasterSquirrel player;
     public SinglePlayerGame(State state, UI ui, Board board) {
         super(state, ui, board);
-        player = new HandOperatedMasterSquirrel(200, new XY(BoardConfig.getSize()/2,BoardConfig.getSize()/2));
+        player = new HandOperatedMasterSquirrel(200, new XY(board.getConfig().getSize()/2,board.getConfig().getSize()/2));
         board.getEntitySet().add(player);
-        board.setMaster(player);
+        board.setMasters(masters);
     }
 
 
@@ -51,7 +50,7 @@ public class SinglePlayerGame extends Game{
             public void run() {
                 render();
             }
-        }, 0, 1000/FPS);
+        }, 0, 1000/getFPS());
 
         timer1.scheduleAtFixedRate(
                 new TimerTask() {
@@ -59,6 +58,6 @@ public class SinglePlayerGame extends Game{
             public void run() {
                 processInput();
             }
-        }, 0, 1000/REFRESH_RATE);
+        }, 0, 1000/getREFRESH_RATE());
     }
 }
