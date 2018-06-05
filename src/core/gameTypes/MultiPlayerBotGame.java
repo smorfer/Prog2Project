@@ -1,12 +1,9 @@
 package core.gameTypes;
 
 import core.Board;
-import core.BoardConfig;
 import core.State;
 import entities.squirrelBots.MasterSquirrelBot;
-import entities.squirrels.MasterSquirrel.HandOperatedMasterSquirrel;
 import entities.squirrels.MasterSquirrel.MasterSquirrel;
-import geom.XY;
 import ui.CommandHandler.GameCommandProcessor;
 import ui.MoveCommand;
 import ui.UI;
@@ -19,8 +16,8 @@ public class MultiPlayerBotGame extends Game{
     MasterSquirrel bot2;
     public MultiPlayerBotGame(State state, UI ui, Board board) {
         super(state, ui, board);
-        bot1 = new MasterSquirrelBot(board.getFreePosition());
-        bot2 = new MasterSquirrelBot(board.getFreePosition());
+        bot1 = new MasterSquirrelBot(board.getFreePosition(), "randomBot");
+        bot2 = new MasterSquirrelBot(board.getFreePosition(), "randomBot");
         board.getEntitySet().add(bot1);
         board.getEntitySet().add(bot2);
 

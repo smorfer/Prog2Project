@@ -1,36 +1,45 @@
 package entities.squirrelBots;
 
-import ID.IDManager;
 import botapi.BotController;
 import botapi.BotControllerFactory;
 import botapi.ControllerContext;
 import core.EntityContext;
 import core.EntityType;
-import core.FlattenedBoard;
-import core.botImpl.BotControllerFactoryImpl;
 import core.logging.ProxyLoggerFactory;
 import entities.Entity;
 import entities.squirrels.MasterSquirrel.MasterSquirrel;
 import entities.squirrels.MiniSquirrel.MiniSquirrel;
+import exceptions.CreatingBotByNameException;
 import exceptions.NotEnoughEnergyException;
 import exceptions.WrongMethodUsageException;
 import geom.XY;
 
-import java.net.IDN;
+import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MasterSquirrelBot extends MasterSquirrel {
 
-    private final BotControllerFactory botControllerFactory = new BotControllerFactoryImpl();
-    private final BotController masterBotController = botControllerFactory.createMasterBotController();
+
     private ControllerContext controllerContext;
 
     Logger logger = Logger.getLogger(this.getClass().getName());
 
+    private final BotController masterBotController;
 
-    public MasterSquirrelBot(XY position) {
+    public MasterSquirrelBot(XY position, String name) {
         super(position);
+        Object factory;
+
+        try {
+            Class<?> factoryClass = Class.forName("botimpls." + name + ".BotControllerFactoryImpl");
+            factory = factoryClass.getConstructor().newInstance();
+        } catch (NoSuchMethodException | InvocationTargetException | ClassNotFoundException | IllegalAccessException | InstantiationException e) {
+            throw new CreatingBotByNameException("MasterSquirrelBot could not create FactoryImpl!");
+        }
+
+        final BotControllerFactory botControllerFactory = (BotControllerFactory)factory;
+        masterBotController = botControllerFactory.createMasterBotController();
     }
 
     public ControllerContext getControllerContext(EntityContext entityContext){
@@ -45,7 +54,7 @@ public class MasterSquirrelBot extends MasterSquirrel {
     @Override
     public void nextStep(EntityContext entityContext) {
         if (!isFrozen()){
-            masterBotController.nextStep(this.getControllerContext(entityContext));
+            this.masterBotController.nextStep(this.getControllerContext(entityContext));
         }
     }
 

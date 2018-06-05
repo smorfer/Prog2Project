@@ -1,4 +1,4 @@
-package core.botImpl;
+package botimpls.randomBot;
 
 import botapi.BotController;
 import botapi.BotControllerFactory;

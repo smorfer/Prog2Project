@@ -14,7 +14,7 @@ public class SinglePlayerBotGame extends Game{
     MasterSquirrel bot;
     public SinglePlayerBotGame(State state, UI ui, Board board) {
         super(state, ui, board);
-        bot = new MasterSquirrelBot(board.getFreePosition());
+        bot = new MasterSquirrelBot(board.getFreePosition(), "randomBot");
         board.getEntitySet().add(bot);
         board.setMaster(bot);
         //Wo hast du diesen schönen Code her? Gefunden auf github.de!
