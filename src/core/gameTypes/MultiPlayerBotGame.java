@@ -1,5 +1,8 @@
 package core.gameTypes;
 
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import core.Board;
 import core.State;
 import entities.squirrelBots.MasterSquirrelBot;
@@ -8,14 +11,18 @@ import ui.CommandHandler.GameCommandProcessor;
 import ui.MoveCommand;
 import ui.UI;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
-@SuppressWarnings("Duplicates")
 public class MultiPlayerBotGame extends Game{
     private MasterSquirrel bot1;
     private MasterSquirrel bot2;
     private MasterSquirrel bot3;
     private MasterSquirrel bot4;
+
+    private Map<String, ArrayList<Integer>> scores = new HashMap<>();
+    private int runs = 0;
 
     public MultiPlayerBotGame(State state, UI ui, Board board) {
         super(state, ui, board);
@@ -82,18 +89,36 @@ public class MultiPlayerBotGame extends Game{
                 new TimerTask() {
                     @Override
                     public void run() {
+
+                        if(runs >= 10){
+                            saveBotScores();
+                            System.exit(-1);
+                        }
+
                         if(board.getRemainingSteps() == 0){
 
                             masters.forEach(e -> {
-                                System.out.println(((MasterSquirrelBot)e).getBotName() + " " + e.getEnergy());
+                                ArrayList<Integer> list = scores.computeIfAbsent(((MasterSquirrelBot)e).getBotName(), k -> new ArrayList<>());
+                                list.add(e.getEnergy());
                             });
 
-
                             resetGame();
+                            runs++;
 
                         }
                         processInput();
                     }
                 }, 0, 1000/getREFRESH_RATE());
+    }
+
+    @Override
+    public void saveBotScores() {
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
+        try {
+            writer.writeValue(new File("scores.json"), scores);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

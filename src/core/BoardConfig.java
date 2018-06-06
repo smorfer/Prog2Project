@@ -28,8 +28,8 @@ public class BoardConfig {
             MASTERSQUIRREL_QUANTITY +
             MINISQUIRREL_QUANTITY;
 
-    private int FPS = 30;
-    private int REFRESH_RATE = 20;
+    private int FPS = 50;
+    private int REFRESH_RATE = 50;
 
 
     public int getFPS() {

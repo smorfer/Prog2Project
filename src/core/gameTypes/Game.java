@@ -3,6 +3,7 @@ package core.gameTypes;
 import core.Board;
 import core.State;
 import entities.squirrels.MasterSquirrel.MasterSquirrel;
+import exceptions.WrongMethodUsageException;
 import ui.UI;
 
 import java.util.ArrayList;
@@ -29,8 +30,10 @@ public abstract class Game {
         this.REFRESH_RATE = board.getConfig().getRefreshRate();
     }
 
-    public void resetGame(){
+    public void resetGame(){}
 
+    public void saveBotScores(){
+        throw new WrongMethodUsageException();
     }
 
     public abstract void run();

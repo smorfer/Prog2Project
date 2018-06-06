@@ -14,7 +14,7 @@ import ui.FxUI;
 public class Launcher extends Application {
     private boolean fxMode = true;
     private boolean botMode = true;
-
+    private Game game;
 
     public static void main(String[] args) {
         Application.launch(args);
@@ -28,7 +28,7 @@ public class Launcher extends Application {
         State state = new State(board);
         FxUI fxUI = FxUI.createInstance(board.getConfig().getSize());
 
-        final Game game;
+
         if (fxMode) {
             game = botMode ? new MultiPlayerBotGame(state, fxUI, board) : new SinglePlayerGame(state, fxUI, board);
         } else {
@@ -45,8 +45,7 @@ public class Launcher extends Application {
 
         System.out.println("Starting Squirrel Game");
         game.run();
-
-
     }
+
 }
 
