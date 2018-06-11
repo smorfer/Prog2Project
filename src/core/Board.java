@@ -206,6 +206,10 @@ public class Board {
         return this.config;
     }
 
+    public int getSize() {
+        return config.getSize();
+    }
+
     public int getRemainingSteps(){
         return this.getConfig().getMaxSteps() - this.currentStepAmount;
     }

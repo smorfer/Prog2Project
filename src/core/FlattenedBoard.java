@@ -21,10 +21,10 @@ public class FlattenedBoard implements EntityContext, BoardView{
     private Board board;
     private static Logger logger = Logger.getLogger(FlattenedBoard.class.getName());
 
-    FlattenedBoard(Board board){
+    public FlattenedBoard(Board board){
         this.board = board;
 
-        Entity[][] data = new Entity[board.getConfig().getSize()][board.getConfig().getSize()];
+        Entity[][] data = new Entity[board.getSize()][board.getSize()];
 
         for (Entity e : board.getEntitySet()) {
             if (e == null) continue;
@@ -51,7 +51,7 @@ public class FlattenedBoard implements EntityContext, BoardView{
     public void tryMove(MasterSquirrel masterSquirrel, XY direction) {
         logger.log(Level.INFO, "MasterSquirrel " + masterSquirrel.getID() + " tries to move in direction " + direction.toString());
         XY newLocation = masterSquirrel.getPosition().plus(direction);
-        Entity targetEntity = entities[newLocation.x][newLocation.y];
+        Entity targetEntity = getEntityAt(newLocation.x,newLocation.y);
 
         if(squirrelCollision(masterSquirrel, direction, targetEntity)) return;
 
