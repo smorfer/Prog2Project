@@ -3,6 +3,7 @@ package core.gameTypes;
 import core.Board;
 import core.State;
 import entities.squirrels.MasterSquirrel.MasterSquirrel;
+import exceptions.WrongMethodUsageException;
 import ui.UI;
 
 import java.util.ArrayList;
@@ -18,19 +19,22 @@ public abstract class Game {
 
 
 
-    protected List<MasterSquirrel> masters = new ArrayList<>();
+    List<MasterSquirrel> masters = new ArrayList<>();
 
-    public Game(State state, UI ui, Board board)
+    Game(State state, UI ui, Board board)
     {
         this.state = state;
         this.ui = ui;
         this.board = board;
+        board.setMasters(masters);
         this.FPS = board.getConfig().getFPS();
         this.REFRESH_RATE = board.getConfig().getRefreshRate();
     }
 
-    public void resetGame(){
+    public void resetGame(){}
 
+    public void saveBotScores(){
+        throw new WrongMethodUsageException();
     }
 
     public abstract void run();

@@ -8,4 +8,6 @@ public class CreatingBotByNameException extends RuntimeException {
     public CreatingBotByNameException(String message) {
         super(message);
     }
+
+
 }

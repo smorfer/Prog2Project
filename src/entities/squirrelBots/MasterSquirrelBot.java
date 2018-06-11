@@ -23,7 +23,7 @@ public class MasterSquirrelBot extends MasterSquirrel {
 
     private ControllerContext controllerContext;
 
-    Logger logger = Logger.getLogger(this.getClass().getName());
+    private Logger logger = Logger.getLogger(this.getClass().getName());
 
     private final BotController masterBotController;
     private String botName;

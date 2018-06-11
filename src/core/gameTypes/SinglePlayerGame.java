@@ -11,13 +11,16 @@ import ui.UI;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SinglePlayerGame extends Game{
     private MasterSquirrel player;
     public SinglePlayerGame(State state, UI ui, Board board) {
         super(state, ui, board);
         player = new HandOperatedMasterSquirrel(200, new XY(board.getConfig().getSize()/2,board.getConfig().getSize()/2));
-        board.getEntitySet().add(player);
+        masters.add(player);
+        board.getEntitySet().addAll(masters);
         board.setMasters(masters);
     }
 
@@ -29,7 +32,7 @@ public class SinglePlayerGame extends Game{
         try {
             processor.process(ui.getCommand());
         } catch (Exception e) {
-            System.out.println("No command!");
+            Logger.getLogger(this.getClass().getName()).log(Level.WARNING, "No command!");
         }
     }
 
