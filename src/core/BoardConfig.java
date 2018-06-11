@@ -6,9 +6,7 @@ import java.util.List;
 public class BoardConfig {
 
     private List<String> botNames = Arrays.asList("nextBot", "randomBot");
-
-    //TODO: Move default energy values here
-
+    
     private static final int SIZE = 50;
     private int maxSteps = 50;
     int BADBEAST_QUANTITY = 5;
@@ -16,7 +14,7 @@ public class BoardConfig {
     int BADPLANT_QUANTITY = 10;
     int GOODPLANT_QUANTITY = 10;
     int BORDER = SIZE*4 - 4;
-    int WALL_QUANTITY = 15; //Ignoring borders
+    int WALL_QUANTITY = 15;
     int MASTERSQUIRREL_QUANTITY = 1;
     int MINISQUIRREL_QUANTITY = 8;
     int ENTITY_QUANTITY = BADBEAST_QUANTITY +
@@ -44,7 +42,7 @@ public class BoardConfig {
         return SIZE;
     }
 
-    public void loadFromFile(){}; //TODO: Maven json if you know what i mean
+    public void loadFromFile(){};
 
     public List<String> getBotNames(){
         return botNames;

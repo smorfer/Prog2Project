@@ -13,7 +13,7 @@ import ui.FxUI;
 
 public class Launcher extends Application {
     private boolean fxMode = true;
-    private boolean botMode = true;
+    private boolean botMode = false;
     private Game game;
 
     public static void main(String[] args) {

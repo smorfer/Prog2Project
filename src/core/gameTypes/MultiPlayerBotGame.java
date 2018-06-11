@@ -14,12 +14,11 @@ import ui.UI;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MultiPlayerBotGame extends Game{
-    private MasterSquirrel bot1;
-    private MasterSquirrel bot2;
-    private MasterSquirrel bot3;
-    private MasterSquirrel bot4;
+    private MasterSquirrel bot1, bot2, bot3, bot4;
 
     private Map<String, ArrayList<Integer>> scores = new HashMap<>();
     private int runs = 0;
@@ -43,7 +42,7 @@ public class MultiPlayerBotGame extends Game{
         try {
             processor.process(ui.getCommand());
         } catch (Exception e) {
-            System.out.println("No command!");
+            Logger.getLogger(this.getClass().getName()).log(Level.WARNING, "No command!");
         }
     }
 

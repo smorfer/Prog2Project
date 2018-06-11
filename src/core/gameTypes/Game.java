@@ -19,13 +19,14 @@ public abstract class Game {
 
 
 
-    protected List<MasterSquirrel> masters = new ArrayList<>();
+    List<MasterSquirrel> masters = new ArrayList<>();
 
-    public Game(State state, UI ui, Board board)
+    Game(State state, UI ui, Board board)
     {
         this.state = state;
         this.ui = ui;
         this.board = board;
+        board.setMasters(masters);
         this.FPS = board.getConfig().getFPS();
         this.REFRESH_RATE = board.getConfig().getRefreshRate();
     }
