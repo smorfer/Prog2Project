@@ -21,6 +21,7 @@ public class MultiPlayerBotGame extends Game{
     private MasterSquirrel bot1, bot2, bot3, bot4;
 
     private Map<String, ArrayList<Integer>> scores = new HashMap<>();
+
     private int runs = 0;
 
     public MultiPlayerBotGame(State state, UI ui, Board board) {

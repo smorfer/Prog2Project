@@ -1,27 +1,38 @@
 package ui;
 
-import core.BoardConfig;
 import core.BoardView;
 import geom.XY;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import ui.CommandHandler.Command;
 import ui.CommandHandler.GameCommandTypes;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class FxUI extends Scene implements UI {
 
     private static boolean fxDebugMode = false;
 
-    private static int CELL_SIZE = 10;
+    private static int CELL_SIZE = 30;
     private static Command nextCommand = null;
+
+    private Image masterImg;
+    private Image miniImg;
+    private Image goodBeastImg;
+    private Image badBeastImg;
+    private Image goodPlantImg;
+    private Image badPlantImg;
+    private Image wallImg;
 
     private Canvas boardCanvas;
     private Label msgLabel;
@@ -30,6 +41,7 @@ public class FxUI extends Scene implements UI {
         super(parent);
         this.boardCanvas = boardCanvas;
         this.msgLabel = msgLabel;
+        loadIconsFromFile();
     }
 
     public static FxUI createInstance(int size) {
@@ -126,28 +138,22 @@ public class FxUI extends Scene implements UI {
             for(int j = 0, b = 0; j < size.x * CELL_SIZE; j += CELL_SIZE, b++) {
                 switch(view.getEntityType(b, a)) {
                     case WALL:
-                        gc.setFill(Color.DARKSLATEGRAY);
-                        gc.fillRect(j, i, CELL_SIZE, CELL_SIZE);
+                        gc.drawImage(wallImg, j, i);
                         break;
                     case BAD_BEAST:
-                        gc.setFill(Color.RED);
-                        gc.fillOval(j, i, CELL_SIZE, CELL_SIZE);
+                        gc.drawImage(badBeastImg, j, i);
                         break;
                     case BAD_PLANT:
-                        gc.setFill(Color.RED);
-                        gc.fillRect(j, i, CELL_SIZE, CELL_SIZE);
+                        gc.drawImage(badPlantImg, j, i);
                         break;
                     case GOOD_BEAST:
-                        gc.setFill(Color.LAWNGREEN);
-                        gc.fillOval(j, i, CELL_SIZE, CELL_SIZE);
+                        gc.drawImage(goodBeastImg, j, i);
                         break;
                     case GOOD_PLANT:
-                        gc.setFill(Color.LAWNGREEN);
-                        gc.fillRect(j, i, CELL_SIZE, CELL_SIZE);
+                        gc.drawImage(goodPlantImg, j, i);
                         break;
                     case MASTER_SQUIRREL:
-                        gc.setFill(Color.BLUE);
-                        gc.fillOval(j, i, CELL_SIZE, CELL_SIZE);
+                        gc.drawImage(masterImg, j, i);
 
                         if (fxDebugMode) {
                             gc.setFill(Color.rgb(0,0,255,0.2));
@@ -155,8 +161,7 @@ public class FxUI extends Scene implements UI {
                         }
                         break;
                     case MINI_SQUIRREL:
-                        gc.setFill(Color.AQUA);
-                        gc.fillOval(j, i, CELL_SIZE, CELL_SIZE);
+                        gc.drawImage(miniImg, j, i);
                         //Not useful right now
                         if (false) {
                             gc.setFill(Color.rgb(0,0,255,0.2));
@@ -169,6 +174,22 @@ public class FxUI extends Scene implements UI {
                         break;
                 }
             }
+        }
+    }
+
+
+    private void loadIconsFromFile() {
+        try {
+            masterImg = new Image(new FileInputStream("icons/squirrelMaster.png"), CELL_SIZE, CELL_SIZE, false, false);
+            wallImg = new Image(new FileInputStream("icons/wall.png"), CELL_SIZE, CELL_SIZE, false, false);
+            goodBeastImg = new Image(new FileInputStream("icons/cat.png"), CELL_SIZE, CELL_SIZE, false, false);
+            goodPlantImg = new Image(new FileInputStream("icons/peach.png"), CELL_SIZE, CELL_SIZE, false, false);
+            badBeastImg = new Image(new FileInputStream("icons/snake.png"), CELL_SIZE, CELL_SIZE, false, false);
+            badPlantImg = new Image(new FileInputStream("icons/fliegenpilz.png"), CELL_SIZE, CELL_SIZE, false, false);
+            miniImg = new Image(new FileInputStream("icons/squirrelMini.png"), CELL_SIZE, CELL_SIZE, false, false);
+        } catch (FileNotFoundException e) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "Could not find the specified image to load");
+            e.printStackTrace();
         }
     }
 
