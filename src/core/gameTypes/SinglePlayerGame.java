@@ -11,6 +11,8 @@ import ui.UI;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SinglePlayerGame extends Game{
     private MasterSquirrel player;
@@ -30,7 +32,7 @@ public class SinglePlayerGame extends Game{
         try {
             processor.process(ui.getCommand());
         } catch (Exception e) {
-            System.out.println("No command!");
+            Logger.getLogger(this.getClass().getName()).log(Level.WARNING, "No command!");
         }
     }
 

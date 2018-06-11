@@ -1,13 +1,23 @@
 package core;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
 public class BoardConfig {
 
+    public BoardConfig(){
+        loadFromFile();
+    }
+
     private List<String> botNames = Arrays.asList("nextBot", "randomBot");
-    
-    private static final int SIZE = 50;
+    private Path defaultPath = Paths.get("config.properties");
+
+    private final int SIZE = 50;
     private int maxSteps = 50;
     int BADBEAST_QUANTITY = 5;
     int GOODBEAST_QUANTITY = 5;
@@ -42,7 +52,20 @@ public class BoardConfig {
         return SIZE;
     }
 
-    public void loadFromFile(){};
+    public void loadFromFile(){
+
+
+
+        if(!Files.exists(defaultPath)){
+            try {
+                Files.createFile(defaultPath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        Properties config = new Properties();
+    };
 
     public List<String> getBotNames(){
         return botNames;

@@ -25,15 +25,18 @@ public class MultiPlayerBotGame extends Game{
 
     public MultiPlayerBotGame(State state, UI ui, Board board) {
         super(state, ui, board);
-        bot1 = new MasterSquirrelBot(board.getFreePosition(), board.getConfig().getBotNames().get(0));
-        bot2 = new MasterSquirrelBot(board.getFreePosition(), board.getConfig().getBotNames().get(0));
-        bot3 = new MasterSquirrelBot(board.getFreePosition(), board.getConfig().getBotNames().get(1));
-        bot4 = new MasterSquirrelBot(board.getFreePosition(), board.getConfig().getBotNames().get(1));
+        resetBots(board);
         masters.addAll(Arrays.asList(bot1, bot2, bot3, bot4));
         board.getEntitySet().addAll(masters);
         board.setMasters(masters);
     }
 
+    private void resetBots(Board board) {
+        bot1 = new MasterSquirrelBot(board.getFreePosition(), board.getConfig().getBotNames().get(0));
+        bot2 = new MasterSquirrelBot(board.getFreePosition(), board.getConfig().getBotNames().get(0));
+        bot3 = new MasterSquirrelBot(board.getFreePosition(), board.getConfig().getBotNames().get(1));
+        bot4 = new MasterSquirrelBot(board.getFreePosition(), board.getConfig().getBotNames().get(1));
+    }
 
 
     @Override
@@ -60,11 +63,7 @@ public class MultiPlayerBotGame extends Game{
         board.setCurrentStepAmount(0);
 
 
-
-        bot1 = new MasterSquirrelBot(board.getFreePosition(), board.getConfig().getBotNames().get(0));
-        bot2 = new MasterSquirrelBot(board.getFreePosition(), board.getConfig().getBotNames().get(0));
-        bot3 = new MasterSquirrelBot(board.getFreePosition(), board.getConfig().getBotNames().get(1));
-        bot4 = new MasterSquirrelBot(board.getFreePosition(), board.getConfig().getBotNames().get(1));
+        resetBots(board);
 
         List<MasterSquirrel> newMasters = Arrays.asList(bot1, bot2, bot3, bot4);
         board.getEntitySet().addAll(newMasters);
