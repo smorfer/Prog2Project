@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 public class BoardConfig {
 
-    public BoardConfig(){
+    BoardConfig(){
         if(Files.exists(Paths.get("config.properties"))){
             loadFromFile();
         }
