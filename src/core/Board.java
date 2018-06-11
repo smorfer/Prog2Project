@@ -53,23 +53,23 @@ public class Board {
         }
 
 
-        for(int BadBeastCounter = 0; BadBeastCounter < config.BADBEAST_QUANTITY; BadBeastCounter++)
+        for(int BadBeastCounter = 0; BadBeastCounter < config.getBADBEAST_QUANTITY(); BadBeastCounter++)
         {
             entitySet.add(new BadBeast(getFreePosition()));
         }
-        for(int GoodBeastCounter = 0; GoodBeastCounter < config.GOODBEAST_QUANTITY; GoodBeastCounter++)
+        for(int GoodBeastCounter = 0; GoodBeastCounter < config.getGOODBEAST_QUANTITY(); GoodBeastCounter++)
         {
             entitySet.add(new GoodBeast(getFreePosition()));
         }
-        for(int BadPlantCounter = 0; BadPlantCounter < config.BADPLANT_QUANTITY; BadPlantCounter++)
+        for(int BadPlantCounter = 0; BadPlantCounter < config.getBADPLANT_QUANTITY(); BadPlantCounter++)
         {
             entitySet.add(new BadPlant(getFreePosition()));
         }
-        for(int GoodPlantCounter = 0; GoodPlantCounter < config.GOODPLANT_QUANTITY; GoodPlantCounter++)
+        for(int GoodPlantCounter = 0; GoodPlantCounter < config.getGOODPLANT_QUANTITY(); GoodPlantCounter++)
         {
             entitySet.add(new GoodPlant(getFreePosition()));
         }
-        for(int WallCounter = 0; WallCounter < config.WALL_QUANTITY; WallCounter++)
+        for(int WallCounter = 0; WallCounter < config.getWALL_QUANTITY(); WallCounter++)
         {
             entitySet.add(new Wall(getFreePosition()));
         }

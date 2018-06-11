@@ -12,8 +12,8 @@ import ui.FxUI;
 
 
 public class Launcher extends Application {
-    private boolean fxMode = true;
-    private boolean botMode = false;
+    private boolean fxMode;
+    private boolean botMode;
     private Game game;
 
     public static void main(String[] args) {
@@ -27,6 +27,10 @@ public class Launcher extends Application {
         Board board = new Board();
         State state = new State(board);
         FxUI fxUI = FxUI.createInstance(board.getConfig().getSize());
+
+        fxMode = board.getConfig().isFxMode();
+        botMode = board.getConfig().isBotMode();
+
 
 
         if (fxMode) {
