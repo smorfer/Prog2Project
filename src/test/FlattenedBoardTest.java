@@ -89,11 +89,13 @@ public class FlattenedBoardTest
         BadBeast badBeast = mock(BadBeast.class);
 
         when(board.getEntityAtPosition(new XY(2,1))).thenReturn(badBeast);
+        when(badBeast.getPosition()).thenReturn(new XY(2,2));
         when(masterSquirrel.getPosition()).thenReturn(new XY(1,1));
+        when(masterSquirrel.isFrozen()).thenReturn(false);
 
         flattenedBoard.tryMove(masterSquirrel,XY.RIGHT);
 
-        verify(masterSquirrel).move(XY.RIGHT);
+
         verify(flattenedBoard).squirrelCollision(masterSquirrel,XY.RIGHT,badBeast);
     }
 
