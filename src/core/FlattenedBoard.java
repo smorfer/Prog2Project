@@ -33,6 +33,7 @@ public class FlattenedBoard implements EntityContext, BoardView{
             data[location.x][location.y] = e;
         }
 
+
         entities = data;
     }
 
@@ -245,7 +246,7 @@ public class FlattenedBoard implements EntityContext, BoardView{
 
         }
 
-        squirrel.getMasterSquirrel().updateEnergy(collectedEnergy);
+        squirrel.getMasterSquirrel().updateEnergy(collectedEnergy+squirrel.getEnergy());
         kill(squirrel);
 
         logger.log(Level.INFO, "MiniSquirrel " + squirrel.getID() + " implodes and gives " + collectedEnergy +  " energy to MasterSquirrel " + squirrel.getMasterSquirrel().getID());

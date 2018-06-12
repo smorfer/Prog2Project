@@ -20,7 +20,7 @@ public class BoardConfig {
         saveToFile();
     }
 
-    private List<String> botNames = Arrays.asList("nextBot", "randomBot");
+    private List<String> botNames;
 
     private int SIZE;
     private int maxSteps;
@@ -78,7 +78,8 @@ public class BoardConfig {
 
                 this.botMode = (Integer.parseInt(prop.getProperty("botMode")) != 0);
                 this.fxMode = (Integer.parseInt(prop.getProperty("fxMode")) != 0);
-            } catch (NumberFormatException e) {
+                this.botNames = Arrays.asList(prop.getProperty("botNames").split(","));
+            } catch (NumberFormatException | NullPointerException e) {
                 Logger.getLogger(this.getClass().getName()).log(Level.WARNING, "Value/s in config file missing, using default values!");
                 loadDefaultValues();
             }
@@ -119,6 +120,7 @@ public class BoardConfig {
             prop.setProperty("REFRESH_RATE", String.valueOf(REFRESH_RATE));
             prop.setProperty("botMode", String.valueOf(botMode ? 1 : 0));
             prop.setProperty("fxMode", String.valueOf(fxMode ? 1 : 0));
+            prop.setProperty("botNames", String.join(",", botNames));
 
 
             // save properties to project root folder
@@ -153,29 +155,30 @@ public class BoardConfig {
 
         fxMode = true;
         botMode = false;
+        botNames = Arrays.asList("nextBot", "randomBot");
     }
 
     public List<String> getBotNames(){
         return botNames;
     }
 
-    public int getMaxSteps() {
+    int getMaxSteps() {
         return maxSteps;
     }
 
-    public int getBADBEAST_QUANTITY() {
+    int getBADBEAST_QUANTITY() {
         return BADBEAST_QUANTITY;
     }
 
-    public int getGOODBEAST_QUANTITY() {
+    int getGOODBEAST_QUANTITY() {
         return GOODBEAST_QUANTITY;
     }
 
-    public int getBADPLANT_QUANTITY() {
+    int getBADPLANT_QUANTITY() {
         return BADPLANT_QUANTITY;
     }
 
-    public int getGOODPLANT_QUANTITY() {
+    int getGOODPLANT_QUANTITY() {
         return GOODPLANT_QUANTITY;
     }
 
@@ -183,15 +186,15 @@ public class BoardConfig {
         return BORDER;
     }
 
-    public int getWALL_QUANTITY() {
+    int getWALL_QUANTITY() {
         return WALL_QUANTITY;
     }
 
-    public boolean isFxMode() {
+    boolean isFxMode() {
         return fxMode;
     }
 
-    public boolean isBotMode() {
+    boolean isBotMode() {
         return botMode;
     }
 }
