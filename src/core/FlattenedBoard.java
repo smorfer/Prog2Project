@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 public class FlattenedBoard implements EntityContext, BoardView{
 
 
-    //            x  y
+    //             x y
     private Entity[][] entities;
     private Board board;
     private static Logger logger = Logger.getLogger(FlattenedBoard.class.getName());
@@ -112,6 +112,7 @@ public class FlattenedBoard implements EntityContext, BoardView{
         if(targetEntity instanceof Squirrel){
             logger.log(Level.INFO, "BadBeast " + badBeast.getID() + " tries to bite Squirrel " + targetEntity.getID());
             badBeast.bite(this, targetEntity);
+            //((Squirrel) targetEntity).hit(this, badBeast);
         }
 
     }
@@ -133,8 +134,8 @@ public class FlattenedBoard implements EntityContext, BoardView{
             return true;
         } else if(targetEntity instanceof BadBeast){
             logger.log(Level.INFO, "Squirrel " + squirrel.getID() + " tries to attack BadBeast " + targetEntity.getID());
-            squirrel.hit(this, (BadBeast)targetEntity);
-            // do bad beast collision
+            // squirrel.hit(this, (BadBeast)targetEntity);
+            // this resulted in BadBeasts attacking multiple times in one step
             return true;
         } else if(targetEntity instanceof Wall){
             // dont move
@@ -252,7 +253,7 @@ public class FlattenedBoard implements EntityContext, BoardView{
         logger.log(Level.INFO, "MiniSquirrel " + squirrel.getID() + " implodes and gives " + collectedEnergy +  " energy to MasterSquirrel " + squirrel.getMasterSquirrel().getID());
     }
 
-    public int implosionEffect(MiniSquirrel squirrel, Entity target, double energyLoss){
+    private int implosionEffect(MiniSquirrel squirrel, Entity target, double energyLoss){
 
 
         EntityType type = EntityType.getEntityType(target);
