@@ -3,6 +3,7 @@ package test;
 import core.Board;
 import core.FlattenedBoard;
 import entities.Entity;
+import entities.beasts.BadBeast;
 import entities.beasts.GoodBeast;
 import entities.plants.BadPlant;
 import entities.squirrels.MasterSquirrel.MasterSquirrel;
@@ -12,12 +13,11 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 
 import java.util.ArrayList;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class FlattenedBoardTest
 {
@@ -32,7 +32,8 @@ public class FlattenedBoardTest
 
         MockitoAnnotations.initMocks(this);
         when(board.getSize()).thenReturn(10);
-        flattenedBoard = new FlattenedBoard(board);
+        flattenedBoard = spy(new FlattenedBoard(board));
+
 
     }
 
@@ -43,6 +44,7 @@ public class FlattenedBoardTest
         flattenedBoard.tryMove(masterSquirrel,XY.RIGHT);
 
         verify(masterSquirrel).move(XY.RIGHT);
+        verify(flattenedBoard).squirrelCollision(masterSquirrel,XY.RIGHT,null);
     }
 
     @Test
@@ -59,6 +61,7 @@ public class FlattenedBoardTest
         flattenedBoard.tryMove(masterSquirrel,XY.RIGHT);
 
         verify(masterSquirrel).hit(flattenedBoard,badPlant);
+        verify(flattenedBoard).squirrelCollision(masterSquirrel,XY.RIGHT,badPlant);
 
     }
 
@@ -76,7 +79,22 @@ public class FlattenedBoardTest
 
 
         verify(masterSquirrel).move(XY.RIGHT_DOWN);
+        verify(flattenedBoard).squirrelCollision(masterSquirrel,XY.RIGHT_DOWN,goodBeast);
         
+    }
+
+    @Test
+    public void testMasterSquirrelBadBeastEncounter () {
+        MasterSquirrel masterSquirrel = mock(MasterSquirrel.class);
+        BadBeast badBeast = mock(BadBeast.class);
+
+        when(board.getEntityAtPosition(new XY(2,1))).thenReturn(badBeast);
+        when(masterSquirrel.getPosition()).thenReturn(new XY(1,1));
+
+        flattenedBoard.tryMove(masterSquirrel,XY.RIGHT);
+
+        verify(masterSquirrel).move(XY.RIGHT);
+        verify(flattenedBoard).squirrelCollision(masterSquirrel,XY.RIGHT,badBeast);
     }
 
 }
