@@ -14,26 +14,28 @@ public class BoardConfig {
     BoardConfig(){
         if(Files.exists(Paths.get("config.properties"))){
             loadFromFile();
+        }else{
+            loadDefaultValues();
         }
         saveToFile();
     }
 
     private List<String> botNames = Arrays.asList("nextBot", "randomBot");
 
-    private int SIZE = 50;
-    private int maxSteps = 50;
-    private int BADBEAST_QUANTITY = 5;
-    private int GOODBEAST_QUANTITY = 5;
-    private int BADPLANT_QUANTITY = 10;
-    private int GOODPLANT_QUANTITY = 10;
-    private int BORDER = SIZE*4 - 4;
-    private int WALL_QUANTITY = 15;
+    private int SIZE;
+    private int maxSteps;
+    private int BADBEAST_QUANTITY;
+    private int GOODBEAST_QUANTITY;
+    private int BADPLANT_QUANTITY;
+    private int GOODPLANT_QUANTITY;
+    private int BORDER;
+    private int WALL_QUANTITY;
 
-    private int FPS = 50;
-    private int REFRESH_RATE = 50;
+    private int FPS;
+    private int REFRESH_RATE;
 
-    private boolean fxMode = true;
-    private boolean botMode = false;
+    private boolean fxMode;
+    private boolean botMode;
 
 
     public int getFPS() {
@@ -48,7 +50,7 @@ public class BoardConfig {
         return SIZE;
     }
 
-    public void loadFromFile(){
+    private void loadFromFile(){
         Properties prop = new Properties();
         InputStream input = null;
 
@@ -78,11 +80,13 @@ public class BoardConfig {
                 this.fxMode = (Integer.parseInt(prop.getProperty("fxMode")) != 0);
             } catch (NumberFormatException e) {
                 Logger.getLogger(this.getClass().getName()).log(Level.WARNING, "Value/s in config file missing, using default values!");
+                loadDefaultValues();
             }
 
 
         } catch (IOException ex) {
             ex.printStackTrace();
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "Loading config failed!");
         } finally {
             if (input != null) {
                 try {
@@ -132,6 +136,23 @@ public class BoardConfig {
             }
 
         }
+    }
+
+    private void loadDefaultValues(){
+        SIZE = 30;
+        maxSteps = 50;
+        BADBEAST_QUANTITY = 5;
+        GOODBEAST_QUANTITY = 5;
+        BADPLANT_QUANTITY = 10;
+        GOODPLANT_QUANTITY = 10;
+        BORDER = SIZE*4 - 4;
+        WALL_QUANTITY = 15;
+
+        FPS = 50;
+        REFRESH_RATE = 8;
+
+        fxMode = true;
+        botMode = false;
     }
 
     public List<String> getBotNames(){

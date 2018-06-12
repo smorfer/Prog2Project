@@ -49,18 +49,20 @@ public class FlattenedBoard implements EntityContext, BoardView{
 
     @Override
     public void tryMove(MasterSquirrel masterSquirrel, XY direction) {
-        logger.log(Level.INFO, "MasterSquirrel " + masterSquirrel.getID() + " tries to move in direction " + direction.toString());
-        XY newLocation = masterSquirrel.getPosition().plus(direction);
-        Entity targetEntity = getEntityAt(newLocation.x,newLocation.y);
+        if (!masterSquirrel.isFrozen()) {
+            logger.log(Level.INFO, "MasterSquirrel " + masterSquirrel.getID() + " tries to move in direction " + direction.toString());
+            XY newLocation = masterSquirrel.getPosition().plus(direction);
+            Entity targetEntity = getEntityAt(newLocation.x,newLocation.y);
 
-        if(squirrelCollision(masterSquirrel, direction, targetEntity)) return;
+            if(squirrelCollision(masterSquirrel, direction, targetEntity)) return;
 
-        if(targetEntity instanceof MiniSquirrel){
+            if(targetEntity instanceof MiniSquirrel){
 
-            logger.log(Level.INFO, "MasterSquirrel " + masterSquirrel.getID() + " tries to absorb MiniSquirrel " + targetEntity.getID());
+                logger.log(Level.INFO, "MasterSquirrel " + masterSquirrel.getID() + " tries to absorb MiniSquirrel " + targetEntity.getID());
 
-            masterSquirrel.hit(this, (MiniSquirrel) targetEntity);
-            moveEntity(masterSquirrel, direction);
+                masterSquirrel.hit(this, (MiniSquirrel) targetEntity);
+                moveEntity(masterSquirrel, direction);
+            }
         }
     }
 

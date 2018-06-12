@@ -2,7 +2,6 @@ package entities.squirrels;
 
 import core.EntityContext;
 import entities.Character;
-import entities.Entity;
 import entities.Wall;
 import entities.beasts.BadBeast;
 import entities.beasts.GoodBeast;
@@ -16,7 +15,7 @@ public abstract class Squirrel extends Character {
 
     private int freezeCounter = 0;
 
-    protected boolean isFrozen(){
+    public boolean isFrozen(){
 
         assert freezeCounter>=0 : "Freeze Counter < 0";
 
