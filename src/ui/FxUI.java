@@ -184,7 +184,7 @@ public class FxUI extends Scene implements UI {
             wallImg = new Image(new FileInputStream("icons/wall.png"), CELL_SIZE, CELL_SIZE, false, false);
             goodBeastImg = new Image(new FileInputStream("icons/cat.png"), CELL_SIZE, CELL_SIZE, false, false);
             goodPlantImg = new Image(new FileInputStream("icons/peach.png"), CELL_SIZE, CELL_SIZE, false, false);
-            badBeastImg = new Image(new FileInputStream("icons/snake.png"), CELL_SIZE, CELL_SIZE, false, false);
+            badBeastImg = new Image(new FileInputStream("icons/spider.png"), CELL_SIZE, CELL_SIZE, false, false);
             badPlantImg = new Image(new FileInputStream("icons/fliegenpilz.png"), CELL_SIZE, CELL_SIZE, false, false);
             miniImg = new Image(new FileInputStream("icons/squirrelMini.png"), CELL_SIZE, CELL_SIZE, false, false);
         } catch (FileNotFoundException e) {
