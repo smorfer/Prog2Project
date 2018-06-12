@@ -11,7 +11,7 @@ import ui.CommandHandler.GameCommandProcessor;
 import ui.MoveCommand;
 import ui.UI;
 
-import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.*;
 import java.util.logging.Level;
@@ -115,7 +115,9 @@ public class MultiPlayerBotGame extends Game{
         ObjectMapper mapper = new ObjectMapper();
         ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
         try {
-            writer.writeValue(new File("scores.json"), scores);
+            Date date = new Date();
+            writer.writeValue(new FileOutputStream("scores.txt", true), date.toString());
+            writer.writeValue(new FileOutputStream("scores.txt", true), scores);
         } catch (IOException e) {
             e.printStackTrace();
         }
