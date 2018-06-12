@@ -4,9 +4,19 @@ import core.EntityContext;
 import geom.XY;
 import ID.IDManager;
 
-
+/**
+ * Every entity is a subclass of this superclass.
+ * This class contains all important variables and methods that an entity has to have.
+ */
 
 public abstract class Entity {
+
+    /**
+     * @value ID Every entity has a unique ID
+     * @value energy The "health points" of every Entity
+     * @value position A Vector (XY) that shows the current position of an Entity
+     */
+
     private final int ID;
     private int energy;
     private XY position;

@@ -13,6 +13,10 @@ import geom.XY;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * This class manages all collisions and other interactions between entities
+ */
+
 public class FlattenedBoard implements EntityContext, BoardView{
 
 

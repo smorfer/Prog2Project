@@ -8,6 +8,11 @@ import entities.squirrels.MiniSquirrel.MiniSquirrel;
 import entities.squirrels.Squirrel;
 import geom.XY;
 
+
+/**
+ * All stuff needed for interactions between 2 or more entities.
+ */
+
 public interface EntityContext {
 
     XY getSize();
@@ -26,7 +31,7 @@ public interface EntityContext {
 
     void kill(Entity entity);
 
-    EntityType getEntityType(Entity entity); // Vielleicht default?
+    EntityType getEntityType(Entity entity);
 
     Entity getEntityAt(int x, int y);
 

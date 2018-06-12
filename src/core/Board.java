@@ -19,6 +19,10 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
+/**
+ * This class creates the game field and instantiates all entities.
+ */
 public class Board {
 
     private List<Entity> entitySet;

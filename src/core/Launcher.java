@@ -10,7 +10,9 @@ import ui.ConsoleUI;
 import ui.FxUI;
 
 
-
+/**
+ * Launches SquirrelGame
+ */
 public class Launcher extends Application {
     private boolean fxMode;
     private boolean botMode;

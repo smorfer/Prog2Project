@@ -9,6 +9,10 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
+/**
+ * This manages all variables that have to be set before the game can run.
+ */
 public class BoardConfig {
 
     BoardConfig(){
